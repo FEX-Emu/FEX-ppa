@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Install FEXInterpreter hardlink
+# Needs to be done before setting up binfmt_misc
+rm /usr/bin/FEXInterpreter || true
+ln -f /usr/bin/FEXLoader /usr/bin/FEXInterpreter

@@ -1,0 +1,20 @@
+
+Package: fex-emu-binfmt32
+Section: libs
+Architecture: arm64
+Depends:
+ binfmt-support,
+ fex-emu,
+ ${shlibs:Depends}, ${misc:Depends}
+Description: x86 and x86-64 Linux emulator
+ FEX is very much work in progress, so expect things to change.
+
+Package: fex-emu-binfmt64
+Section: libs
+Architecture: arm64
+Depends:
+ binfmt-support,
+ fex-emu,
+ ${shlibs:Depends}, ${misc:Depends}
+Description: x86 and x86-64 Linux emulator
+ FEX is very much work in progress, so expect things to change.

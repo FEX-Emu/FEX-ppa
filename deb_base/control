@@ -1,0 +1,47 @@
+Source: fex-emu-@ARCH_SUFFIX@
+Section: misc
+Priority: optional
+Maintainer: Ryan Houdek <houdek.ryan@fex-emu.org>
+Uploaders: Ryan Houdek <houdek.ryan@fex-emu.org>
+Standards-Version: 4.5.1
+Build-Depends:
+  debhelper-compat (= 12),
+  cmake (>= 3.14),
+  ninja-build,
+  clang,
+  lld,
+  libsdl2-dev,
+  libepoxy-dev,
+  python3,
+  gzip,
+  llvm,
+  git,
+  tree,
+Homepage: https://fex-emu.org/
+Vcs-Browser: https://github.com/FEX-Emu/FEX
+Vcs-Git: https://github.com/FEX-Emu/FEX.git
+Rules-Requires-Root: no
+
+Package: fex-emu-@ARCH_SUFFIX@
+Section: misc
+Architecture: any
+Depends:
+ libsdl2-2.0-0,
+ libepoxy0,
+ ${shlibs:Depends}, ${misc:Depends}
+Conflicts: @ARCH_CONFLICTS@
+Replaces: @ARCH_CONFLICTS@
+Provides: fex-emu
+Description: x86 and x86-64 Linux emulator
+ FEX is very much work in progress, so expect things to change.
+
+Package: libfex-emu-@ARCH_SUFFIX@-dev
+Section: libs
+Architecture: any
+Depends:
+ ${shlibs:Depends}, ${misc:Depends}
+Conflicts: @LIBARCH_CONFLICTS@
+Replaces: @LIBARCH_CONFLICTS@
+Provides: libfex-emu-dev
+Description: x86 and x86-64 Linux emulator
+ FEX is very much work in progress, so expect things to change.
