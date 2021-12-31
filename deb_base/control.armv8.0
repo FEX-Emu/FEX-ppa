@@ -6,6 +6,7 @@ Depends:
  binfmt-support,
  fex-emu,
  ${shlibs:Depends}, ${misc:Depends}
+Conflicts: qemu-user-static
 Description: x86 and x86-64 Linux emulator
  FEX is very much work in progress, so expect things to change.
 
@@ -16,5 +17,6 @@ Depends:
  binfmt-support,
  fex-emu,
  ${shlibs:Depends}, ${misc:Depends}
+Conflicts: qemu-user-static
 Description: x86 and x86-64 Linux emulator
  FEX is very much work in progress, so expect things to change.
