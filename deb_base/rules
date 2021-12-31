@@ -31,6 +31,7 @@ confflags += \
 	-DBUILD_TESTS=False \
 	-DENABLE_ASSERTIONS=False \
 	-DTUNE_CPU=@TUNE_CPU@ \
+	-DOVERRIDE_VERSION=@FEX_VERSION@ \
 	-DENABLE_X86_HOST_DEBUG=True
 
 override_dh_clean:

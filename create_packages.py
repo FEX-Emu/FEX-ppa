@@ -72,17 +72,18 @@ def AppendToFile(filename, text):
 def GetDateInCorrectFormat():
     return subprocess.getoutput("date -u -R")
 
-# Args: <Stage> <BaseVersion> <Base Changelog txt> <Base Source tar.gz>
-if len(sys.argv) < 3:
+# Args: <Stage> <FEX Version> <Package BaseVersion> <Base Changelog txt> <Base Source tar.gz>
+if len(sys.argv) < 5:
     sys.exit()
 
 RootBaseDeb = "deb_base"
 RootGenPPA = os.path.abspath("gen_ppa")
 RootPackageName = "fex-emu"
 Stage = int(sys.argv[1])
-RootPackageVersion = sys.argv[2]
-CurrentChangelogFile = sys.argv[3]
-SourceTar = sys.argv[4]
+FEXVersion = sys.argv[2]
+RootPackageVersion = sys.argv[3]
+CurrentChangelogFile = sys.argv[4]
+SourceTar = sys.argv[5]
 
 if "-" in RootPackageVersion:
     print("Can't have dash in package version. Breaks things")
@@ -165,6 +166,7 @@ if Stage == 1:
             # Modify the rules file in place
             SpecificRulesFile = DebSubFolder + "/" + "rules"
             SpecificRules = ReadFile(SpecificRulesFile)
+            SpecificRules = SpecificRules.replace("@FEX_VERSION@", FEXVersion)
             SpecificRules = SpecificRules.replace("@TUNE_CPU@", arch[1])
             StoreFile(SpecificRulesFile, SpecificRules)
 
