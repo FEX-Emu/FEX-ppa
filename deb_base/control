@@ -26,6 +26,11 @@ Package: fex-emu-@ARCH_SUFFIX@
 Section: misc
 Architecture: any
 Depends:
+ curl,
+ squashfuse,
+ fuse3,
+ squashfs-tools,
+ zenity,
  libsdl2-2.0-0,
  libepoxy0,
  ${shlibs:Depends}, ${misc:Depends}
