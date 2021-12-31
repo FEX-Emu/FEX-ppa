@@ -9,21 +9,21 @@ $ tar -cvpzf ../FEX-ppa/fex-emu_<MATCHING VERSION>.orig.tar.gz .
 # Generates a change log from the passed in changelog file and copies it in to debian/changelog
 # Wrapped by changelog_template
 # Make sure to check debian/changelog after generating
-./create_packages.py 0 2201~3 TestChanges fex-emu_2201ubuntu4.orig.tar.gz
+./create_packages.py 0 2201 2201~3 TestChanges fex-emu_2201ubuntu4.orig.tar.gz
 
 # Stage 1
 # Generates all the target specific folder structures for building source packages
 # Generates in to `gen_ppa` in cwd
-./create_packages.py 1 2201~3 TestChanges fex-emu_2201ubuntu4.orig.tar.gz
+./create_packages.py 1 2201 2201~3 TestChanges fex-emu_2201ubuntu4.orig.tar.gz
 
 # Stage 2
 # Walks all of the target specific debian trees and runs `debuild -S` over them cleanly
-./create_packages.py 2 2201~3 TestChanges fex-emu_2201ubuntu4.orig.tar.gz
+./create_packages.py 2 2201 2201~3 TestChanges fex-emu_2201ubuntu4.orig.tar.gz
 
 # Stage 3
 # Walks all of the created debian packages and uploads them directly to the fex-ppa with dput
 # Hardcoded to ppa:fex-emu/fex
-./create_packages.py 3 2201~3 TestChanges fex-emu_2201ubuntu4.orig.tar.gz
+./create_packages.py 3 2201 2201~3 TestChanges fex-emu_2201ubuntu4.orig.tar.gz
 
 # Setting up a pbuilder
 ## Only needs to be done once
