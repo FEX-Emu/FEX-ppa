@@ -1,1 +1,1 @@
-rm /usr/bin/FEXInterpreter
+rm -f /usr/bin/FEXInterpreter
