@@ -28,7 +28,7 @@ Architecture: any
 Depends:
  curl,
  squashfuse,
- fuse3,
+ fuse,
  squashfs-tools,
  zenity,
  libsdl2-2.0-0,
