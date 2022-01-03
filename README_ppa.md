@@ -60,6 +60,9 @@ This allows you to create a pbuilder to test building the package before uploadi
 
 `sudo pbuilder create --distribution focal --architecture amd64 --basetgz /var/cache/pbuilder/focal-amd64-base.tgz`
 
+`sudo pbuilder create --distribution impish --architecture arm64 --basetgz /var/cache/pbuilder/impish-arm64-base.tgz`
+
+
 # Perform the build
 This will attempt building the package provided with the dsc file.
 Result will be in `/var/cache/pbuilder/result/`
@@ -67,6 +70,8 @@ Result will be in `/var/cache/pbuilder/result/`
 `sudo pbuilder build --distribution impish --architecture amd64 --basetgz /var/cache/pbuilder/impish-amd64-base.tgz ../fex-emu_2201.dsc`
 
 `sudo pbuilder build --distribution focal --architecture amd64 --basetgz /var/cache/pbuilder/focal-amd64-base.tgz ../fex-emu_2201.dsc`
+
+`sudo pbuilder build --distribution impish --architecture arm64 --basetgz /var/cache/pbuilder/impish-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}.dsc`
 
 # Cleanup
 ` sudo rm /var/cache/pbuilder/impish-amd64-base.tgz`
