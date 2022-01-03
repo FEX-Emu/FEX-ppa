@@ -1,0 +1,2 @@
+activate-noawait fex-emu-binfmt32
+activate-noawait fex-emu-binfmt64

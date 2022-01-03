@@ -28,7 +28,11 @@ debfiles_tocopy = [
     "install",
     "rules",
     "fex-emu-binfmt32.install",
+    "fex-emu-binfmt32.triggers",
+    "fex-emu-binfmt32.postinst",
     "fex-emu-binfmt64.install",
+    "fex-emu-binfmt64.triggers",
+    "fex-emu-binfmt64.postinst",
     "source/",
 ]
 
@@ -149,10 +153,12 @@ if Stage == 1:
             # "fex-emu.install",
             # "fex-emu.postinst",
             # "fex-emu.postrm",
+            # "fex-emu.triggers",
             # "libfex-emu-dev.install",
             shutil.copy(BaseDeb + "/fex-emu.install", ResultFolder + "/fex-emu-" + arch[0] + ".install")
             shutil.copy(BaseDeb + "/fex-emu.postinst", ResultFolder + "/fex-emu-" + arch[0] + ".postinst")
             shutil.copy(BaseDeb + "/fex-emu.postrm", ResultFolder + "/fex-emu-" + arch[0] + ".postrm")
+            shutil.copy(BaseDeb + "/fex-emu.triggers", ResultFolder + "/fex-emu-" + arch[0] + ".triggers")
             shutil.copy(BaseDeb + "/libfex-emu-dev.install", ResultFolder + "/libfex-emu-" + arch[0] + "-dev.install")
 
             # Modify the changelog file in place
@@ -213,6 +219,9 @@ if Stage == 2:
             SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0]
             p = subprocess.Popen(["debuild", "-S"], cwd = SubFolder)
             p.wait()
+            if p.returncode != 0:
+                print ("Couldn't debuild -S for some reason. Not continuing")
+                sys.exit(-1)
 
 if Stage == 3:
     print("Uploading results")
