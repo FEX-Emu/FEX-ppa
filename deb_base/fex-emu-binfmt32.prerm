@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+update_binfmt() {
+	# Check for update-binfmts
+	command -v update-binfmts >/dev/null || return 0
+
+	# Setup binfmt_misc
+	update-binfmts --unimport FEX-x86
+}
+
+update_binfmt
