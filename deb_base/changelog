@@ -1,1 +1,134 @@
+fex-emu-@ARCH_SUFFIX@ (2201~8~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - Arm64
+   - Fixes vixl assertions around ubfm usage (5654f9a0)
+   - Fixes MapSelectCC FGT flag (13087f84)
+  .
+  - CMake
+   - Adds an OVERRIDE_VERSION option (08085998)
+   - Adds a TUNE_CPU option (51466519)
+   - Adds experimental libc++ option (f3a27a57)
+  .
+  - CPUID
+   - Fixes another memory overflow issue (0e45b98f)
+   - Fixes crash on unknown CPU (be3e3a35)
+  .
+  - Config
+   - Enables all host threads by default (edce9818)
+   - Sanitize Core option (9bffaeea)
+  .
+  - Context
+   - Take some arguments as pointer-to-const (9d439047)
+  .
+  - Dispatcher
+   - Disables unsync context message (154468c1)
+   - Adds more state reconstruction to state restore (fa6f1b1d)
+  .
+  - Docs
+   - Adds documentation about the FEX monthly release process (a65e7a09)
+  .
+  - FEXConfig
+   - Removes jemalloc usage (c65be9f5)
+  .
+  - FEXCore
+   - Don't use Run() inside RunUntilExit() (0bf57765)
+   - Fixes a memcpy overflow in processor brand (340699ca)
+   - Fixes FEXCore_Base config dependency (95bd309d)
+   - Implements recoverable INTO instruction (cd4269f4)
+   - Reorganizes some AOT related code (d4655fbb)
+  .
+  - FEXRootFSFetcher
+   - Remove 0x prefix on hash (b72245a2)
+   - Adds a new tool to help set up a new RootFS (72e8a997)
+  .
+  - GDBServer
+   - Fixes long string packet encodings (88ce9b5c)
+  .
+  - HostFeatures
+   - Detect if the host CPU suports float exceptions  (117cbde2)
+   - Consolidates HostFeatures flags (e24eb7a7)
+  .
+  - IR
+   - Fixes sized constant mask (565d1e27)
+  .
+  - Linux
+   - Fixes pidfd_send_signal for 32-bit (ac63a2ba)
+   - Finish 32-bit msqid_ds usage (98210fdf)
+   - Implements the remaining 32-bit syscalls (bc120b9f)
+   - Fixes build on Ubuntu 20.04 take 3 (8f835678)
+   - Fixes build on Ubuntu 20.04 take 2 (059e8a90)
+   - Fixes build on Ubuntu 20.04 (02005e71)
+   - Fixes Ubuntu 20.04 compilation on AArch64 (47bd4795)
+   - Fixes semid_ds_64 definition (f2fd9d9e)
+   - Fixes 32-bit shmctl (45430e95)
+   - Adds the safe syscall unimplemented gap for x86-64 (e05d116b)
+  .
+  - LinuxSyscalls
+   - Enable warnings (75e5df54)
+  .
+  - NetStream
+   - Move NetBuf definition into cpp file  (9860e8b7)
+  .
+  - OpcodeDispatcher
+   - Handle PDEP (0a3a270a)
+   - Handle PEXT (91984003)
+  .
+  - RootFS
+   - Stop trying to retry rootfs after five times (a45bc759)
+   - Be more robust against stale lock files (d4b31cd4)
+  .
+  - Scripts
+   - Adds a python script that can hand hold a user through FEX install (b276750c)
+  .
+  - X86Tables
+   - Build Unknown op definition tables at compile time (e8670bba)
+  .
+  - Misc
+   - Stop hardcoding /usr/bin paths (1d5bd152)
+   - Improves compile ability for older libraries (c691d709)
+   - More AOT code movement (43dc232e)
+   - FEXMountDaemon squashfs fixes. (ea73c9d7)
+   - Implements RDTSCP (ee821b9c)
+   - Update jemalloc for fixed libc overrides (c43af0e1)
+   - CPUID Expose Hybrid flag and CPU names (9394e49c)
+   - Speed up initialization of X86Tables (e99a23cf)
+   - Implement thunk library generation using libclang (425d9323)
+   - Implements CLZero instruction (5f0dfcd7)
+   - {x32, x64}/Thread: Make use of .data() instead of .at(0) (b6499ac7)
+   - Adds a new ReentrantMutex to use for FEXCore (b9c49027)
+  .
+  - gvisor
+   - Disables flaky test (e62cb417)
+  .
+  - unittests
+   - Fixes a missing dependency on ASM tests (b078f511)
+   - Enables remaining unaligned atomic tests on ARMv8.0 (fd042476)
+   - Fixes known failures (5c4112f1)
+  .
+  - x32
+  .
+   - Socket
+    - Resolve sign comparison mismatch cases (097f48f3)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.org>  Tue, 04 Jan 2022 03:13:28 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2201~7~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Fix package triggers
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.org>  Mon, 03 Jan 2022 23:38:20 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2201~6~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Adds binfmt_misc triggers on FEXLoader/FEXInterpreter change
+  Adds missing binfmt postinst files
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.org>  Mon, 03 Jan 2022 22:35:55 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2201~5~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Fix fortify crashes
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.org>  Mon, 03 Jan 2022 04:07:04 +0000
+
 
