@@ -6,7 +6,7 @@ export FEX_VERSION=2201
 export UBUNTU_SUBVERSION= # If exists then tilde plus a number
 export PACKAGE_VERSION=${FEX_VERSION}${UBUNTU_SUBVERSION}
 export FEXPPA=$(readlink -f .)
-git clone --recurse-submodules --depth=1 --branch=fex-${FEX_VERSION} https://github.com/FEX-Emu/FEX.git $TEMP_SOURCE
+git clone --recurse-submodules --depth=1 --branch=FEX-${FEX_VERSION} https://github.com/FEX-Emu/FEX.git $TEMP_SOURCE
 rm -Rf $TEMP_SOURCE/External/{fex-gcc-target-tests-bins,fex-gvisor-tests-bins,fex-posixtest-bins}
 rm -Rf $TEMP_SOURCE/.git
 rm -Rf $TEMP_SOURCE/unittests
