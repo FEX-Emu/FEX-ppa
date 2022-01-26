@@ -13,11 +13,11 @@ supported_distros = [
 ]
 
 # Supported CPUs split by features
-# By package suffix, -mcpu flavour
+# By package suffix, -march flavour
 supported_cpus = [
-    ["armv8.0", "cortex-a57"],
-    ["armv8.2", "cortex-a75"],
-    ["armv8.4", "apple-a13"], # Not quite but sure whatever
+    ["armv8.0", "armv8-a"],
+    ["armv8.2", "armv8.2-a"],
+    ["armv8.4", "armv8.4-a"],
 ]
 
 debfiles_tocopy = [
@@ -175,7 +175,9 @@ if Stage == 1:
             SpecificRulesFile = DebSubFolder + "/" + "rules"
             SpecificRules = ReadFile(SpecificRulesFile)
             SpecificRules = SpecificRules.replace("@FEX_VERSION@", FEXVersion)
-            SpecificRules = SpecificRules.replace("@TUNE_CPU@", arch[1])
+            SpecificRules = SpecificRules.replace("@TUNE_CPU@", "generic")
+            SpecificRules = SpecificRules.replace("@TUNE_ARCH@", arch[1])
+
             StoreFile(SpecificRulesFile, SpecificRules)
 
             # If this is armv8.0 then append the binfmt_misc builds to its control file
