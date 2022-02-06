@@ -7,7 +7,6 @@ import subprocess
 # Supported distros in the form of: letter, series name
 supported_distros = [
     ["f", "focal"], # Oldest supported is 20.04 focal
-    ["h", "hirsute"],
     ["i", "impish"],
     ["j", "jammy"],
 ]
