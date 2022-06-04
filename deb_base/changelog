@@ -1,3 +1,173 @@
+fex-emu-@ARCH_SUFFIX@ (2206~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - AOTIR
+   - copy RAData and IRList, make sure data is accessible (da2e44d)
+
+  - AppConfig
+   - Inject --no-sandbox in to steamwebhelper (c14c0c2)
+
+  - ArchHelpers
+   - Adds relocation struct defines (b5ae9e4)
+
+  - Arm64
+   - Fix LDAPUR/STLUR DMB backpatch (27f2e0b)
+   - Adds support for RCPC2 extension (f8ba373)
+   - Fixes AtomicSwap (70988cc)
+
+  - Arm64Emitter
+   - Optimize constants with ADRP and ADR (912dbfe)
+
+  - CMake
+   - C/C++ flags for defined singed overflow warping (2e05349)
+   - Add option to use the mold linker (5884114)
+
+  - CompileService
+   - Removes no longer necessary service thread  (b1033ed)
+
+  - Config
+   - Adds code cache config option (278ca52)
+
+  - Core
+   - Adds Code Object Cache service  (13f3c6e)
+   - context-wide guest code invalidations (d810988)
+
+  - EmulatedFiles
+   - Fixes temporary file flags (4fbc266)
+
+  - F64
+   - Implement FCW using host rounding mode (db3854e)
+   - Fix FILD and FIST for Size < 8 (89d6752)
+
+  - FEXBash
+   - Set PS1 to make it more obvious when running under FEX (ec38d58)
+
+  - FEXCore
+   - Adds refcount_shared_mutex class (1e597bf)
+   - Reclaimable thread pool allocator (8a7f395)
+
+  - FEXLoader
+   - Fix create_directories check for aotir .path file writting (90f338d)
+
+  - FEXLogServer
+   - Stop improper use of std::erase_if (d523b7a)
+
+  - FEXRootFSFetcher
+   - Don't continue download (fa87c73)
+
+  - JitSymbols
+   - Print file+offset if possible (a715627)
+
+  - Linux
+   - Fixes 32-bit mmap (3fd136b)
+
+   - MemAllocator32Bit
+    - Add missing lock to shmdt, fix error returns (b2b4c2b)
+
+  - OpcodeDispatcher
+   - Implement SHA256 instructions (3bbff8a)
+   - Handle SHA-1 instructions (8dd9a5b)
+   - Implements support for PAUSE  (da48020)
+   - Fixes pextrb with high registers (fe11bd2)
+   - Remove debugging dump statement (c8dc663)
+   - Adds support for non-temporal loadstores (ba78dff)
+
+  - ScopedSignalMask
+   - Add shared mutex support, move constructors (8e36f53)
+
+  - Syscalls
+   - Fixes clone3 stack pointer (0ed9654)
+
+   - Linux
+    - Add guest[Mmap/Munmap] (b9d878b)
+    - Refactor guest mman tracking (ce0f5db)
+
+  - TestHarnessRunner
+   - Use guest mapper for test harness files (b78af2f)
+
+  - X86Tables
+   - Leave shouldn't end block (4f42632)
+
+  - Misc
+   - Struct verifier fixes and reenable (c6153d6)
+   - v5.18 support (969d8f8)
+   - Fix dangling curl hyphen (1dee54a)
+   - SMC detection via segfaults (5460a24)
+   - Standarized TODO markers: FEX_TODO, FEX_TODO_ISSUE (73d43c1)
+   - Clean up and document ScopedSignalMask (5379f0a)
+   - Object cache named region no-op implementation (ee2d417)
+   - JIT relocation handling support (c5dacab)
+   - 32-bit FSGS instruction fixes. (9bc631a)
+   - V5.17 support (2f7dcb8)
+   - Emulate reduced-precision X87 with 64-bit host FPU ops (42a6320)
+
+  - mtrack
+   - Fixes 32-bit shmat, shmdt tracking, guaranteed invalidation atomicity (d82d294)
+
+  - unittests
+   - Reenable atomic tests on ARMv8.0 (0fc6d6b)
+   - Investigate failing CI changes (7227ee9)
+   - Workaround runner issues (ce5297b)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.org>  Sat, 04 Jun 2022 20:05:54 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2204~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - CPUID
+   - Adds 4000_0001h function (977bda97)
+
+  - Documentation
+   - Adds hypervisor CPUID information (1f1c2149)
+
+  - FEXCore
+   - Delete IR after it is used (a247df50)
+   - Fixes #1618 (60c7ea6e)
+   - Removes unused debug data (8422fc63)
+
+  - FileManager
+   - Fix realpath failed on debian buster (91665fdf)
+
+  - JIT
+   - Adds comment to EmitDetectionString (d39df8d3)
+
+  - JITArm64
+   - Get long divide out of the hot path (8ad14728)
+
+  - JITs
+   - Emit identification string in the code buffers (23a1c64b)
+
+  - Linux
+   - Fixes MAP_32BIT supported range (fad91bb8)
+
+  - OpcodeDispatcher
+   - Fixes SIGILL on unsupported host instructions (042cd354)
+   - Fixes FNINIT (187c6418)
+
+  - Scripts
+   - Updates AArch64 fit for Clang 14 (6b3cd3d3)
+
+  - SignalDelegator
+   - Adds missing include (b43937a7)
+
+  - Softfloat
+   - Fixes FSCALE (56779245)
+
+  - TestHarnessRunner
+   - Flush log on asserts (ebd0edba)
+
+  - Misc
+   - GDBServer improvements: Three's a crowd (7b0265ff)
+   - Gdbstub improvements: The sequel (6a5abd36)
+   - GDBServer improvements (53ffe5df)
+   - Adds a cmake option for forcing a termux build (5de6c866)
+   - Change page define usages over to self-defined (f5f9512d)
+   - Disables GUI applications in a Termux build (fb27cb43)
+   - Update ReleaseProcess docs for Termux (94664580)
+
+  - docs
+   - Remove stale text (5cc0c0a3)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.org>  Tue, 19 Apr 2022 08:43:38 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2203~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - Arm64
