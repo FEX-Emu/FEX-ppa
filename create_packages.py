@@ -3,12 +3,14 @@ import os
 import sys
 import shutil
 import subprocess
+from dataclasses import dataclass, field
 
 # Supported distros in the form of: letter, series name
 supported_distros = [
     ["f", "focal"], # Oldest supported is 20.04 focal
     ["i", "impish"],
     ["j", "jammy"],
+    ["k", "kinetic"],
 ]
 
 # Supported CPUs split by features
@@ -215,16 +217,46 @@ if Stage == 1:
 
             os.symlink(os.path.abspath(SourceTar), TargetSymlink)
 
+@dataclass
+class DebuildOutput:
+    def __init__(self, Distro, Arch, LogFileName, LogFD, Process):
+        self.Distro = Distro
+        self.Arch = Arch
+        self.LogFileName = LogFileName
+        self.LogFD = LogFD
+        self.Process = Process
+
+    def Wait(self):
+        self.Process.wait();
+
+    def ErrorCode(self):
+        return self.Process.returncode;
+
+    def Close(self):
+        self.LogFD.close()
+
 if Stage == 2:
-    print("Generating debuild files")
+    print("Generating debuild files: Spinning up {} processes".format(len(supported_distros) * len(supported_cpus)))
+    print("Don't kill this early otherwise you'll get background lintian processes running!")
     for distro in supported_distros:
         for arch in supported_cpus:
             SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0]
-            p = subprocess.Popen(["debuild", "-S"], cwd = SubFolder)
-            p.wait()
-            if p.returncode != 0:
-                print ("Couldn't debuild -S for some reason. Not continuing")
+            SubFolderLogs = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0] + "_logs"
+            os.makedirs(SubFolderLogs, exist_ok=True)
+            SubFolderLogFiles = SubFolderLogs + "/log.txt"
+            SubFolderLogFile = open(SubFolderLogFiles, "w")
+
+            p = subprocess.Popen(["debuild", "-S"], cwd = SubFolder, stderr=subprocess.STDOUT, stdout=SubFolderLogFile)
+            Process = DebuildOutput(distro, arch, SubFolderLogFiles, SubFolderLogFile, p)
+            Process.Wait()
+            ReturnCode = Process.ErrorCode()
+            Process.Close()
+
+            if ReturnCode != 0:
+                print ("Couldn't debuild -S for distro series {}-{} some reason. Check {} for details. Not continuing".format(Builder.Distro, Builder.Arch,
+                        Builder.LogFileName))
                 sys.exit(-1)
+
 
 if Stage == 3:
     print("Uploading results")
