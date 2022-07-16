@@ -34,6 +34,8 @@ Depends:
  libsdl2-2.0-0,
  libepoxy0,
  ${shlibs:Depends}, ${misc:Depends}
+Recommends:
+ erofs-utils (>= 1.5)
 Conflicts: @ARCH_CONFLICTS@
 Replaces: @ARCH_CONFLICTS@
 Provides: fex-emu
