@@ -1,3 +1,161 @@
+fex-emu-@ARCH_SUFFIX@ (2207~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - AOTIR
+   - Fix IRList delete (fb41ba1)
+   - Fix RAData free (9242e59)
+
+  - Arm64
+
+   - EncryptionOps
+    - Fix register specifiers in PCLMUL movs (63b70ff)
+
+   - JIT
+    - Use IR names in opcode implementations (19b0a9c)
+
+  - Backends
+   - Unified dispatch, interface rework, cleanups (072690a)
+
+  - CI
+   - Auto rootfs fetching (c027ace)
+
+  - CMAKE
+   - Create directories during configuration, fixes endless generation of unittests (e62bc24)
+
+  - CMake
+   - Check for binfmt_misc conflicts before install (6d2f98a)
+
+  - CPUID
+   - Enable the hypervisor bit (da8dbf1)
+
+  - Common
+   - Support application profiles for games launched through wine (3913dd6)
+
+  - Config
+   - Fixes AppConfig for wine-preloader (ae6a57e)
+
+  - Context
+   - Fix CreateThread partial initialization issue (eac579f)
+   - Decouple from CodeLoader, introduce generic CustomIREntrypoints (b0a31f7)
+
+  - CoreState
+   - Add register size constants (1c1ad87)
+
+  - Dispatcher
+
+   - Arm64
+    - Fix vixl assert (0f696c6)
+
+  - Dispatchers
+   - Use thread local emitters for backend callbacks (4f9bc70)
+
+  - FDUtils
+   - Fix get_fdpath (aa17f64)
+
+  - FEXGDBReader
+   - Fix install path (b3e090c)
+
+  - FEXRootFSFetcher
+   - Update and fix xxhash file hashing (c0a8984)
+
+  - FEXServer
+   - Stop leaking FDs to subprocesses (b7806e4)
+   - Minor changes (1f1d070)
+   - Adds -w option for waiting on current FEXServer (b020e59)
+   - Adds new FEXServer service (5a19425)
+
+  - FEXServerClient
+   - When running under pressure-vessel don't use FEXServer rootfs (9110546)
+
+  - IPR
+   - Store copy of IRLists, Dispatcher cleanups (790bd97)
+
+  - IR
+   - Remove GuestCallDirect, GuestCallIndirect (e4d659a)
+   - add IsFragmentExit, IsBlockExit (2d3c6ef)
+
+  - Invalidations
+   - Move invalidation locks to Context (ffcde18)
+
+  - Ioctl
+   - Safely access v3d csd ioctl structure (158ba1a)
+
+  - Ioctl32
+   - Fix DRM_IOCTL_WAIT_VBLANK (982518d)
+
+  - JITs
+   - Qualify external includes consistently (b05e5ce)
+
+  - Linux
+   - Fixes for clone3 stack size (1494aac)
+   - Make `get_fdpath` more optimal (542ab04)
+   - Fixes 32-bit allocator range scanning (4c73c71)
+   - Fixes `open` syscall emulated path handling (4323493)
+
+  - OpcodeDispatcher
+   - Handle CLMUL opcode extension (9e9ceb3)
+
+  - SMC
+   - Track code pages before frontend decode (bbd9eb5)
+
+  - Scripts
+   - Allow user override on tagged version (aafe7ff)
+
+  - TSO
+   - Add auto migration optimisation for applications that don't need TSO (c99d1e4)
+
+  - Tests
+
+   - IRLoader
+    - Silence missing override warning (ade3a52)
+
+  - ThunkLibs
+   - Fix Guest.h (302a6c9)
+   - silence warnings (30a28ff)
+
+   - vulkan
+    - Work around lack of generic callback support in VK_EXT_debug_report (4771a34)
+
+  - Thunks
+   - Implement generic callback support (aec5b21)
+   - Soften error condition to be non-fatal (3b8491b)
+   - Adds libvulkan steam pinned library thunking support (6b226dd)
+   - Fix std::set crash (6a43db8)
+   - Add fex:is_lib_loaded (88b94be)
+   - Support returning host function pointers to the guest (04a1ac9)
+   - Support pressure-vessel prefixes (e2e6f2a)
+
+   - vulkan
+    - Disable debug report callback (751b66d)
+
+  - ThunksDB
+   - Fix String.find error check (d8fa53a)
+
+  - ValueDominanceValidation
+   - Avoid stack exhaustion when aggregating predecessors (124097d)
+
+  - Vulkan
+   - Handle queries for unknown functions more gracefully (e137c2e)
+
+  - Misc
+   - Support EroFS (46fcbe2)
+   - Allow building thunks on a wider range of platforms (ad6fd5a)
+   - Fix inconsistent allocation schemes used for RegisterAllocationData (8a21eca)
+   - Make Dispatcher per Context from per Thread, Simplify TestHarnessRunner (0a62a4c)
+   - IR.json: Correct 'Dest' key to 'Desc' (51c5f94)
+
+  - gdb
+   - jit integration (4449b60)
+
+  - unittests
+   - Classify CPU based on CPU features (d005fdc)
+   - Disable known flake in posix tests (a97fb2f)
+   - Add FEXLinuxTests with a few tests (cb0935c)
+
+   - ThunkLibs
+    - Fix test failures due to missing FEX_PACKFN_LINKAGE define (a2c9d5a)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.org>  Thu, 07 Jul 2022 17:14:03 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2206~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - AOTIR
