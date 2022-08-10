@@ -3,14 +3,26 @@ import os
 import sys
 import shutil
 import subprocess
+import time
 from dataclasses import dataclass, field
 
 # Supported distros in the form of: letter, series name
 supported_distros = [
     ["f", "focal"], # Oldest supported is 20.04 focal
-    ["i", "impish"],
     ["j", "jammy"],
     ["k", "kinetic"],
+]
+supports_thunks = [
+    False,
+    True,
+    True,
+]
+
+supports_thunks_files = [
+    # False
+    "",
+    # True
+    "usr/lib/fex-emu/*\n",
 ]
 
 # Supported CPUs split by features
@@ -130,7 +142,11 @@ if Stage == 1:
     print("Generating debian file structure trees")
 # First thing's first, bifurcate all of our options
     os.makedirs(RootGenPPA, exist_ok = True)
+    distro_index = 0
     for distro in supported_distros:
+        supports_thunk_option = supports_thunks[distro_index]
+        thunk_files = supports_thunks_files[supports_thunk_option]
+
         for arch in supported_cpus:
             # Create subfolder
             SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0]
@@ -164,6 +180,12 @@ if Stage == 1:
             shutil.copy(BaseDeb + "/fex-emu.triggers", ResultFolder + "/fex-emu-" + arch[0] + ".triggers")
             shutil.copy(BaseDeb + "/libfex-emu-dev.install", ResultFolder + "/libfex-emu-" + arch[0] + "-dev.install")
 
+            # Modify the install file in place
+            SpecificInstallFile = ResultFolder + "/fex-emu-" + arch[0] + ".install"
+            SpecificInstall = ReadFile(SpecificInstallFile)
+            SpecificInstall = SpecificInstall.replace("@THUNK_FILES@\n", thunk_files)
+            StoreFile(SpecificInstallFile, SpecificInstall)
+
             # Modify the changelog file in place
             SpecificChangelogFile = DebSubFolder + "/" + "changelog"
             SpecificChangelog = ReadFile(SpecificChangelogFile)
@@ -178,6 +200,10 @@ if Stage == 1:
             SpecificRules = SpecificRules.replace("@FEX_VERSION@", FEXVersion)
             SpecificRules = SpecificRules.replace("@TUNE_CPU@", "generic")
             SpecificRules = SpecificRules.replace("@TUNE_ARCH@", arch[1])
+            if supports_thunk_option:
+                SpecificRules = SpecificRules.replace("@SUPPORTS_THUNKS@", "True")
+            else:
+                SpecificRules = SpecificRules.replace("@SUPPORTS_THUNKS@", "False")
 
             StoreFile(SpecificRulesFile, SpecificRules)
 
@@ -216,6 +242,7 @@ if Stage == 1:
                 os.remove(TargetSymlink)
 
             os.symlink(os.path.abspath(SourceTar), TargetSymlink)
+        distro_index += 1
 
 @dataclass
 class DebuildOutput:
@@ -235,11 +262,71 @@ class DebuildOutput:
     def Close(self):
         self.LogFD.close()
 
+    def poll(self):
+        return self.Process.poll()
+
+    def name(self):
+        return "{}_{}".format(self.Arch[1], self.Distro[1])
+
+    def pid(self):
+        return self.Process.pid
+
+def WaitForProcesses(ActiveProcesses, MaxProcesses):
+    if len(ActiveProcesses) == 0:
+        return ActiveProcesses
+
+    if len(ActiveProcesses) < MaxProcesses:
+        return ActiveProcesses
+
+    DeadProcesses = []
+    while True:
+        for key, process in ActiveProcesses.items():
+            if process.poll() != None:
+                # Process exited
+                ReturnCode = process.ErrorCode()
+                process.Close()
+
+                if ReturnCode != 0:
+                    print ("Couldn't debuild -S for distro series {}-{} some reason. Check {} for details. Not continuing".format(Builder.Distro, Builder.Arch,
+                            Builder.LogFileName))
+                else:
+                    print("{} completed".format(process.name()))
+
+                DeadProcesses.append(key)
+
+        Erased = False
+        for pid in DeadProcesses:
+            Erased = True
+            del ActiveProcesses[pid]
+
+        if Erased:
+            break;
+
+        # Sleep for five seconds before we poll the processes again
+        time.sleep(5)
+
+    return ActiveProcesses
+
 if Stage == 2:
+    print("Signing our license key quick to kick off a GPG wallet hit for the following processes")
+    # Remove the file if it exists
+    p = subprocess.Popen(["rm", "LICENSE.gpg"])
+    p.wait()
+
+    # Sign a file to store password in the wallet
+    p = subprocess.Popen(["gpg", "-s", "LICENSE"])
+    p.wait()
+    if p.returncode != 0:
+        print("Couldn't setup gpg key with signing dummy file")
+        sys.exit(-1)
+
     print("Generating debuild files: Spinning up {} processes".format(len(supported_distros) * len(supported_cpus)))
     print("Don't kill this early otherwise you'll get background lintian processes running!")
+
+    ActiveProcesses = {}
     for distro in supported_distros:
         for arch in supported_cpus:
+            print("Building package for {} on {}.".format(arch[1], distro[1]))
             SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0]
             SubFolderLogs = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0] + "_logs"
             os.makedirs(SubFolderLogs, exist_ok=True)
@@ -248,15 +335,13 @@ if Stage == 2:
 
             p = subprocess.Popen(["debuild", "-S"], cwd = SubFolder, stderr=subprocess.STDOUT, stdout=SubFolderLogFile)
             Process = DebuildOutput(distro, arch, SubFolderLogFiles, SubFolderLogFile, p)
-            Process.Wait()
-            ReturnCode = Process.ErrorCode()
-            Process.Close()
+            ActiveProcesses[Process.pid()] = Process
 
-            if ReturnCode != 0:
-                print ("Couldn't debuild -S for distro series {}-{} some reason. Check {} for details. Not continuing".format(Builder.Distro, Builder.Arch,
-                        Builder.LogFileName))
-                sys.exit(-1)
+            # If at max processes then wait
+            ActiveProcesses = WaitForProcesses(ActiveProcesses, 9)
 
+    # Wait for all processes to exit
+    ActiveProcesses = WaitForProcesses(ActiveProcesses, 0)
 
 if Stage == 3:
     print("Uploading results")

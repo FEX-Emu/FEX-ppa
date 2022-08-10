@@ -17,6 +17,19 @@ Build-Depends:
   llvm,
   git,
   tree,
+Build-Depends-Arch:
+  g++-x86-64-linux-gnu,
+  pkg-config,
+  libclang-dev,
+  llvm-dev,
+  libssl-dev,
+  libdrm-dev,
+  libxcb-present-dev,
+  libxcb-dri2-0-dev,
+  libxcb-dri3-dev,
+  libxcb-glx0-dev,
+  libxcb-shm0-dev,
+  libxshmfence-dev,
 Homepage: https://fex-emu.org/
 Vcs-Browser: https://github.com/FEX-Emu/FEX
 Vcs-Git: https://github.com/FEX-Emu/FEX.git

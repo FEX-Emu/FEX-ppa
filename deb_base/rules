@@ -27,9 +27,9 @@ confflags += \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DENABLE_LTO=True \
 	-DENABLE_LLD=True \
-	-DENABLE_STATIC_PIE=False \
 	-DBUILD_TESTS=False \
 	-DENABLE_ASSERTIONS=False \
+	-DBUILD_THUNKS=@SUPPORTS_THUNKS@ \
 	-DTUNE_CPU=@TUNE_CPU@ \
 	-DTUNE_ARCH=@TUNE_ARCH@ \
 	-DOVERRIDE_VERSION=@FEX_VERSION@ \
@@ -60,6 +60,20 @@ override_dh_auto_configure:
 
 #override_dh_installchangelogs:
 #	dh_installchangelogs
+
+# If dwz is attempted to be used then it will complain about too few files for multifile optimization
+# If also complains about unknown debugging sections in our cross-arch libraries
+# Disable entirely since it doesn't support these things
+override_dh_dwz:
+	# Nothing here
+
+# If dh_strip is enabled then it tries to strip ELF libraries of thunks which breaks
+override_dh_strip:
+	# Nothing here
+
+# We need to ignore any shlib dependencies from the GuestThunks
+override_dh_shlibdeps:
+	dh_shlibdeps -XGuestThunks
 
 %:
 	dh $@ --builddirectory=build/ --buildsystem=cmake
