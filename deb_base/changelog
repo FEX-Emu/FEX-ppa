@@ -1,3 +1,107 @@
+fex-emu-@ARCH_SUFFIX@ (2208~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - AppConfig
+   - Fix bug with filename (ac23bce)
+
+  - Arm64
+
+   - JIT
+    - Remove unnecessary [[maybe_unused]] attributes (89aa590)
+
+  - Arm64Dispatcher
+   - Amend memcpy in SpillSRA  (f5e18cc)
+
+  - Arm64Emitter
+   - Re-add use of stp/ldp with hosts that don't support SVE2 (8589119)
+
+  - CMake
+   - Support multiple json files in the root of Data/ (bd296d7)
+
+  - CPUID
+   - Detect Cortex-X1C (c9f0ecb)
+
+  - Config
+   - Support a global configuration file (3a64ea1)
+
+  - Dispatcher
+   - Fix SRA enabled check in signal delegator handlers (0dfe617)
+
+  - Externals
+   - Update fmt to 9.0.0 (54f62b6)
+
+  - FEXBash
+   - Changes PS1 to hopefully help users (a72ebfd)
+
+  - FEXConfig
+   - Some quality of life improvements (164299c)
+
+  - FEXCore
+   - Fix-up edge case behaviour on faulting instructions  (8037231)
+   - Adds assume optimizing LogManager function  (3d347ed)
+   - Support synchronizing RIP on block entry through config (80909ea)
+
+  - FEXRootFSFetcher
+   - Adds runtime checks for image mounting tools (cfd59db)
+   - Actually wire up -a -x (3aabe07)
+   - Add some options for automation without user intervention (f6fcfba)
+
+  - FEXServer
+   - Fix unsafe vector insert/removal (0982ec6)
+
+  - HarnessHelpers
+   - Handle SSE register offsets in CompareStates (0e93ba5)
+
+  - Interpreter
+   - Move argument names over to IR names (3f9a1c3)
+
+  - JitSymbols
+   - Only initialize perf map file if using (a984674)
+
+  - Linux
+   - Fixes hang in close_range  (4dfe0a0)
+   - Only install syscall handlers for the arch we launched with (0186616)
+
+  - Syscalls
+   - Removes staging vector usage (6903159)
+
+  - Telemetry
+   - Support executable names through wineserver (ce0c24e)
+
+  - Thunks
+   - Extends libGL interface to support more functions (1051cd9)
+   - Make glXGetProcAddress self-query work  (dd7e1ba)
+   - Make unknown glXGetProcAddress non-fatal (ab228c1)
+   - Use external Vulkan-Headers  (9664d98)
+   - Make GL guest thunks implicitly load libX11.so (5eab087)
+
+   - X11
+    - Distinguish between host and guest pointers in XFree (6933c2a)
+
+  - Misc
+   - Disable UnitTestGenerator (45330fd)
+   - Synchronized Block Linking (b9c9c7d)
+   - Implement signature-based thunking of function pointers (62d9961)
+   - Cleanup syscalls headers (c3c52d0)
+   - json_ir_generator: Remove Args() functions from IR structs (98d935d)
+   - Fix SOMA and sigaction definition (b07660c)
+   - improve compile ability for older linux (c1688fa)
+   - AVX initial groundwork (c173405)
+   - x86_64: Migrate args over to named IR arguments (3ac6ba0)
+
+  - cmake
+   - Remove the static-pie compilation option (a112db1)
+
+  - drm
+   - Update to v5.19 (1fa6bf1)
+
+  - unittests
+   - Adds 32-bit into test  (f2602e3)
+
+  - vixl
+   - Update (9b685ba)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.org>  Wed, 10 Aug 2022 15:23:53 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2207~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - AOTIR
