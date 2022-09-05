@@ -5,6 +5,12 @@ import shutil
 import subprocess
 import time
 from dataclasses import dataclass, field
+from shutil import which
+
+NeededApplications = [
+    "debuild",
+    "tree",
+]
 
 # Supported distros in the form of: letter, series name
 supported_distros = [
@@ -118,6 +124,17 @@ if not os.path.isfile(SourceTar):
 
 UploaderName = "Ryan Houdek"
 UploaderEmail = "houdek.ryan@fex-emu.org"
+
+def CheckPrograms():
+    Missing = False
+    for Binary in NeededApplications:
+        if which(Binary) is None:
+            print("Missing necessary application '{}'".format(Binary))
+            Missing = True
+    return not Missing
+
+if CheckPrograms() == False:
+    sys.exit(1)
 
 if Stage == 0:
     print("Generating Changelog")
