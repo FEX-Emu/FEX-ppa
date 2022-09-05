@@ -123,7 +123,7 @@ if not os.path.isfile(SourceTar):
     sys.exit()
 
 UploaderName = "Ryan Houdek"
-UploaderEmail = "houdek.ryan@fex-emu.org"
+UploaderEmail = "houdek.ryan@fex-emu.com"
 
 def CheckPrograms():
     Missing = False

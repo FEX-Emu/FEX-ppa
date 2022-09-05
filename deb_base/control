@@ -1,8 +1,8 @@
 Source: fex-emu-@ARCH_SUFFIX@
 Section: misc
 Priority: optional
-Maintainer: Ryan Houdek <houdek.ryan@fex-emu.org>
-Uploaders: Ryan Houdek <houdek.ryan@fex-emu.org>
+Maintainer: Ryan Houdek <houdek.ryan@fex-emu.com>
+Uploaders: Ryan Houdek <houdek.ryan@fex-emu.com>
 Standards-Version: 4.5.1
 Build-Depends:
   debhelper-compat (= 12),
@@ -30,7 +30,7 @@ Build-Depends-Arch:
   libxcb-glx0-dev,
   libxcb-shm0-dev,
   libxshmfence-dev,
-Homepage: https://fex-emu.org/
+Homepage: https://fex-emu.com/
 Vcs-Browser: https://github.com/FEX-Emu/FEX
 Vcs-Git: https://github.com/FEX-Emu/FEX.git
 Rules-Requires-Root: no

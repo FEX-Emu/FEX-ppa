@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: fex-emu
-Upstream-Contact: FEX-Emu Maintainers <team@fex-emu.org>
+Upstream-Contact: FEX-Emu Maintainers <team@fex-emu.com>
 Source: https://github.com/FEX-Emu/FEX
 
 Files: *
