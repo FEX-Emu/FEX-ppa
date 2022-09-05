@@ -304,8 +304,7 @@ def WaitForProcesses(ActiveProcesses, MaxProcesses):
                 process.Close()
 
                 if ReturnCode != 0:
-                    print ("Couldn't debuild -S for distro series {}-{} some reason. Check {} for details. Not continuing".format(Builder.Distro, Builder.Arch,
-                            Builder.LogFileName))
+                    print ("Couldn't debuild -S for distro series {}some reason. Check {} for details. Not continuing".format(process.name(), Builder.LogFileName))
                 else:
                     print("{} completed".format(process.name()))
 
