@@ -1,3 +1,83 @@
+fex-emu-@ARCH_SUFFIX@ (2209~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - 64BitAllocator
+   - Fixes a significant state tracking perf problem (123b672)
+
+  - Allocator
+   - Simplify StealMemory, make it less chatty with kernel space (04678f8)
+
+  - Arm64
+
+   - JIT
+    - Rename CanUseSVE to HostSupportsSVE (7d8950d)
+
+  - CI
+   - Build Thunks (e544591)
+
+  - FDUtils
+   - Don't make unknown get_fdpath fatal (336dedb)
+
+  - FEXRootFSFetcher
+   - Fix crash if curl fails to download rootfs definition file (31fefaa)
+
+  - FEXServer
+   - Support socket path override (a2f4f49)
+
+  - Github
+   - Fix fresh runner rootfs checkout (d619968)
+
+  - HostRunner
+   - Handle upper YMM lanes in sigsegv handler (d5c83a2)
+
+  - IRLoader
+
+   - TestHarnessLoader
+    - Don't build if not building tests (097184c)
+
+  - InterpreterOps
+   - Extend SSAData size to accomodate 256-bit operations (98dbfbe)
+
+  - Linux
+   - Emulate classic getdents syscall for x64 and x32 (9de25c2)
+
+  - Syscalls
+   - Use underscored shm syscall names  (bbcca80)
+
+  - Termux
+   - Add android-shmem library (0adbe31)
+
+  - Thunks
+   - Consolidate all generated code to one file per library per platform (c17da25)
+   - Adds VDSO thunk library  (53623ff)
+   - Minor cleanups for signature-based function pointer thunking (e6acdcc)
+   - Support direct thunk config in configuration files  (84a95ad)
+   - Fix compile without jemalloc (d5138f5)
+
+   - X11
+    - Support Variadic stack packing (fbb008e)
+    - Adds missing XLibint functions (998a3d8)
+
+  - VectorOps
+   - Extend VAnd/VBic/VOr/VXor (e776f4c)
+   - Extend VMov (e7d7dd1)
+   - Extend VectorImm (8439cf4)
+   - Extend VectorZero (d03b6a9)
+
+  - Misc
+   - New domain. (7f9edbf)
+   - x86_64/JIT: Resolve lingering fmt deprecation warning (37ccb13)
+
+  - cmake
+   - fix incorrect assumption about the value of git's core.abbrev (c03a7fd)
+
+  - unittests
+   - Support skipping unit tests based on host feature support (1fe6fc3)
+
+   - ThunkLibs
+    - Fix warning about "dangerous" use of tmpnam (12fee91)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 05 Sep 2022 17:38:02 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2208~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - AppConfig
