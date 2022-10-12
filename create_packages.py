@@ -304,7 +304,7 @@ def WaitForProcesses(ActiveProcesses, MaxProcesses):
                 process.Close()
 
                 if ReturnCode != 0:
-                    print ("Couldn't debuild -S for distro series {}some reason. Check {} for details. Not continuing".format(process.name(), Builder.LogFileName))
+                    print ("Couldn't debuild -S for distro series {}some reason. Check log for details. Not continuing".format(process.name()))
                 else:
                     print("{} completed".format(process.name()))
 
@@ -324,7 +324,8 @@ def WaitForProcesses(ActiveProcesses, MaxProcesses):
     return ActiveProcesses
 
 if Stage == 2:
-    print("Signing our license key quick to kick off a GPG wallet hit for the following processes")
+    print("Signing our license key quick to kick off a GPG wallet hit for the following processes.\n\tMake sure to save to wallet so it doesn't get asked
+            again")
     # Remove the file if it exists
     p = subprocess.Popen(["rm", "LICENSE.gpg"])
     p.wait()
