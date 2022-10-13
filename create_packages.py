@@ -18,6 +18,26 @@ supported_distros = [
     ["j", "jammy"],
     ["k", "kinetic"],
 ]
+
+distro_build_depends_arch = [
+   ["  libstdc++-10-dev-i386-cross",
+    "  libgcc-10-dev-i386-cross",
+    ""],
+    ["  libstdc++-12-dev-i386-cross",
+    "  libgcc-12-dev-i386-cross",
+    ""],
+    ["  mlir-15-tools",
+     "  libmlir-15-dev",
+     "  clang-15",
+     "  clang-tools-15",
+     "  clang-format-15",
+     "  clang-tidy-15",
+     "  clangd-15",
+     "  libstdc++-12-dev-i386-cross",
+     "  libgcc-12-dev-i386-cross",
+     ""]
+]
+
 supports_thunks = [
     False,
     True,
@@ -164,6 +184,8 @@ if Stage == 1:
         supports_thunk_option = supports_thunks[distro_index]
         thunk_files = supports_thunks_files[supports_thunk_option]
 
+        distro_build_depends = ",\n".join(distro_build_depends_arch[distro_index])
+
         for arch in supported_cpus:
             # Create subfolder
             SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0]
@@ -249,6 +271,7 @@ if Stage == 1:
             SpecificControl = SpecificControl.replace("@ARCH_SUFFIX@", arch[0])
             SpecificControl = SpecificControl.replace("@ARCH_CONFLICTS@", ArchConflicts)
             SpecificControl = SpecificControl.replace("@LIBARCH_CONFLICTS@", LibArchConflicts)
+            SpecificControl = SpecificControl.replace("@BUILD_DEPENDS_ARCH@\n", distro_build_depends)
 
             StoreFile(SpecificControlFile, SpecificControl)
 
@@ -324,8 +347,9 @@ def WaitForProcesses(ActiveProcesses, MaxProcesses):
     return ActiveProcesses
 
 if Stage == 2:
-    print("Signing our license key quick to kick off a GPG wallet hit for the following processes.\n\tMake sure to save to wallet so it doesn't get asked
-            again")
+    print("Signing our license key quick to kick off a GPG wallet hit for the following processes.")
+    print("\tMake sure to save to wallet so it doesn't get asked again")
+
     # Remove the file if it exists
     p = subprocess.Popen(["rm", "LICENSE.gpg"])
     p.wait()
