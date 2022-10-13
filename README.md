@@ -63,11 +63,11 @@ This allows you to create a pbuilder to test building the package before uploadi
 
 `sudo pbuilder create --distribution kinetic --architecture amd64 --basetgz /var/cache/pbuilder/kinetic-amd64-base.tgz`
 
-`sudo pbuilder create --distribution focal --architecture arm64 --basetgz /var/cache/pbuilder/focal-amd64-base.tgz`
+`sudo pbuilder create --distribution focal --architecture arm64 --mirror "http://ports.ubuntu.com/ubuntu-ports/" --basetgz /var/cache/pbuilder/focal-arm64-base.tgz`
 
-`sudo pbuilder create --distribution jammy --architecture arm64 --basetgz /var/cache/pbuilder/jammy-amd64-base.tgz`
+`sudo pbuilder create --distribution jammy --architecture arm64 --mirror "http://ports.ubuntu.com/ubuntu-ports/" --basetgz /var/cache/pbuilder/jammy-arm64-base.tgz`
 
-`sudo pbuilder create --distribution kinetic --architecture arm64 --basetgz /var/cache/pbuilder/kinetic-amd64-base.tgz`
+`sudo pbuilder create --distribution kinetic --architecture arm64 --mirror "http://ports.ubuntu.com/ubuntu-ports/" --basetgz /var/cache/pbuilder/kinetic-arm64-base.tgz`
 
 # Perform the build
 This will attempt building the package provided with the dsc file.
@@ -79,11 +79,11 @@ Result will be in `/var/cache/pbuilder/result/`
 
 `sudo pbuilder build --distribution kinetic --architecture amd64 --basetgz /var/cache/pbuilder/kinetic-amd64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}~k.dsc`
 
-`sudo pbuilder build --distribution focal --architecture arm64 --basetgz /var/cache/pbuilder/focal-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}.dsc`
+`sudo pbuilder build --distribution focal --architecture arm64 --basetgz /var/cache/pbuilder/focal-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}~f.dsc`
 
-`sudo pbuilder build --distribution jammy --architecture arm64 --basetgz /var/cache/pbuilder/jammy-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}.dsc`
+`sudo pbuilder build --distribution jammy --architecture arm64 --basetgz /var/cache/pbuilder/jammy-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}~j.dsc`
 
-`sudo pbuilder build --distribution kinetic --architecture arm64 --basetgz /var/cache/pbuilder/kinetic-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}.dsc`
+`sudo pbuilder build --distribution kinetic --architecture arm64 --basetgz /var/cache/pbuilder/kinetic-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}~k.dsc`
 
 # Cleanup
 ` sudo rm /var/cache/pbuilder/impish-amd64-base.tgz`
@@ -106,3 +106,7 @@ Result will be in `/var/cache/pbuilder/result/`
 ### Unable to find mandatory field 'Changed-By' in the changes file.
 * Changes need to be indented by two spaces otherwise the change file is invalid.
 * Ensure it is indented
+
+### create_package failed with log complaining about running out of memory
+* Add `auto-expand-secmem` to `$HOME/.gnupg/gpg-agent.conf` and then restart gpg-agent with `killall gpg-agent`
+* Lets GPG agent allocate more secure working memory which is necessary to allow multiple signing agents at once
