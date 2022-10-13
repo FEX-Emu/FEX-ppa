@@ -1,3 +1,142 @@
+fex-emu-@ARCH_SUFFIX@ (2210~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - Arm64
+   - Fixes SVE VectorImm (ad8526852)
+   - Centralize location for register defines (169cfbbee)
+
+   - VectorOps
+    - Make use of static predicate registers (0fee355ff)
+
+  - CI
+   - Fixes struct verifier on Ubuntu 20.04 (f97a4afd8)
+   - Adds support for flakes (96fecfd7c)
+
+  - CMake
+   - Add toolchain file for 32-bit cross-compiler (1ed3ecb40)
+   - Extend AArch64 check to include arm64 (a583ebe59)
+
+  - Docs
+   - Update Release docs (c987e1ef4)
+
+  - ELFCodeLoader
+   - Map primary ELF more like the kernel  (b44b3401b)
+   - Fixes dynamic non-interpreter ELFs (edca52860)
+   - Map interpreter first (71f7ff510)
+
+  - ELFCodeloader
+   - Map once and then use MAP_FIXED to overwrite (d68b84bc2)
+
+  - FEXConfig
+   - Ensure APP_CONFIG_NAME isn't stored in json (8d69f539a)
+
+  - FEXLinuxTests
+   - Adds missing pthread_cancel flake status (c262362a0)
+   - Migrate to Catch2 (8f70137b1)
+   - Build 32-bit and 64-bit test variants separately (3448c8343)
+   - Use the build system instead of setting up compile flags via source-code annotations (d2138694b)
+
+  - FEXServer
+   - Fix waiting on kernel version older than 5.3 (8f9d79934)
+
+  - FHU
+   - Convert to a interface target (dee85f14f)
+
+  - IR
+   - Handle 256-bit VSMul/VUMul (23dd056b6)
+   - Handle 256-bit VRev64 (c412d073b)
+   - Handle 256-bit VShlI/VUShlI/VUShrI  (c2b6aef6f)
+   - Handle 256-bit VSShrS/VUShlS/VUShrS (51214d1be)
+   - Handle 256-bit VFCMPORD/VFCMPUNO (7b4b9a80f)
+   - Handle 256-bit VFCMPLT/VFCMPGT/VFCMPLE (25a8a0077)
+   - Handle 256-bit VFCMPEQ/VFCMPNEQ (a67f7422b)
+   - Handle 256-bit VCMPGT/VCMPGTZ/VCMPLTZ (ed8150cfb)
+   - Handle 256-bit VCMPEQ/VCMPEQZ (462a163ba)
+   - Handle 256-bit VBSL (6374175a6)
+   - Handle 256-bit VSMax/VUMax (8d8b02928)
+   - Handle 256-bit VSMin/VUMin (aa6a49932)
+   - Handle 256-bit VNot (64c4fdccf)
+   - Handle 256-bit VFNeg (d715ffbc8)
+   - Handle 256-bit VNeg (1799d4c67)
+   - Handle 256-bit VFRSqrt (dacd96cab)
+   - Handle 256-bit VFSqrt (ca4d3bf64)
+   - Handle 256-bit VFRecp (ea38b043c)
+   - Handle 256-bit VFMax (a39746df2)
+   - Handle 256-bit VFMin (2367a8e50)
+   - Handle 256-bit VAddP (cb121d7f1)
+   - Handle 256-bit VFDiv (50eba4066)
+   - Handle 256-bit VFMul (447226576)
+   - Handle 256-bit VFSub (3f8b872f1)
+   - Handle 256-bit VFAddP (e573ddc2d)
+   - Handle 256-bit VFAdd (eedbde6f1)
+   - Handle 256-bit VPopcount (4e441e5a0)
+   - Handle 256-bit VAbs (3e287a36c)
+   - Removes Mov IR op (46bde401b)
+   - Removes VExtractElement (01beac495)
+   - Removes unnecessary VBitcast IR op (fcd981e6b)
+   - Removes SplatVector{2,4} (2b9cc9666)
+   - Removes VInsScalarElement (82eba2229)
+
+  - Interpreter
+   - Handle 256-bit VSShr/VUShl/VUShr (4d6e15d7a)
+   - Use constant for AVX register size where applicable (808e1c033)
+   - Handle 256-bit VMov (412793c21)
+   - Handle 256-bit VAnd/VBic/VOr/VXor (b5cb42924)
+
+  - JITs
+   - Handle spilling/filling 256-bit vectors (6742e0c37)
+   - Expand max spill slot size to 32 bytes (0d0d116bd)
+
+  - SMC
+   - Fix possible deadlock (8da9ebc2e)
+
+  - Scripts
+   - Updates DefinitionExtract (3977e1f29)
+
+  - StructVerifier
+   - Fixes CI failure (d4b5bf0f7)
+
+  - ThunkLibs
+   - X11/Xext: Removes two functions that don't exist on 32-bit (cc4c705fc)
+
+  - Thunks
+   - Add support for building with clang (2b1ef9735)
+   - Adds dependency on linker script (eaddf7f1a)
+   - Implement the Thunk IR op for 32-bit mode (1ea00f68a)
+   - Adds functional thunk testing to CI (a59097763)
+
+   - Host
+    - Adds bool operator to fex_guest_function_ptr (3237de308)
+
+   - gen
+    - Use fmt for writing formatted output (704afed97)
+
+   - libvulkan
+    - Fixes print for 32-bit (d8c2a8271)
+
+  - VDSO
+   - Fix vsyscall (5cf59408a)
+
+  - VectorOps
+   - Handle 256-bit VURAvg (977d6dd24)
+   - Handle 256-bit VUMinV (0261ed353)
+   - Extend VSQAdd/VSQSub/VUQAdd/VUQSub (f34f1309a)
+   - Extend VAdd/VSub (0ad52b7d1)
+
+  - Misc
+   - Add opencl thunk db (b693112c8)
+   - 32-bit VDSO support (6f6f3c9dc)
+   - Update vixl external (832a320e2)
+   - Move thunk generator logic from ASTVisitor to ASTFrontendAction (54915f87c)
+   - Add support for the vixl simulator (b36ec152d)
+
+  - cmake
+   - Adds uninstall target (6adf22761)
+
+  - unittests
+   - Disable gvisor pselect test (acddc0323)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 13 Oct 2022 07:51:12 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2209~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - 64BitAllocator
