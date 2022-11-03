@@ -1,3 +1,124 @@
+fex-emu-@ARCH_SUFFIX@ (2211~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - 32bit
+   - Fixes Debug build of VDSO (cf91ab9)
+
+  - Allocator
+   - Expand stack space when stealing virtual address space (000677a)
+
+  - Arm64
+
+   - BranchOps
+    - Remove unused std::vector (74e18f4)
+
+   - ConversionOps
+    - Eliminate use of temporary in Vector_FToF (b1d98f4)
+
+   - MemoryOps
+    - Merge if statement into switch in ParanoidLoadMemTSO (199649b)
+    - Remove lingering unnecessary ptrue instances (40d820f)
+
+   - VectorOps
+    - Make use of MOVPRFX where applicable (639d6e6)
+    - Simplify SVE VSXTL/VSXTL2/VUXTL/VUXTL2 implementations (136f1e2)
+
+  - ELFCodeLoader
+   - Fixes Proton Experimental on 48-bit VA systems (2fa1a64)
+   - Implement four more auxv values (fa5322d)
+
+  - External
+   - Update vixl submodule (fc6de5f)
+
+  - FEXCore
+   - Adds support for a timeline profiler interface (62a24bd)
+
+  - FEXServer
+   - Be robust against invalid packets. (64eb87e)
+
+  - Flags
+   - Refine _Bfe's shift (abb44d3)
+
+  - IR
+   - Handle 256-bit VInsElement (9e7daf6)
+   - Handle 256-bit LoadContextIndexed/StoreContextIndexed (03f0edc)
+   - Handle 256-bit StoreMem/StoreMemTSO/ParanoidStoreMemTSO (70a91ee)
+   - Handle 256-bit LoadMem/LoadMemTSO/ParanoidLoadMemTSO (8a14f87)
+   - Handle 256-bit LoadContext/StoreContext (d475b0b)
+   - Handle 256-bit VTBL1 (2332c41)
+   - Handle 256-bit VInsGPR (b7d9c00)
+   - Handle 256-bit VExtractToGPR (b3ee5db)
+   - Handle 256-bit Vector_FToI (7e81023)
+   - Check for invalid conversion masks in Float_FromGPR_S (7291b10)
+   - Handle 256-bit Vector_FtoF (b8f7e4c)
+   - Handle 256-bit Vector_FToZS/Vector_FToS  (13003da)
+   - Handle 256-bit Vector_SToF (cb17ee9)
+   - Handle 256-bit VDupElement (27b022d)
+   - Handle 256-bit VUnZip/VUnZip2 (780e3c7)
+   - Handle 256-bit VZip/VZip2 (ab45db1)
+   - Handle 256-bit VUShrNI/VUShrNI2 (bb38bcb)
+   - Handle 256-bit VSQXTUN/VSQXTUN2 (6cc2912)
+   - Handle 256-bit VSQXTN/VSQXTN2 (1c7d416)
+   - Handle 256-bit VSMull/VSMull2 (3ac5e04)
+   - Handle 256-bit VUMull/VUMull2 (78a0773)
+   - Handle 256-bit VUXTL/VUXTL2 (e9f3a5b)
+   - Handle 256-bit VUABDL (ebc45df)
+   - Handle 256-bit VSXTL/VSXTL2 (f14a5ff)
+
+  - Interpreter
+
+   - MiscOps
+    - Remove unused StopThread() function (d2e0dc9)
+
+  - OpcodeDispatcher
+   - Fixes ROR imm OF calculation (eca9353)
+   - Fixes flag calculation on ROR and ROL by immediate (b1e475d)
+   - Fixes FPREM1 C2 flag calculation (4a09a43)
+
+  - Syscalls
+   - Fixes 64-bit mmap and munmap (d1b235d)
+
+  - Thunks
+   - Add support for disabling thunks in config (004c323)
+   - Fixes missing thunk librarie so versions (2272b30)
+   - Fixes indirect thunks with 8+ arguments (6b3d888)
+   - Update Vulkan thunk to v1.3.231  (ddc1027)
+
+   - Guest
+    - Enable SSE2 on thunks and set fpmath to sse (671f3e7)
+
+   - X11
+    - Reorder and sort X11 interface by headers included.  (8d373c1)
+
+   - libX11
+    - Fix recursive initialize (d838612)
+
+  - ThunksDB
+   - Fixes Thunks loaded boolean pointer check (b5fb1cb)
+
+  - Utils
+
+   - 64BitAllocator
+    - Minor cleanups and optimization for munmap  (70a3ceb)
+
+  - X87
+   - Claim incoming float was in the range for trancendental ops (aa5e92b)
+
+  - Misc
+   - Segment register index optimization (ecf4891)
+   - Implements DAA, DAS, AAA, AAS, AAM and AAD instruction (f26eccd)
+   - Ensure Arm64Emitter uses FEX allocator (ffb4de9)
+
+  - unittests
+   - Amend mm register usage in H0F38/66_04.asm test (cada0d5)
+
+   - asm
+    - Adds more extensive FPREM/FPREM1 tests  (b726f60)
+
+   - gvisor
+    - Adds a bunch of tests to flakes (5bef13d)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 03 Nov 2022 06:29:06 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2210~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - Arm64
