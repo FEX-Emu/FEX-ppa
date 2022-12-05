@@ -1,3 +1,102 @@
+fex-emu-@ARCH_SUFFIX@ (2212~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - Arm64
+   - Const on unmodified argument (9ca34ca)
+   - Minor optimization in AESKEYGENASSIST (c1d118c)
+   - Optimize Break IR op codegen (c7dd6ff)
+
+   - VectorOps
+    - Simplify VMov IR op on SVE  (70e6ab5)
+
+  - CMake
+   - Fix typo in clang thunks option. (0030971)
+
+  - Config
+   - Disable multiblock by default (df25d4e)
+   - Add support for steamid based configurations. (02ca94e)
+
+  - Core
+   - Replace a couple maps with tsl robin_map (57c5761)
+   - Removes log about migrating to shared memory mode (8b6e9e0)
+
+  - ELFCodeLoader
+   - Calculate AT_MINSIGSTKSZ (e0fe916)
+   - Fixes AT_PLATFORM null terminator (d7b0e84)
+   - Pass through AT_SECURE (8afc3b8)
+   - Ensure we set AT_SYSINFO for 32-bit (1d32df9)
+
+  - EmulatedFiles
+   - Defer cpuinfo file initialization to first access (8e2b0d1)
+
+  - Externals
+   - Update vixl submodule (f066abc)
+
+  - FEXConfig
+   - Sort named rootfs vector (71f658b)
+
+  - FEXLoader
+   - Make `IsInterpreterInstalled` check less horrible. (1dd5642)
+   - Disables some AOT shutdown overhead when not enabled (f8b2a0b)
+
+  - FEXServer
+   - More Systemd fixes (5e5e5a3)
+
+  - FEXServerClient
+   - Disable confusing connection log (cc6306a)
+   - Add some debug logs for when FEX can't connect to se… (3c8da3e)
+
+  - IR
+   - Handle 256-bit VExtr (5a403b7)
+   - Removes the only uses of VSLI and VSRI (7d9ed4e)
+   - Remove VLoadMemElement and VStoreMemElement (9cee012)
+   - Handle 256-bit LoadRegister/StoreRegister (a9c5138)
+   - Handle 256-bit VAddV (04d4c5e)
+
+  - IntrusiveIRList
+   - Add a utility helper for getting an OrderedNodeWrapper (3c88180)
+
+  - IoctlEmu
+   - Support radeon (fc28062)
+
+  - Linux
+   - Improve performance of hot paths in path searching (66e0d46)
+
+  - OpcodeDispatcher
+   - Handle VADDPD/VADDPS/VPADDB/VPADDW/VPADDD/VPADDQ (8f157e4)
+   - Handle VANDPD/VANDPS/VPAND/VANDNPD/VANDNPS/VPANDN (c37fcf1)
+   - Handle VORPD/VORPS/VPOR (34e39c9)
+   - Handle VPXOR/VXORPD/VXORPS (4de6902)
+   - Handle VZEROUPPER/VZEROALL (a374a9a)
+   - Handle VMOVQ (b35c6c6)
+   - Handle VMOVNTDQ/VMOVNTDQA/VMOVNTPD/VMOVNTPS (0841ff5)
+   - Implement SGDT  (9912d41)
+   - Moves all GPR and XMM accesses to direct register accesses (a4556e9)
+   - Handle VMOVDQA/VMOVDQU (df761a9)
+   - Handle VMOVDDUP (f8a199a)
+   - Handle VMOVSHDUP/VMOVSLDUP (58f35ba)
+   - Handle VMOVHPD/VMOVHPS (bc20f1e)
+   - Handle VMOVLPD/VMOVLPS (69045db)
+   - Handle VMOVAPD/VMOVUPD/VMOVUPS (2271a90)
+   - Handle VMOVAPS (56ff09f)
+   - Disable PCLMUL if not supported on host (c8293cb)
+
+  - Syscalls
+   - Minor optimization with initialization of syscall definition vector (4d2c4b4)
+
+  - Thunks
+   - Fix guest targets not being detected by IDEs (9158877)
+
+  - Misc
+   - x86_64/VectorOps: Separate 128-bit/256-bit paths (181d315)
+   - Systemd fixes (d5f7e61)
+   - InstallFEX.py: Adds support for Kinetic (aa837ed)
+   - Update release process to include AUR (5336f01)
+
+  - unittests
+   - Expand VPCLMULQDQ unit test (9fea774)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 05 Dec 2022 22:09:11 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2211~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - 32bit
