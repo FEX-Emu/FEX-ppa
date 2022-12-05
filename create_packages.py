@@ -33,6 +33,7 @@ distro_build_depends_arch = [
      "  clang-format-15",
      "  clang-tidy-15",
      "  clangd-15",
+     "  libclang-15-dev",
      "  libstdc++-12-dev-i386-cross",
      "  libgcc-12-dev-i386-cross",
      ""]
