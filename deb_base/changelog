@@ -1,3 +1,139 @@
+fex-emu-@ARCH_SUFFIX@ (2301~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - ARM64
+   - Moves RA functions to header (048daa4)
+
+  - Arm64
+   - Rename GetSrcPair, GetDst, and GetSrc (bf7d0f7)
+   - Enables debug option for disassembling the JIT code (03a0613)
+   - Inline Syscall spill optimization (0ebb15c)
+   - Optimize SVE register spilling and filling (1ab4471)
+   - Optimizing spilling and filling (9a8852f)
+   - Reduce dispatcher to 1 page (65e8bf9)
+
+   - VectorOps
+    - Simplify FADDP result merging (344ec33)
+
+  - Config
+   - Fixes global application configs (dc9737a)
+
+  - Crypto
+   - Explicitly clear upper lane with VPCLMULQDQ (4c013c8)
+
+  - Dispatcher
+   - Calculate REG_ERR correctly using ARM ESR_EL1  (4f313f5)
+
+  - Frontend
+   - Handle 256-bit destination sizes directly (e8aa79b)
+
+  - IR
+   - Handle 128-bit VInsElement with SVE (94ae2e3)
+
+  - LookupCache
+   - Use a PMR map for our Blocklinks with monotonic allocator (b7358b4)
+   - Optimize cache clearing and allocation (2b6a020)
+
+  - OpCodeDispatcher
+   - Optimize a case of GOT calculation (b42b4e0)
+
+  - OpcodeDispatcher
+   - Handle immediate variants of VPERMILPD/VPERMILPS (3904a52)
+   - Handle VMASKMOVDQU (c6297ed)
+   - Handle VPHSUBD/VPHSUBW (4786ddc)
+   - Zip elements instead of for loop insertion in PHSUB  (58ec2b2)
+   - Handle VDPPD/VDPPS (9b8c92e)
+   - Handle VINSERTPS (6caf764)
+   - Handle VMOVMSKPD/VMOVMSKPS (faa81f2)
+   - Handle VPUNPCKHBW/VPUNPCKHWD/VPUNPCKHDQ/VPUNPCKHQDQ (64cd377)
+   - Handle VUNPCKHPD/VUNPCKHPS (138f1fc)
+   - Handle VPUNPCKLBW/VPUNPCKLWD/VPUNPCKLDQ/VPUNPCKLQDQ (6bc1c3f)
+   - Handle VUNPCKLPD/VUNPCKLPS (4560c5b)
+   - Handle VCVTSS2SI/VCVTTSS2SI/VCVTSD2SI/VCVTTSD2SI (4a88480)
+   - Handle VCVTPD2DQ/VCVTTPD2DQ/VCVTPS2DQ/VCVTTPS2DQ (f379385)
+   - Handle VPMULHRSW (82adc2f)
+   - Handle VPMULHW/VPMULHUW (4a3af8d)
+   - Handle VPHMINPOSUW (9d58514)
+   - Handle VPMULDQ/VPMULUDQ (33e8f21)
+   - Handle VCMPSD/VCMPSS (cecda7b)
+   - Remove lingering debug log from VPFCMPOp (ce35128)
+   - Convert runtime assert to static_assert in SHUFOps (345e9b9)
+   - Handle VCMPPD/VCMPPS (0c651dd)
+   - Handle VPSRLDQ (1668db0)
+   - Remove unnecessary usage of VMov in VPSLLDQOp (515b3e4)
+   - Handle VCVTDQ2PD/VCVTDQ2PS (4aed60e)
+   - Handle VPSLLDQ (60a2fb1)
+   - Simplify SHA1MSG1 implementation (d0cb329)
+   - Handle immediate variants of VPSRLD/VPSRLQ/VPSRLW (72a3b18)
+   - Handle 128-bit AVX AES instructions (1800451)
+   - Handle immediate variants of VPSRAD/VPSRAW (1d92182)
+   - Handle VPACKUSDW/VPACKUSWB (6e733bf)
+   - Handle VPACKSSDW/VPACKSSWB (01d2284)
+   - Handle vector versions of VPSRA{D, W} (78b53bf)
+   - Handle remaining PEXTRW opcode (fabf453)
+   - Handle VPMULL{D, B} (b26e410)
+   - Handle vector variants of VPSRL{D, Q, W} (ad3bf18)
+   - Handle VPEXTR{B, D, Q, W}/VEXTRACTPS (c86ba76)
+   - Handle immediate variants of VPSLL{D, Q, W} (c1e301a)
+   - Handle vector variants of VPSLL{D, Q, W} (58fab72)
+   - Handle VPHADDW/VPHADDD (8ce6c08)
+   - Handle VPMOVSXB{D, W, Q}/VPMOVSXW{D, Q}/VPMOVSXDQ/VPMOVZXB{D, W, Q}/VPMOVZXW{D, Q}/VPMOVZXDQ (dc2eaf6)
+   - Narrow memory access with scalar rounding operations (0e233a9)
+   - Move template impl to regular function where applicable (4b891d6)
+   - Handle VROUNDS{D, S}/VROUNDP{D, S} (1ca3563)
+   - Handle VINSERTF128/VINSERTI128 (4b21647)
+   - Handle VPERM2F128/VPERM2I128 (f3d0fa6)
+   - Handle VPERMQ/VPERMPD (60a4561)
+   - Handle VHADDP{D, S} (ded257c)
+   - Handle VPMAXS{B, D, W}/VPMAXU{B, D, W} (9de5840)
+   - Handle VPMINS{B, D, W}/VPMINU{B, D, W} (40bab6b)
+   - Handle VPADDS{B, W}/VPSUBS{B, W} (98a4541)
+   - Handle VPADDUS{B, W}/VPSUBUS{B, W} (757602b)
+   - Handle VPSUB{B, D, Q, W} (a90067f)
+   - Handle VPSIGN{B, D, W} (1bc013d)
+   - Handle VDIVP{D, S}/VDIVS{D, S} (a07a533)
+   - Handle VMULP{D, S}/VMULS{D, S} (eefcea4)
+   - Handle VMAXP{D, S}/VMAXS{D, S}/VMINP{D, S}/VMINS{D, S} (d6b137e)
+   - Handle VSUBP{D, S}/ VSUBS{D, S} (db90390)
+   - Handle VRCPPS/VRCPSS (2937344)
+   - Handle VLDDQU (03fbb92)
+   - Handle VPABS{B, D, W} (a57f3a6)
+   - Handle VPCMPEQ{B, D, Q, W}/VPCMPGT{B, D, Q, W} (573896d)
+   - Handle VRSQRTSS/VRSQRTPS (ab14375)
+   - Handle VPBROADCAST{B, D, Q, W}/VBROADCASTI128 (ace90aa)
+   - Handle VBROADCASTSD/VBROADCASTSD/VBROADCASTF128 (2123868)
+   - Handle VLDMXCSR/VSTMXCSR (b73aeb8)
+   - Handle VSQRTPD/VSQRTPS/VSQRTSD/VSQRTSS (d965ae0)
+   - Handle VCOMISD/VCOMISS/VUCOMISD/VUCOMISS (7ac21e7)
+   - Handle VPAVGB/VPAVGW (a98920d)
+   - Explicitly zero upper lanes (e9aa368)
+   - Handle VADDSD/VADDSS (5ac44ba)
+   - Merge HADDP/PHADD into VectorALUOp (bf86df7)
+   - Merge PAVGOp with VectorALUOp (3322f8b)
+   - Merge PADDQOp, PSUBQOp, PADDSOp, PSUBSOp with VectorALUOp (9eaa45f)
+   - Merge ANDNOp with VectorALUROp (4b16718)
+   - Simplify VANDN (2bf7e09)
+
+  - OpcodeHandler
+   - Handle VADDSUBP{D, S} (905eb01)
+
+  - ThunkDB
+   - Clean up database loading (12b866c)
+
+  - Thunks
+   - Fix IDE integration (16969fc)
+
+  - ThunksDB
+   - Fix misspelt guest library names (e486833)
+
+  - X86Tables
+   - Restrict CVTDQ2PD and CVTTSD2SI to 64-bit memory accesses (91c00d2)
+
+  - Misc
+   - Create a new ARM64 Emitter and move JIT over to it. (ec55ecd)
+   - Initial 32-bit host thunk feature support (d5f3a09)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Fri, 06 Jan 2023 15:58:39 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2212~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - Arm64
