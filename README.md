@@ -110,3 +110,8 @@ Result will be in `/var/cache/pbuilder/result/`
 ### create_package failed with log complaining about running out of memory
 * Add `auto-expand-secmem` to `$HOME/.gnupg/gpg-agent.conf` and then restart gpg-agent with `killall gpg-agent`
 * Lets GPG agent allocate more secure working memory which is necessary to allow multiple signing agents at once
+
+### New subversion rejected due to `Version older than that in the archive`
+When updating the package with a new subversion, the old version first needs to be deleted from the ppa.
+
+- This is due to their version check not really understanding the `<Version>~<SubVersion>~<distro series>` layout
