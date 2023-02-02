@@ -210,13 +210,9 @@ if Stage == 1:
 
             # These need to be copied with rename
             # "fex-emu.install",
-            # "fex-emu.postinst",
-            # "fex-emu.postrm",
             # "fex-emu.triggers",
             # "libfex-emu-dev.install",
             shutil.copy(BaseDeb + "/fex-emu.install", ResultFolder + "/fex-emu-" + arch[0] + ".install")
-            shutil.copy(BaseDeb + "/fex-emu.postinst", ResultFolder + "/fex-emu-" + arch[0] + ".postinst")
-            shutil.copy(BaseDeb + "/fex-emu.postrm", ResultFolder + "/fex-emu-" + arch[0] + ".postrm")
             shutil.copy(BaseDeb + "/fex-emu.triggers", ResultFolder + "/fex-emu-" + arch[0] + ".triggers")
             shutil.copy(BaseDeb + "/libfex-emu-dev.install", ResultFolder + "/libfex-emu-" + arch[0] + "-dev.install")
 

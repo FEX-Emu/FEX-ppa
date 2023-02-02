@@ -2,6 +2,7 @@ usr/bin/FEXBash
 usr/bin/FEXConfig
 usr/bin/FEXGetConfig
 usr/bin/FEXLoader
+usr/bin/FEXInterpreter
 usr/bin/FEXServer
 usr/bin/FEXRootFSFetcher
 usr/bin/FEXUpdateAOTIRCache
