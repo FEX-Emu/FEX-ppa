@@ -1,3 +1,125 @@
+fex-emu-@ARCH_SUFFIX@ (2302~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - ARMEmitter
+   - Handle integer add/subtract vectors (predicated) instruction class (9d33bba)
+   - Handle RMIF, SETF8/SETF16 (a899f9f)
+   - Handle SVE floating-point recursive reduction (1cda029)
+   - Add a few missing instructions (2c9f99e)
+   - Support helper for long address generation  (f8d56a8)
+   - Removes some warnings that cropped up (5fd8fdb)
+
+  - Arm64
+   - Merge two loads in to an LDP (a28039f)
+   - Fixes incorrect operation for CacheLineClear (f8d92aa)
+   - Use switch statement for op handlers instead of jump table (565ed45)
+   - Fix SpillRegister C&P error (9c93c6f)
+   - Fixes large offset spill slots (9acb513)
+
+   - VectorOps
+    - Clamp shift amount to esize-1 for VSShr (9a318ca)
+
+  - ArmEmitter
+   - Adds two more classes of ASIMD instructions (95e544c)
+   - Adds three more classes of ASIMD instructions (81e0ac7)
+
+  - CPUID
+   - Optimize initialization (f614fc6)
+
+  - Config
+   - Fix relative execve applications. (65971ef)
+
+  - ConstProp
+   - Pool inline constants (1e90ebb)
+
+  - Core
+   - Adjust virtual memory size for 32-bit (7f6a620)
+
+  - Dispatcher
+   - Extract 64-bit signal frame save and restore (65b6b6d)
+   - Fixes x86-64 SA_SIGINFO generation  (8dae785)
+
+  - ELFCodeLoader
+   - Don't use std::random_device for RNG (f5e97f3)
+
+  - Emitter
+   - Remove unused header (90bcb8c)
+
+  - External
+   - Update JEMalloc to disable 16k pages (bbf9198)
+
+  - Externals
+   - Update jemalloc to 5.3.0 (9322e55)
+
+  - F64
+   - Fix integer immediates for add,mul,div,sub (c2325e1)
+
+  - FEXCore
+   - Fixup 32-bit signal handling  (fa1193f)
+
+  - FEXLoader
+   - Adds support for execveat with AT_EMPTY_PATH  (dcce9ad)
+   - Build FEXInterpreter and FEXLoader independently (8974509)
+
+  - FEXRootFSFetcher
+   - Support option to auto select first distro (a7aeb4a)
+
+  - FEXServer
+   - Remove POLLREMOVE usage (d2d5282)
+
+  - FileLoading
+   - Optimize FileLoad (28dd946)
+
+  - Frontend
+   - Various optimizations (787b689)
+
+  - Github
+   - Add ARM emitter tests to CI (da88c68)
+
+  - IR
+   - Removes NumArgs member from IR ops (9403c66)
+   - Remove HasDest member (f8e762f)
+
+  - JitSymbols
+   - Fixes file opening and writing (a486797)
+   - Fixes a crash that can occur (34e1ba6)
+
+  - Linux
+   - Fixes shebang file execution (477d4b6)
+
+  - MContext
+   - Insert a stack cookie with assertions enabled (7664359)
+
+  - OpDispatcher
+   - Adds support for CLWB and CLFLUSHOPT (7be2e1a)
+   - Fixes a few missing GPR/XMM helper usages (4aa984a)
+
+  - OpcodeDispatcher
+   - Handle VPBLENDD/VBLENDPS (62e6ada)
+   - Handle VPSRAVD (fe79f61)
+
+  - Scripts
+   - Update InstallFEX.py rootfs links (df87042)
+
+  - Syscalls
+   - Fix out-of-bounds read when handling single-line shebang files (3d29dac)
+
+  - Thunks
+   - Fixes host symbol overrides (9d35bc0)
+
+  - X86Tables
+   - Optimize struct layouts (dfc3297)
+
+  - Misc
+   - X87_F64: Fixes FICOM (afaff92)
+   - fix ifdef to use HAS_SYSCALL_TGKILL for tgkill as it was intented (8d0329d)
+   - fix tgkill (1521e0a)
+   - Fix FPREM flags calculation in F64 (632add6)
+
+  - unittests
+   - Adds negative integer x87 tests (ee58c5d)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sat, 04 Feb 2023 01:29:51 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2301~2~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   Fixes focal
