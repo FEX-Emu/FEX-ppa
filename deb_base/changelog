@@ -1,3 +1,143 @@
+fex-emu-@ARCH_SUFFIX@ (2303~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - ARMEmitter
+   - Tidy up some assertion handling (e7069f9)
+   - Remove predicate implicit conversion operators (41731e2)
+   - Make second sxtw parameter a WRegister (e71e3ec)
+   - Remove implicit conversions from Register/XRegister/WRegister (378e069)
+   - Remove predicate uint32_t conversion operators (e869b2f)
+   - Remove most implicit conversion operators for vector register types (0f45318)
+   - Make VRegister constructor explicit (21fbcef)
+   - Handle sequential registers in lists nicer (ef02083)
+   - Simplify size handling Advanced SIMD 3 different group (24904f4)
+   - Simplify advanced SIMD copy (e65b429)
+   - Centralize handling for unsigned offset load-stores (1832cc8)
+   - Handle SVE Integer Compare - Scalars group (fe1faf9)
+   - Finish off SVE Predicate Misc group (165db37)
+   - Handle SVE partition break categories (4d65521)
+   - Handle SVE integer compare with wide elements category (0a8fc2c)
+   - Finish off SVE Permute Vector - Predicated group (a4c694f)
+   - Handle SVE index generation category (e4488b0)
+   - Handle a few more vector permutation categories (9c256bf)
+   - Handle SVE2 Accumulate category (8c8b680)
+   - Finish off SVE Misc category (2bd64ad)
+   - Handle CPY (scalar) and CPY (SIMD&FP, scalar) (3c1ba84)
+   - Handle predicated wide shifts (dd2e70e)
+   - Handle unpredicated wide shifts and unpredicated shifts by immediates (5fd68b6)
+   - Handle SVE2 saturating add/subtract category (cb3cfed)
+   - Centralize instruction handling for a few categories (582108a)
+   - Fixes some warnings that cropped up. (5da90aa)
+   - Handle SVE SQDMULH/SQRDMULH (vector) (1089987)
+   - Handle ADDVL/ADDPL and RDVL (d810974)
+   - Handle MLA/MLS (vector) and MAD/MSB (347abf0)
+   - Handle SVE predicated mul/div and finish off integer reduction category (c0bc5d9)
+
+   - ASIMDOps
+    - Amend a few error logs (f7f2dc2)
+
+  - Arm64
+   - Fixes a race condition on syscall spilling SRA (f6e2fe1)
+
+   - VectorOps
+    - Use SVE only with 256-bit op sizes (2f260ae)
+    - Use movprfx with VBSL (e8fd8ef)
+
+  - Arm64Emitter
+   - Use bit utils wrapper over __builtin_ffs (9e01730)
+
+  - CPUID
+   - Adds an config option to hide hypervisor bit (77fad28)
+
+  - Core
+   - Support Data in JIT buffer header (c7c47a8)
+
+  - Dispatcher
+   - Fixes crash with misalign stack returning from signal (d688026)
+   - Support reconstructing RIP from block entry (66d879f)
+   - Fixes guest stack register usage (81a89ab)
+   - Minor flags optimization (6047ca9)
+
+  - ELFCodeLoader
+   - Adds an option to inject libSegFault (a5762b6)
+
+  - Emitter
+
+   - ALUOps
+    - Fix typos in log messages (f2aa002)
+
+  - EmulatedFiles
+   - Optimize openat handler (545a216)
+
+  - FEXBash
+   - Move to Tools folder (ef6f5d2)
+
+  - FEXCore
+   - Removes C wrapper interface (f71f244)
+
+  - FEXRootFSFetcher
+   - Update link to rootfs links file (308fa76)
+
+  - FEXServer
+   - Change systemd service environment variable key (d2e0adf)
+
+  - FEXServerClient
+   - Fixes instance where FEXServer can create a zombie (70aefc9)
+
+  - FileManagement
+   - Fixes Proton (2fca207)
+   - Skip opening emulated writable files (e310e29)
+   - Optimize GetEmulatedFDPath with an FD! (55d3edb)
+
+  - IR
+   - Add VDupFromGPR (b329442)
+   - Allow specifying register size for AES enc/dec ops and PCLMUL (8689038)
+
+  - JIT
+   - Adds a JIT data header and tail.  (60b76f5)
+
+  - OpcodeDispatcher
+   - Optimize REP STOS to MemSet operation (fc38df2)
+   - Restrict partial XMM stores to FPRs in StoreResult_WithOpSize (b39a882)
+   - Remove now unused _VDupElement path in LoadSource_WithOpSize (4d25de3)
+   - Handle VPHSUBSW (9b23ae9)
+   - Share MOVHPD implementation with MOVHPS (f951a40)
+   - Handle alignment for MOVAPS a little better (68b2072)
+   - Handle VHSUBPD/VHSUBPS (9b12335)
+   - Handle register variants of VPERMILPD/VPERMILPS (618f5bb)
+   - Handle VPERMD/VPERMPS (645f40b)
+   - Handle VPHADDSW (268dedd)
+   - Optimize ALUOp handler (65b2da2)
+   - Handle VPTEST (a90f536)
+   - Use VectorZero over VectorImm in InsertPSOpImpl (ab03e59)
+   - Handle VMOVSD/VMOVSS (25f0a03)
+   - Handle VPMADDWD (efafe0e)
+   - Handle VSHUFPD/VSHUFPS (35746c7)
+   - Handle VPSHUFD/VPSHUFHW/VPSHUFLW (3ac7b2c)
+   - Handle VPSHUFB (d408129)
+   - Handle VPALIGNR (a96ad0f)
+   - Handle VEXTRACTF128/VEXTRACTI128 (e6fc159)
+   - Handle VPBLENDVB/VBLENDVPD/VBLENDVPS (4ef3066)
+   - Handle VBLENDPD/VPBLENDW (e255f1c)
+
+  - Scripts
+   - Update fit_native script for X1C/A78C (11c8db5)
+
+  - Syscalls
+   - Renamed fstatat64 to fstatat_64 (c4b66b4)
+
+  - VEXTables
+   - Remove VPERMIL2PD and VPERMIL2PS entries (5f574fb)
+
+  - VectorOps
+   - Remove unnecessary mov in VUShrNI2/VSQXTN2/VSQXTUN2 (b5bc8cd)
+   - Only use VBSL 256-bit path if SVE is present (86a6118)
+
+  - Misc
+   - Support user supplied signal restorer.  (143ef57)
+   - Fix SDL2 directfb includes under Alpine Linux (3bc722c)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 06 Mar 2023 16:54:44 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2302~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - ARMEmitter
