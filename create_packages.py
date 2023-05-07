@@ -17,6 +17,8 @@ supported_distros = [
     ["f", "focal"], # Oldest supported is 20.04 focal
     ["j", "jammy"],
     ["k", "kinetic"],
+    ["l", "lunar"],
+    ["m", "mantic"],
 ]
 
 distro_build_depends_arch = [
@@ -36,11 +38,35 @@ distro_build_depends_arch = [
      "  libclang-15-dev",
      "  libstdc++-12-dev-i386-cross",
      "  libgcc-12-dev-i386-cross",
-     ""]
+     ""],
+    ["  mlir-15-tools",
+     "  libmlir-15-dev",
+     "  clang-15",
+     "  clang-tools-15",
+     "  clang-format-15",
+     "  clang-tidy-15",
+     "  clangd-15",
+     "  libclang-15-dev",
+     "  libstdc++-12-dev-i386-cross",
+     "  libgcc-12-dev-i386-cross",
+     ""],
+    ["  mlir-15-tools",
+     "  libmlir-15-dev",
+     "  clang-15",
+     "  clang-tools-15",
+     "  clang-format-15",
+     "  clang-tidy-15",
+     "  clangd-15",
+     "  libclang-15-dev",
+     "  libstdc++-12-dev-i386-cross",
+     "  libgcc-12-dev-i386-cross",
+     ""],
 ]
 
 supports_thunks = [
     False,
+    True,
+    True,
     True,
     True,
 ]
