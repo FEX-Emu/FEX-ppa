@@ -1,3 +1,255 @@
+fex-emu-@ARCH_SUFFIX@ (2305~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - ARM64Dispatcher
+   - Fix compiling with mingw (a33443d)
+
+  - ARM64Emitter
+   - Ensure platform register is saved on win32 (73ede9d)
+
+  - ARMEmitter
+   - Handle SVE2 integer add/subtract wide category (c9fb9c4)
+   - Handle SVE Integer Multiply-Add - Unpredicated group (7747ac8)
+   - Fix treating 32-bit elements as 64-bit with ld1w (100b4d4)
+   - Finish off SVE2 Integer - Predicated group (719803b)
+   - Handle SVE Inc/Dec by Predicate Count category (2293614)
+   - Handle SVE Element Count category (7f0cccf)
+   - Handle SVE predicate count group (aea9028)
+   - Handle floating-point multiply add (indexed) groups (7344680)
+   - Handle SVE Floating Point Multiply-Add group (3275dab)
+   - Handle SVE floating-point compare with zero group (11d396c)
+   - Handle SVE Floating-point Serial Reduction (Predicated) group (cd40a85)
+   - Handle SVE Floating Point Unary Operations - Unpredicated group (9b70c1d)
+   - Handle LDR (vector) (5e8d960)
+   - Move op and assertions into SVEFloatArithmeticPredicated helper (1c3af30)
+   - Handle SVE Write FFR group (3b74e34)
+   - Move SVEBitwiseShiftbyVector into private section  (054430f)
+   - Remove unused helper functions (94e0591)
+   - Fully handle SVE Integer Misc - Unpredicated (3bd4b23)
+   - Simplify uses of IsXOrWRegister (060745f)
+
+   - ASIMDOps
+    - Remove unnecessary template constraints (2321d2a)
+
+   - ScalarOps
+    - Move base opcodes into helper functions (4b8ac0f)
+
+  - Allocator
+   - Adds VirtualAlloc with memory Base hint function (ba45bf4)
+   - Ensure uses of aligned allocations use aligned_free (c140dd7)
+   - Remove pointer indirection overhead (1815418)
+   - Disable glibc sbrk allocations (e4fadd6)
+
+  - AllocatorHooks
+   - Adds some mingw allocator helpers (86e09a0)
+
+  - Arm64
+   - Reclaim SRA registers on 32-bit (3a81efd)
+
+   - VectorOps
+    - Remove a few unnecessary EORs from comparisons in SVE path (55d65f3)
+    - Handle 64-bit elements in VSShr (72df6a2)
+    - Remove unnecessary EOR in VAddP/VFAddP SVE path (1f512b0)
+
+  - Arm64Emitter
+   - Replace x18 usage with x30 (121d9fd)
+
+  - CI
+   - Adds glibc faulting testing (27c03f9)
+
+  - CMake
+   - Get past configuration when mingw is used (aba4257)
+
+  - CPUID
+   - Disable RDTSCP under wine (f7d827a)
+   - Fix std::min type cast (fbc5d58)
+   - Enable FAST REP MOVS (6e0a1a5)
+
+  - CPUInfo
+   - Add mingw helper for CalculateNumberOfCPUs (1fad26d)
+   - Switch away from using get_nprocs_conf (7f243ee)
+
+  - Config
+   - Move path generation to the frontend (da12614)
+
+  - Core
+   - Add a new log message for unsupported instruction (88dba60)
+
+  - CoreState
+   - Fix SynchronousFaultData padding type (68599bf)
+
+  - Dispatcher
+   - Disable signal handling under mingw (0fa4390)
+   - Fixes restoring of AVX state (28c168e)
+
+  - Docs
+   - Adds programming concerns documentation (bfd606e)
+
+  - FEXConfig
+   - Fixes misalignment when advanced option is changed.  (4f20dba)
+
+  - FEXCore
+   - Moves SIGBUS handler to FEXCore/Utils (86af1f6)
+   - Compile without exceptions (37b5bc4)
+   - Stop exposing the x86 table data symbols (590422b)
+   - Fixup cmake file for mingw (b5420f5)
+   - Switch to xbyak for CPUID fetch helpers. (7a774a8)
+   - Stop leaking AVX configuration state (5c62ea2)
+   - IR_INC dependency on FEXCore_Base (1771d08)
+   - Adds fexctl container alias objects (a8ed2af)
+
+  - FEXLoader
+   - Don't build with mingw (892c07a)
+   - Move to Tools folder (307158d)
+   - Move ELFCodeLoader2 to remove 2 (eadce28)
+
+  - FEXServerClient
+   - Insert missing padding in message packet (73caa67)
+
+  - FHU
+
+   - FS
+    - Create WIN32 helpers for some functions. (af15277)
+
+  - FM
+   - Removes double syscall issue with `GetEmulatedFDPath` (b2a3c6a)
+   - Remove unused FD to Name mapping (1aeab04)
+
+  - FileLoading
+   - Add WIN32 specific loading path (c942687)
+
+  - Frontend
+   - Remove errant header (4bffdc6)
+
+  - GdbServer
+   - Disable under mingw (f673afc)
+
+  - HostFeatures
+   - Mark DCZID related utilities as [[maybe_unused]] (5e105e8)
+
+  - IR
+
+   - Passes
+    - Changes vector to fextl (2d05ffe)
+
+  - Interpreter
+   - Separate fallback OpHandler from F80 fallbacks (6e52a16)
+
+  - IntrusiveIRList
+   - Ensure this is using the FEX allocator (82f7bb2)
+
+  - Ioctl
+   - Add default handler for drm (db706bb)
+   - Ensure DRM name check uses strncmp (c1dab3e)
+
+  - LogManager
+   - Remove unused handler (1e4a6d4)
+
+  - LookupCache
+   - Removes unnecessary recursive lock_guard (6dfea8a)
+
+  - Netstream
+   - Disable on WIN32 (2ff5096)
+
+  - ObjectCache
+   - Ensure correctly packed config option (059472f)
+
+  - OpDispatcher
+   - Implements REP MOVS as Memcpy IR op  (11c6f97)
+
+  - OpcodeDispatcher
+   - Simplify PCMPXSTRIOpImpl (30974fb)
+   - Handle PCMPISTRI/VPCMPISTRI (8824714)
+   - Handle VPMASKMOVD/VPMASKMOVQ (238ffdf)
+   - Handle VCVTPD2PS/VCVTPS2PD (35f192b)
+   - Handle VCVTSD2SS/VCVTSS2SD (512d6d0)
+   - Handle PCMPESTRI/VPCMPESTRI (a12802e)
+   - Move usages of `And(Not(` to Andn (f55a653)
+   - Implement support for 32-bit SALC instruction (df354e3)
+   - Handle store variants of VMASKMOVPD/VMASKMOVPS (cf66643)
+   - Handle load variants of VMASKMOVPD/VMASKMOVPS (5cdde0b)
+   - Handle VMPSADBW (2c2abc5)
+   - Handle VPSLLVD/VPSLLVQ (54e7847)
+   - Handle VPSRLVD/VPSRLVQ (91f056b)
+   - Handle VCVTSI2SD/VCVTSI2SS (41477db)
+   - Handle VPINSRB/VPINSRD/VPINSRQ/VPINSRW (8633528)
+   - Handle VPSADBW (1087c45)
+   - Handle VTESTPD/VTESTPS (6517f7e)
+   - Handle VPMADDUBSW (c14f435)
+   - Handle VPMOVMSKB (6645e68)
+   - Pass full register size through VExtractToGPR (e92cfc4)
+
+  - RA
+   - Use FindFirstSetBit helper (cfc1aa5)
+
+  - SignalDelegator
+   - Make sure to save and restore `InSyscallInfo` (456e9db)
+   - Calculate siginfo layout (886c562)
+   - Moves all signal handling to the frontend  (9432a84)
+   - Cleanup unused functions (ad332e3)
+
+  - StringConv
+   - Convert to conversion functions that don't use std::string (c5da0e7)
+
+  - StringUtils
+   - Stop allocating TrimTokens (f45ea1e)
+
+  - Telemetry
+   - Disable on WIN32 (cbe55b0)
+
+  - Threads
+   - Moves pthread logic to FEXLoader (874ae5b)
+   - Adds SetThreadName helper (797737a)
+   - Disable glibc allocator fault testing with `exit` (6d4cef7)
+
+  - Thunks
+   - Fixes xcb helper thread creation (542aeed)
+   - Disable under mingw (4a11111)
+   - Enable ccache if available (c03ed52)
+   - Make xcb's callback more robust. (e8bf7a1)
+
+  - VEXTables
+   - Adds a missing class of AVX instructions (a351620)
+
+  - Misc
+   - Win32 memory allocation fixes (468f747)
+   - Get mingw compiling libFEXCore (7552ad2)
+   - Disable AOT and object cache under mingw (361e684)
+   - Disable Break/INT operations on mingw (4c74913)
+   - llvm-mingw: Fix SoftFloat compiling (2b5ddb6)
+   - Add in jemalloc glibc hooking again  (1a91d84)
+   - Update drm headers to v6.2 (1c2fd72)
+   - cpp-optparse: Update to latest optparse (7916281)
+   - More glibc allocation removals. (f806ca6)
+   - Move FEX away from the remaining glibc allocations that we can (aac4e25)
+   - Add support for thunking Wayland (21838fe)
+   - Convert most std::string over to fextl (9183cf1)
+   - Convert most things to fextl (e3f6ef6)
+
+  - fextl
+   - :fmt: Remove fwrite usage (d7bc037)
+   - Bulk merge (bba8716)
+
+   - memory
+    - Don't allow arrays in fextl::make_unique (65fa495)
+
+  - gvisor
+   - Disable timerfd test (780491d)
+
+  - mingw
+   - Disable compiling Common/Linux/Tools (d7f9c7e)
+
+  - unittests
+   - Add missing VPMASKMOVQ store test (e71f3e8)
+   - Change alignment directive in 256-bit VPSADBW test to 32 (d1ece88)
+
+   - gcc
+    - Disable mcount_pic test (a78860c)
+
+  - x32
+   - Fixes clock_nanosleep syscall (1f44037)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sun, 07 May 2023 12:04:43 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2303~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - ARMEmitter
