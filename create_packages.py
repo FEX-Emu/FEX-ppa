@@ -14,7 +14,6 @@ NeededApplications = [
 
 # Supported distros in the form of: letter, series name
 supported_distros = [
-    ["f", "focal"], # Oldest supported is 20.04 focal
     ["j", "jammy"],
     ["k", "kinetic"],
     ["l", "lunar"],
@@ -22,9 +21,6 @@ supported_distros = [
 ]
 
 distro_build_depends_arch = [
-   ["  libstdc++-10-dev-i386-cross",
-    "  libgcc-10-dev-i386-cross",
-    ""],
     ["  libstdc++-12-dev-i386-cross",
     "  libgcc-12-dev-i386-cross",
     ""],
@@ -64,7 +60,6 @@ distro_build_depends_arch = [
 ]
 
 supports_thunks = [
-    False,
     True,
     True,
     True,
