@@ -1,3 +1,79 @@
+fex-emu-@ARCH_SUFFIX@ (2306~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - AOTIR
+   - Stop passing a mutex around. It's already guarded (f47caf4)
+
+  - ARM64
+   - Fixes SRA disabled codepath (dc65a5e)
+
+  - CPUID
+   - Only enable BMI1 and BMI2 if AVX is supported (cc7a56b)
+
+  - Context
+   - Remove debug namespace (5be798e)
+
+  - ELFCodeLoader
+   - Fixes missing AT_EXECFN (00dc373)
+
+  - FEXConfig
+   - Removes Emulated CPU cores option (1a9b6a8)
+
+  - FEXCore
+   - Implements support for xgetbv (737f917)
+   - Support Wine syscalls (77e8be1)
+   - Convert Core and Telemetry over to fextl::file::File  (5674d3a)
+   - Adds support for hardware x86-TSO prctl (ed69eb9)
+
+  - FEXLoader
+   - Allow simulated kernel version up to 6.2 (ada226b)
+
+  - FEXRootFSFetcher
+   - Support rolling release distros (9473025)
+
+  - IRDumper
+   - Fixes ssa number in arguments. (0f4a5ed)
+
+  - InstallFEX
+   - Updates helper install script for Ubuntu 23.04 (02f15f4)
+
+  - Linux
+   - Make vfork act more similar to how it should. (95b7592)
+
+  - OpcodeDispatcher
+   - Optimize ADC/ADD OF flag calculation (5b58082)
+   - Optimize EFLAG unpacking (69181d4)
+   - Handle PCMPESTRM/VPCMPESTRM (182010c)
+   - Handle PCMPISTRM/VPCMPISTRM (e924468)
+   - Removes a warning that cropped up. (e03b859)
+
+  - Syscalls
+   - Optimize getdents{64,} (de0f398)
+
+  - Telemetry
+   - Save on signal terminate (c9d1f0d)
+
+  - Thunks
+   - Mostly reverts #2672 (6017a91)
+   - Optimize ARM64 trampoline (ce4e991)
+
+  - Tools
+   - Removes visual debugger (09997cf)
+
+  - X87
+   - Super minor FCMOV optimization (4e01452)
+
+  - Misc
+   - Implement support for deferred asynchronous signals (8bc33e9)
+   - Wine TestHarnessRunner support (0ad6f98)
+
+  - github
+   - Updates some actions to v3 (52f64a0)
+
+  - unittests
+   - Adds step to remove stale SHM regions. (0a4bf10)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Fri, 09 Jun 2023 00:15:12 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2305~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - ARM64Dispatcher
