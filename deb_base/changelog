@@ -1,3 +1,241 @@
+fex-emu-@ARCH_SUFFIX@ (2308~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - ARMEmitter
+   - Add missing atomic aliases (68cb6e61d)
+   - Add cinc/cinv/csetm aliases (30ab4d3f5)
+   - Add ngc/ngcs aliases (eebcbfda9)
+   - Add bfc/bfxil aliases (d2bca9b99)
+   - Add sbfiz/tst/ubfiz aliases (468106101)
+   - Finish off remaining SVE Integer Wide Immediate - Unpredicated categories (2fc6542d1)
+   - Implement cmn alias (1ce0ea8f3)
+
+  - Arm64
+   - Switch to using half barriers (94273fbf4)
+   - Fixes LR corruption in 128-bit divides (5821175dd)
+   - Optimize {Load,Store}ContextIndexed address generation (536b2ed49)
+   - Only clear icache for code (0674dfab0)
+   - Emitter: Handle LD1{*}/LDFF1{*} Vector + Immediate encodings (421214e72)
+
+   - Emitter
+    - Add remaining missing SVE predicate range assertions (64c72430b)
+    - Deduplicate some more SVE implementations pt. 2 (0a1820d44)
+    - Deduplicate some more SVE implementations (9c175da0e)
+    - Reorganize some base opcode and assert locations (0be68a54d)
+    - Simplify SVE immediate shift helper (e689c6fcf)
+    - Collapse encoding cases for indexed dup  (d6697fce3)
+    - Handle SVE FP convert precision group (e633ef7cf)
+    - Handle SVE FP arithmetic with immediate (predicated) group (754bc1881)
+    - Handle SVE XAR (842b71cf8)
+    - Add helper for encoding SVE shift immediates (41b3c5266)
+    - Deduplicate some opcode values (d7200e2a1)
+    - Handle unsized contiguous STR variants (46d3f283b)
+    - Handle ST1{*} scatter store variants (724a8e13b)
+    - Simplify SVEMemOperand data union  (699c3f576)
+    - Handle LD1{*}/LDFF1{*} scalar + vector load variants (5c27febbc)
+
+   - VectorOps
+    - Hoist asserts out of VInsElement cases (5b261b0d2)
+
+  - ArmEmitter
+   - Support 32-bit bitmask moves (d9b52fd67)
+
+  - CMake
+   - Allow overriding linker (0d6837f1a)
+   - Fix pkg version extraction for xcb (96b428dca)
+   - Stop installing fmt (2c3361be9)
+
+  - ConstProp
+   - Handle constant Bfi (29dc77c44)
+   - Fix shift mask in const-prop (daeba0625)
+
+  - Context
+   - Pull out some long std::function declarations into aliases (7562ff230)
+
+  - FEXCore
+   - Ensure that the man page follows DESTDIR (d19670916)
+   - Remove erroneous asserts in the project (f5262446a)
+   - Removes unused TLS variable (6455c4817)
+   - Fixes WIN32 compiling again (2283c73fa)
+   - Minor cleanup (462feec2a)
+
+   - Config
+    - Adds support for enum mask configuration array (2c91b5cff)
+
+  - FEXLinuxTests
+   - Fixes race in smc-mt-2 (af35e1897)
+
+  - FEXRootFSFetcher
+   - Make verification percent easier to read (7765bbc7b)
+
+  - FHU
+   - Avoid calling faccessat on WIN32 (b34401bb3)
+   - Fix WIN32 getcpu implementation (70d54122b)
+
+  - Frontend
+   - Remove unused ModRMDecoded instance (f9a9645ef)
+   - Remove redundant lookups in BranchTargetInMultiblockRange() (c81b1c343)
+   - Handle VSIB byte (4a7fa7f2b)
+
+  - Github
+   - Adds mingw build test workflow (0f748bd72)
+
+  - IR
+   - Expand to 16-bit opcodes (003c88e53)
+   - Print SSA values as %123 instead of %ssa123 (599b64e97)
+   - Optimize vector TSO loadstore address calculation (810c7d926)
+
+   - Passes
+    - Fixes DeadStoreElimination pass (ee66985ae)
+
+  - JIT
+   - Use TST instead of CMN (5a53c9231)
+
+  - Jit
+   - Add block links directly through the lookup cache on thread exit (8d8b64d2b)
+
+  - Linux
+   - Implement {recv,send}mmsg inside of socketcall (0a5db6c40)
+   - Implement accept4 inside of socketcall (7c4e4c440)
+
+  - LongDivideRemovalPass
+   - Remove unused variable (759747b3c)
+
+  - Mingw
+   - Fixes compiling again (dc8f063a4)
+
+  - OpcodeDispatcher
+   - Optimize rotates (25b2af14f)
+   - Optimize phsubsw/phaddsw (76059949e)
+   - Optimize CMPXCHG{8B,16B} final comparison (6e15c9c21)
+   - Optimize PSAD* to use vuabdl{2,}  (173b70d19)
+   - Fixes SHRD by immediate OF flag calculation (52d7efda1)
+   - Optimize 8/16-bit RCR (072f02788)
+   - Another FCMov minor optimization (f7b7997c7)
+   - Handle VSIB byte (6979dc9c4)
+   - Remove unused member variables and reorganize (be7188699)
+   - Minor optimization to phminposuw (d3a279510)
+   - Optimize 32/64-bit SH{L,R}D with extr (3cd6c2d91)
+   - Minor optimization to FILD (1b1e9e0fb)
+   - Narrow use of LoadXMMRegister in StoreResult_WithOpSize (68a2441e6)
+   - Fix and optimize PF calculation (1d7b4bb52)
+   - Optimize ADD/ADC OF flag packing  (9722c4c5a)
+   - Remove spurious bfe with flag storing (ddd6dbfdc)
+   - Optimize MOVSS to register (7f2557e32)
+   - Optimize MOVSS to memory destination (0121e858f)
+   - Optimize some shifts size masking (98eda5e16)
+   - Fixes bug with pcmpestri (592935790)
+   - Optimize GetPackedRFLAG (8a4bfba47)
+   - Optimize MASKMOVDQU and MASKMOVQ (69ea03f0e)
+
+  - RCLSE
+   - Rename `Node` to `ValueNode` (d83960d4d)
+
+  - SignalDelegator
+   - Moves last TLS variable to the frontend (b86abfbcc)
+
+  - StructPackVerifier
+   - Fixes missing cursorkind again (296adf183)
+
+  - Thunks
+   - Set bitness flags for 64-bit guests (96aa0a844)
+   - Remove weak symbol definitions (ff3b40400)
+   - Fixes thunks in non-multiarch (9def04c70)
+
+   - X11
+    - Fixes variadic packing and callbacks. (82295b294)
+
+   - xcb
+    - Fixes typo in version check. (8c53a373b)
+
+  - ThunksDB
+   - Adds X11 dependency to XCB (597da8803)
+
+  - X86Tables
+   - Fixes CLZero destination address (5d0b2060e)
+   - Adds spaceship operator to couple op types (20aaad15e)
+
+  - Misc
+   - Fix 16-bit popa insertion behaviour (21eb6e03c)
+   - Pack NZCV flags (91bd3aa62)
+   - Preserve PF across zero shift (abf5e8c6a)
+   - Optimize `xor %eax, %eax` (77c88ffe5)
+   - github-actions: Adds timeout to upload results (6baee3b7c)
+   - fix spelling errors (22f95e627)
+
+  - unittests
+   - Adds missing header (573f33964)
+
+   - gvisor
+    - Adds all socket tests to flakes (6f2452e2e)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sun, 06 Aug 2023 09:39:16 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2307~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - Arm64
+   - Fixes paranoidtso option for CPUs that support LRCPC/2  (e5189d6)
+   - Fixes GPR pair allocation to get one pair back (16f7002)
+   - Fixes register pair conflict. (7c47296)
+
+  - Context
+   - Removes dead `AddVirtualMemoryMapping` function (c3e123d)
+
+  - Emitter
+   - Adds support for CSSC  (8047007)
+
+  - External
+   - Update jemalloc trees (f872199)
+
+   - jemalloc
+    - Updates external jemallocs (1a4d5a1)
+
+  - Externals
+   - Update fmt to 10.0.0 (7ee6fc0)
+
+  - FEXServerClient
+   - Ensure server socket is created with SOCK_CLOEXEC (e86a792)
+
+  - FHU
+   - Workaround libstdc++ version 13+ bug (8a4c5bc)
+
+  - IR
+   - Move VPCMPESTRX REX handling to OpcodeDispatcher  (f39163b)
+   - Pad IROp_Header to be 32-bit in width (fe06f1b)
+
+  - JIT
+   - Implement support for per-instruction RIP reconstruction (9dcc1de)
+
+  - Linux
+   - Fixes hangs due to mutexes locked while fork happens. (e72fa02)
+   - Handle xattr syscalls with emulated paths. (5a53931)
+   - Stop using faccessat2 for faccessat emulation (f444b03)
+   - Remove warning that isn't necessary anymore (cac7985)
+   - Optimize CalculateHostKernelVersion (1506a19)
+
+  - OpcodeDispatcher
+   - Ensure MXCSR is saved/restored with FXSAVE/FXRSTOR (66d4206)
+   - Handle XSAVE/XRSTOR (a082161)
+
+  - Scripts
+   - Disable using catchsegv if it doesn't exist (d6c9b54)
+
+  - VectorFallbacks
+   - Fix PCMPSTR fallback ZF/SF flag setting  (9b5e1c4)
+
+  - Misc
+   - Some small fixes for android building (d2032da)
+   - Move config layers to the frontend (2997257)
+
+  - unittests
+   - Add include search path for asm tests (cb8bf1a)
+
+  - x32
+
+   - Thread
+    - Fixes robust futex fetching (e652399)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Fri, 07 Jul 2023 17:05:03 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2306~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - AOTIR
