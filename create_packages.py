@@ -15,7 +15,6 @@ NeededApplications = [
 # Supported distros in the form of: letter, series name
 supported_distros = [
     ["j", "jammy"],
-    ["k", "kinetic"],
     ["l", "lunar"],
     ["m", "mantic"],
 ]
@@ -46,21 +45,9 @@ distro_build_depends_arch = [
      "  libstdc++-12-dev-i386-cross",
      "  libgcc-12-dev-i386-cross",
      ""],
-    ["  mlir-15-tools",
-     "  libmlir-15-dev",
-     "  clang-15",
-     "  clang-tools-15",
-     "  clang-format-15",
-     "  clang-tidy-15",
-     "  clangd-15",
-     "  libclang-15-dev",
-     "  libstdc++-12-dev-i386-cross",
-     "  libgcc-12-dev-i386-cross",
-     ""],
 ]
 
 supports_thunks = [
-    True,
     True,
     True,
     True,
