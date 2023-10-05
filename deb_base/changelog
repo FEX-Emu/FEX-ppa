@@ -1,3 +1,450 @@
+fex-emu-@ARCH_SUFFIX@ (2310~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - AppConfig
+   - Removes Steam config (02da6d6)
+
+  - Arm64
+   - Fixes inline syscalls (4e9a114)
+   - Optimize wide shifts slightly for 64-bit OpSize (f5c4e28)
+   - Recover two unused vector vector temporary registers  (90f7937)
+
+   - ALUOps
+    - Remove spills in PEXT (4604c01)
+
+   - VectorOps
+    - Elide moves where applicable in 128-bit VSQXTUN2 (fd1b639)
+    - Improve handling of 128-bit vector VInsElement (950a8db)
+    - Elide moves in ASIMD VUShrNI2 if possible (b3269f2)
+    - Assert VTMP1 and VTMP2 are sequential in VTBL2 (8168a49)
+    - Fix SVE aliasing-path  move in VSShr (ffb5876)
+
+  - CI
+   - Run tests with <30s runtime first (e1eb151)
+
+  - CPUID
+   - Enabled Enhanced REP MOVSB/STOSB (6fe643d)
+
+  - Config
+   - Fixes core sanitization (da3e172)
+
+  - ConstProp
+   - Fixes unscaled signed 9-bit range (72d092e)
+
+  - DeadContextStoreElimination
+   - Silence unused function warning  (773e946)
+
+  - ELFCodeLoader
+   - Expose FSGSBase in getauxval HWCAP2 (fbc4bda)
+
+  - FEX
+   - Moves Linux utils and adds spdx (ba56e51)
+
+   - Common
+    - Adds SPDX identifier (9f5f09b)
+
+   - Tools
+    - Adds SPDX identifier (ddf4b5c)
+
+  - FEXCore
+   - Support CpuState relative vector named constants  (3413eb3)
+   - Merge Arm64Dispatcher in to Dispatcher (935b3a3)
+   - Removes x86 JIT. (879b41c)
+   - Removes vestigial Interpreter code (65b6df9)
+   - Support preserve_all ABI for interpreter fallbacks (fea72ce)
+   - Gut interpreter (7d99eb0)
+   - Adds SPDX identifier (67680d7)
+   - Implements support for shifted bitwise ops (d578256)
+   - Disable Enhanced REP MOVSB if Atomic TSO is enabled (0604336)
+   - Defer setting x87 softflow rounding mode until use  (9866e23)
+   - Minor optimization to StoreRegisterSRA  (6fdf2f9)
+
+   - Include
+    - Adds SPDX identifier (d86f41e)
+
+   - JitSymbols
+    - Buffer writes to reduce overhead (2ea2300)
+
+  - FEXServerClient
+   - Adds back ServerSocketPath config option  (e795ec6)
+
+  - FHU
+   - Prepend SPDX identifier (3b188b7)
+
+  - FileManagement
+   - Fix inverted boolean check for procfs/interpreter support (615ab8d)
+
+  - Github
+   - Changes jobs to have unique names (220761a)
+
+  - HostFeatures
+   - Fix x86 CLWB support check (6e08ac6)
+   - Detect FlagM/2 (98f1487)
+
+  - IR
+   - Changes Select operation to not have implicit sizes  (a8c1720)
+   - Changes crc32 operation to always return a 32-bit result. (6d9b524)
+   - RCLSE: Partially reenables the RCLSE pass  (879fcdc)
+
+  - InstCountCI
+   - Enable running on x86 hosts  (a1a709f)
+   - Support f64 reduced precision mode tests (5eed24a)
+   - Fail CI if there was any difference. (93aeb15)
+   - Adds negative immediate primary tests (c38beff)
+   - Add log before compiling instruction (1804b00)
+   - Adds missing instructions from Secondary OpSize tables (750d909)
+
+  - OpcodeDispatcher
+   - Don't mask logic op inputs (d1d3de8)
+   - Optimize lock btr  (2b7e1d1)
+   - Optimize reconstructing FSW (5fc8699)
+   - Removes non-explicit SelectCC function  (43fd159)
+   - Improve output of SHLX/SHRX/SARX (ad8b0c6)
+   - Improve output of MULX (e574cfe)
+   - Handle RORX corner cases better (647629a)
+   - Optimize cmov  (c8e7c34)
+   - Optimize CRC32  (96bbd01)
+   - Optimize 16-bit MOVBE  (f84a264)
+   - Optimize blendp{s,d} (92824f5)
+   - Optimize pins{b,w,d,q} (213d3c4)
+   - Optimize pextr{b,w}  (d4c6749)
+   - Optimize shufpd (655cee0)
+   - Implement shufps with VTBL2 in worst case (31d8283)
+   - Optimize a bunch of shufps variants  (cfe620a)
+   - Optimize 32-bit bswap  (ebdca02)
+   - Optimize NOP vector move (f7e652b)
+   - Minor optimization to BT/BTC/BTR/BTS (48521a4)
+   - Update 32/64-bit RCL for operating size  (950007c)
+   - Update 32/64-bit RCR for operating size (d029394)
+
+  - PassManager
+   - Optimize out CPUID and XGetBV calls (234e029)
+
+  - RCLSE
+   - Optimize redundant store->load operations (6dc5c0d)
+
+  - Scripts
+   - Update generate_doc_outline for moved FEXCore (9ff5544)
+
+  - Thunks
+   - Only build guest target for libfex_thunk_test if FEXLinuxTests are enabled (507cf82)
+   - Analyze data layout to detect platform differences (48fa4f1)
+   - Fix AddressSanitizer build (1439874)
+   - Update Vulkan thunk to v1.3.261.1 (76d4637)
+   - Avoid recompiling thunk interfaces on FEXLoader changes (533f359)
+   - Minor restructuring and small cleanups (be07254)
+
+   - wayland
+    - Add support for APIs required by zink and Super Meat Boy (0d9dce9)
+
+  - Tools
+   - Fixes usage of waitpid in the face of EINTR (dda5861)
+
+  - X87F64
+   - Implement FABS with vector instruction (3a25dd6)
+   - Use Bfe for rounding mode, FCHS use float instruction (ccfd770)
+
+  - Misc
+   - Minor AVX optimizations (3ba1c79)
+   - Optimize ASCII flags (6b4ff4a)
+   - Use adcs (ca87d86)
+   - Optimize 8/16-bit CF calculation (8b3881b)
+   - Optimize PF calculation in lahf (19a7b51)
+   - More opts to the dispatcher + 1 to the JIT (bee9730)
+   - Requiem for the x86 jit (86ad35c)
+   - Add WOW64 JIT frontend (797c890)
+   - Optimize reconstructing x87, harder (5444810)
+   - Make x87 FCMOV slightly less terrible (65d558b)
+   - Minor/flag opts (8b52308)
+   - InstCountCI/VEX_map3: Add missing zeroing vperm2f128/vperm2i128 test cases (3d0b664)
+   - Inline constant with PF calculation (9152fb0)
+   - Optimize out carry invert for DEC (b6922df)
+
+  - unittests
+   - Instruct CTest to print output from tests on failure (e32601f)
+   - Add test thunk library (000fb2e)
+
+   - ASM
+    - Implements tests for vpgatherqd/vgatherqps (ab4642a)
+    - Implements tests for vpgatherqq/vgatherqpd (d94e5ce)
+    - Implements tests for vpgatherdq/vgatherpq (dad7086)
+    - Implements tests for vpgatherdd/vgatherps (85da0f0)
+    - Adds unit test caught by #3153 (0d12cce)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 05 Oct 2023 22:17:42 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2309.1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - Hotfix for fixing file accesses
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 07 Sep 2023 00:45:51 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2309~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - ARM64
+   - Optimize vector zeroing (eaed5c4)
+
+  - ARMEmitter
+   - Handle SVE load and broadcast quadword groups (a9dea29)
+   - Handle SVE load and broadcast element group (710a392)
+   - Handle load/store multiple structures (scalar plus scalar) groups (eda67eb)
+   - Handle SVE ADR (139dd4c)
+   - Handle SVE CPY (immediate) (72357e5)
+   - Migrate off vixl float utils (5a0a6dd)
+   - Handle SVE FCPY (predicated) (8fce133)
+   - Remove resolved TODO comment (5de7eee)
+   - Handle contiguous first fault load (scalar plus scalar) group (0109e88)
+   - Handle SVE FP multiply-add long groups (6f4a23d)
+
+  - Arm64
+   - Only allocate vixl::Decoder if enabled (2d78b1f)
+   - Optimize AES operations by caching a zero register  (7f99738)
+   - Optimize AESKeyGenAssist (02b891c)
+   - Optimize VFMin/VFMax (0819338)
+   - Optimize SVE VInsElement (1f2c5fc)
+   - Stop abusing orr in LoadConstant  (6d562f8)
+   - Optimize non-optimal BFI move case  (1029bb1)
+   - Optimize CacheLine{Clear,Clean} (1343c14)
+   - Adds stats to the disassembly (53ac8ab)
+   - Implement first SVE-128bit optimization  (fe35135)
+   - Remove erroneous LoadConstant (c4c7620)
+
+   - ConversionOps
+    - Remove redundant moves in AdvSIMD VInsGPR (6e4765d)
+    - Add missing half-precision conversions to scalar functions (172c8f3)
+    - Add scalar support to Vector_FToI  (a62ba75)
+
+   - EncryptionOps
+    - Use MOVI reg, #0 to zero vectors (4286d44)
+
+   - VectorOps
+    - Remove redundant moves in SVE VExtr when possible (4297e13)
+    - Remove redundant moves from VSQXTN2/VSQXTUN2/VSQSHL/VSRSHR (5b8a0f1)
+    - Remove redundant moves from SVE variable/immediate/vector shifts when possible (926b8c2)
+    - Remove redundant moves from SVE BSL when possible (ec6548e)
+    - Remove redundant moves from SVE V{S,U}Min/V{S,U}Max when possible (350bca9)
+    - Remove redundant moves from SVE VFMin/VFMax when possible (2264058)
+    - Remove moves from SVE VFDiv if possible (da098d8)
+    - Remove redundant moves from SVE VURAvg if possible (2501ebc)
+    - Remove redundant move in VFRSqrt SVE path (6ad053a)
+
+  - Arm64Emitter
+   - Stop saving and restoring platform register (affbcd2)
+   - Ensure that 128-bit predicate is generated with SVE (49b8b7c)
+
+  - CMake
+   - Add mingw toolchain file (f1aa620)
+
+  - Config
+   - Minor changes (3885bc4)
+
+  - ConstProp
+   - Adds constpool distance heuristic (67a26a0)
+   - Fix set-but-not-used mask variable (2f0c690)
+
+  - Context
+   - Adds helper to reconstruct and consume packed EFLAGS (ea96581)
+
+  - Externals
+   - Update Catch2 to v2.13.10 (e025d32)
+   - Update fmt to 10.1.0 (b0ec419)
+
+  - FEX
+   - Adds instruction count CI (6c7371a)
+   - Create a CommonTools static library (f318203)
+
+  - FEXCore
+   - Rework X87 tag word handling (8bae58d)
+   - Allows disabling telemetry at runtime (d738538)
+   - Adds telemetry around legacy segment register setting (a523858)
+   - Allow for interrupting the JIT on block entry (fc84f6b)
+   - Fixes bug with 32-bit adcx (da17e24)
+   - Fixes Arm64 stats disassembly (099f29f)
+   - Fixes vector shifts by zero (c77ed78)
+
+   - IR
+    - Fixes bug in IRDumper without specification (6cb0f52)
+
+  - FEXInterpeter
+   - Fixes compilation when telemetry is disabled (5cc30bd)
+
+  - FEXInterpreter
+   - Supports procfs/interpreter (016c3c0)
+
+  - Filemanagement
+   - Optimize GetSelf using a string_view  (9f3730f)
+
+  - GIthub
+   - Only enable InstCountCI on an ARM platform (df3d4ef)
+
+  - Github
+   - Adds a CI runner for 128-bit SVE testing  (969ad9b)
+
+  - IR
+   - Remove phi nodes (16f826c)
+   - Adds printer for OpSize (2c2081c)
+   - Adds IR::OpSize to IRDumper (e1c2033)
+   - Removes implicit sized add (b40f784)
+   - Removes implicit sized bfe (351c0ee)
+   - Removes implicit sized and (8239f8a)
+   - Removes implicit sized sub (59a4d15)
+   - Removes bfi from variable size (227ba9f)
+   - Removes implicit sized xor (9b55a34)
+   - Removes implicit sized andn (e9a3848)
+   - Removes implicit sized or (516f27b)
+   - Removes implicit sized lshr (24a9254)
+   - Removes implicit sized lshl (8534d3d)
+   - Removes implicit sized mul ops (915e520)
+   - Removes sext IR helper (a55616e)
+   - Removes implicit sized {Create,Extract}ElementPair (6f66153)
+   - Convert all Move+Atomic+ALU ops from implicit to explicit size (590345b)
+   - Fixes RAValidation for 32-bit applications (547daf8)
+   - Implements support for wide scalar shifts  (084d102)
+   - Allow 128-bit broadcasts in VBroadcastFromMem (425b034)
+   - Add VBroadcastFromMem opcode  (cfc6368)
+   - Adds Option to run the IRDumper with more configurations (ea8fbc6)
+
+   - ConstProp
+    - Ensure that BFI with constant bitfields can optimize to Andn or Or (a2e5c23)
+
+  - InstCountCI
+   - Update for previous changes (b801bac)
+   - Test rorx at max mask size (e2ac97f)
+   - Fix some mislabeled instructions (4443c66)
+   - Add newline to end of file (f4f9b20)
+   - Support encoding expected Arm64 ASM in JSON (dc0cf98)
+   - Update tests from actual ARM64 device (f95ef70)
+   - Adds RNG support (dac220a)
+   - Disables tests with unsupported configurations (da334fe)
+   - Ensure output nasm name doesn't conflict (3c99fb8)
+   - Adds primary tables  (63f28ea)
+   - Adds secondary prefix tables (135b9ac)
+   - Adds secondary tables  (24d01cd)
+   - Adds Primary group tables (103e604)
+   - Adds VEX map3 tables (e334278)
+   - Adds VEX map group tables (7fe2d3b)
+   - Adds FEX map2 tables  (871434d)
+   - Adds VEX map1 tables (a464798)
+   - Adds x87 table (1146c42)
+   - Adds H0F38 table (a15934b)
+
+  - InstructionCountCI
+   - Adds three more instruction tables  (6d1fcfc)
+
+  - Interpreter
+   - Tie SSA data elements to supported vector width (e765bd8)
+   - Use alias for temporary vector data (8b9ee99)
+
+  - Linux
+   - Call exit_group when application tries (0195bb6)
+
+  - LogMan
+   - Commonise log level to string conversion (b4d1726)
+
+  - OpcodeDispatcher
+   - Optimize CMC (c27f69d)
+   - Fixes NZCV and PF flag compacting  (b18592f)
+   - Remove final assumptions about small IR operating sizes (8017a91)
+   - Cleans up RFLAGS size handling  (62fcf6c)
+   - Optimize calls with push (7c81a0d)
+   - Optimize BLENDV when xmm0 is one of the sources  (9fb8c95)
+   - Removes erroneous debug log (012750f)
+   - Optimize Get{Src,Dst}Size (c1b4c11)
+   - Optimizes SSE movmaskps  (1d7c280)
+   - Optimize PSHUF{LW, HW, D}!  (db3dc3e)
+   - Optimize 128-bit movmaskpd  (bf12f08)
+   - Optimize movddup from register (1f7d138)
+   - Optimize cvtdq2pd from register source  (f36f070)
+   - Optimizes movq (30a1a38)
+   - Optimize nontemporal moves  (631655d)
+   - Generate more optimal code for scalar GPR converts (0ef439f)
+   - Optimize cvtps2pd  (80d871f)
+   - Optimize MMX conversion operation  (4d58ec1)
+   - Optimize addsubp{s,d} using fcadd  (200dbdd)
+   - Cache named vector constants in the block  (df99b7b)
+   - Optimize AddSubP{S,D}  (ab83ab4)
+   - Optimize PMULH{U,}W using new IR operations (66c6f96)
+   - Remove redundant moves from PCLMULQDQ and AES operations (1aa2c53)
+   - Use new IR ops for pack instructions  (ee10153)
+   - Optimizes scalar movd/movq (4b06069)
+   - Remove redundant moves from remaining AVX ops (b646f4b)
+   - Remove redundant moves from VPACKUSOP/VPACKSSOp (a40526a)
+   - Remove unnecessary moves from AVX move ops where applicable (86ef6fe)
+   - Remove unnecessary moves from AVXExtendVectorElements (6624f50)
+   - Remove unnecessary moves in AVXVFCMPOp (cd1f401)
+   - Remove redundant moves in AVX blend special cases (76430ba)
+   - Optimize MOVHP{S,D} (819fe11)
+   - Remove unnecessary moves from AVX inserts (adfd678)
+   - Optimize MOVLP{S,D} loads  (bb2f710)
+   - Remove unnecessary moves from AVX register shifts (5d44a44)
+   - Remove redundant moves from AVX immediate shifts (fb65fb2)
+   - Remove unnecessary moves from AVX conversion operations (36a5418)
+   - Remove unnecessary moves from AVXVariableShiftImpl (ead141f)
+   - Remove unnecessary move from VPHMINPOSUW (1414452)
+   - Optimize phminposuw (ed7f1b0)
+   - Optimize PFNACC  (6c7933e)
+   - Optimize hsubp  (364f084)
+   - Remove redundant move from VPSIGN (ffa8f1e)
+   - Optimize pmuludq (9df94d8)
+   - Remove redundant move in AVXVectorScalarALUOpImpl (71984fc)
+   - Remove redundant moves in AVXVectorALUOp (3c88671)
+   - Optimize pmaddwd  (185e3bf)
+   - Optimize phsub  (3c49b32)
+   - Handle zero immediate shifts better (3a2a576)
+   - Optimizes mpsadbw  (8ee6262)
+   - Optimize SSE/AVX pmaddubsw (34a7fef)
+   - Implement support for push IR operation (9e4888c)
+   - Improve SHA1MSG1 output (277345d)
+   - Minor optimization around clearing flags  (3472234)
+   - Eliminate redundant moves in {AVX}VectorRound (b973c19)
+   - Eliminate unnecessary moves in {AVX}VFCMPOp (4c409ea)
+   - Remove unnecessary moves in {AVX}VectorUnaryOp (ac53913)
+   - Remove extraneous moves in {V}CVTSD2SS/{V}CVTSS2SD (2224c23)
+   - Remove unnecessary moves in {AVX}VectorScalarALUOp  (6ce380d)
+   - Remove redundant moves from {V}CVTSD2SI/{V}CVTSS2SI (8dade7e)
+   - Remove some extraneous MOVs from VMOVSD/VMOVSS (add5bae)
+   - Handle broadcasting cases in VPERMQ/VPERMPD (db60a2f)
+   - Improve {V}PSRLDQ shift by 0 (f09d9af)
+   - Remove unnecessary conditionals in {V}PSLLIOp (461ca6f)
+   - Improve VMOVDDUP output (a4a68b4)
+   - Improve output of {V}MOVSLDUP/{V}MOVSHDUP (f70b6f3)
+   - Remove unused variable in AVXVectorUnaryOpImpl (6580796)
+   - Eliminate unnecessary moves in AVXVectorUnaryOpImpl (0e52158)
+
+   - Flags
+    - Update SHLimm to use Opsize upfront  (2d22176)
+    - Update ShiftLeft to use Opsize upfront (338cb19)
+
+  - SignalDelegator
+   - Fix build with telemetry disabled (81046ef)
+   - Allow getting the internal configuration (6960fca)
+
+  - Syscalls
+   - Fix telemetry with exit_group (f0ab960)
+
+  - X86Tables
+   - Optimize MOVLPD stores  (42200bf)
+
+  - X8764
+   - Ensure frndint uses host rounding mode (7c6660f)
+
+  - Misc
+   - Defer PF calculation completely (0422895)
+   - Remove ABINoPF option (8184c55)
+   - Defer second XOR for AF (a8bc6bb)
+   - Stop zeroing undefined flags (252ca88)
+   - Defer AF extract (486f0ba)
+   - Optimize ADD flag calculation (ee8092b)
+   - Remove implicit sized IR ops part atomic (bc1e89d)
+   - Remove implicit sized IR ops part 1 (5415e4c)
+   - IR/Passes/RA: Enable SRA for 32-bit GPRs (6f2b3e7)
+   - x86_64/MemoryOps: Fix mislabeled IR op messages (c5f358b)
+   - Optimize PSIGN and VBSL (2d7a3a5)
+   - Support for Config.json loading on WIN32 (d3f0c7e)
+   - Move External/FEXCore/ to FEXCore/ (c9856da)
+   - Various warning fixes (9d26af9)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 06 Sep 2023 05:29:09 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2308~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - ARMEmitter
