@@ -1,3 +1,132 @@
+fex-emu-@ARCH_SUFFIX@ (2311~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2311
+
+  - ARMEmitter
+   - Fix GPR fill mask in `FillStaticRegs` (3702e51)
+
+  - Arm64
+   - Minor optimization to bfxil and bfi  (8181e53)
+
+  - ArmEmitter
+   - Adds sized Scalar 1 source and 2 source helpers (2e1389b)
+
+  - CPUID
+   - Adds some missing cpu core names (ff3f734)
+
+  - Config
+   - Fixes string enum parser with multiple arguments (bbd20b4)
+
+  - External
+   - Remove a spurious license (26ee63c)
+
+  - FEXCore
+   - Removes gdb pause check handler (d4a6b03)
+   - Fixes bug in vector `ZextAndMaskingElimination` pass (a261d99)
+   - Removes a warning about assume discarding side-effects (462fff2)
+   - Renames raw FLAGS location names to signify they can't be used directly (8dab35c)
+   - Implements support for RPRES  (b2a8b0c)
+   - Support crypto extensions in HostFeatures override (fc70fc3)
+
+   - FileLoading
+    - Updates helper to load file that is backed by memory (190f7c2)
+
+   - IR
+    - Changes over to automated IR dispatch generation (6543a80)
+
+  - FEXLinuxTests
+   - Adds a unittest for eflags and signals around a inlined syscall (b92e716)
+   - Compile tests with masm=intel (b45023b)
+   - Temporarily limit thunk test execution to 64-bit guests (1ea40ae)
+
+  - FEXLoader
+   - Query runtime page size (65e8d09)
+
+  - GDBServer
+   - Preparation work to get this moved to the frontend  (e91c5ff)
+
+  - GdbServer
+   - Fixes returning thread names (1806519)
+
+  - IR
+   - Print assert code for IR EmitValidation (5431aa5)
+   - Optimize unused result atomic fetch mop to just atomic mop (14e5ea1)
+   - Adds scalar vector insert operations  (6253f4f)
+
+  - InstCountCI
+   - Update rounds{s,d} classification (a287f2a)
+   - Adds two missing variants of movd/movq (8538f5b)
+   - Support disabling flagm extensions  (6db2125)
+   - Adds some multi instruction tests (4834236)
+   - Support multiple instructions in the tests (f036a0b)
+   - Adds missing atomic tests (a5f82a5)
+   - Fixes recursive tests with same filename (9c36d10)
+   - Support overriding AFP features (5a3cc7b)
+
+  - JIT
+   - Implements Print support for vixl sim (5b70209)
+
+  - JITArm64
+   - Fixes double munmap issue that was causing crashes (8ee5b5c)
+   - Fixes bug in rpres scalar operations  (8f8f376)
+
+  - Linux
+   - Fixes issue with *at syscalls with absolute paths not working (cf9c2aa)
+   - Fixes warning in 32-bit clock_settime (b4ddf36)
+
+  - OpcodeDispatcher
+   - Optimize palignr with zero immediate  (9612b2f)
+   - Optimize pblendw  (ef5503f)
+   - Optimize blendps  (f45722d)
+   - Optimize 128-bit DPPS and DPPD  (77d9287)
+   - Optimize a few 3DNow! operations  (4045bfd)
+   - Allow garbage in upper bits for more ALU ops  (f5822f8)
+   - Optimize DF pointer offset calculation (63e4c36)
+   - Handle SSE vector moves into themselves a little better (5c93a08)
+   - Remove unnecessary 128-bit truncating moves from StoreResult (ef321e4)
+   - Put extra LoadSource options in a struct (6d39f36)
+   - Remove redundant moves from rorx (efb479f)
+   - Optimizes < 32-bit register push  (cc558fd)
+
+  - TestHarnessRunner
+   - Don't hardcode stack allocation to 4096 bytes (0f3d14e)
+
+  - Thunks
+   - Print error if guest-provided callbacks are called asynchronously (e305a9a)
+   - Skip data layout analysis for types that are always assumed compatible (a379d50)
+   - Fix function pointer support on 32-bit (39c5ab1)
+   - Annotate pointer parameters throughout all thunked libraries (5bf7903)
+   - Add new pointer annotations to assist data layout analysis (978f607)
+   - Oops deleted an entry point (e0ef32e)
+   - Fixes missing vulkan definitions (cb53a70)
+
+   - xcb
+    - Drop unused and incomplete support for asynchronous callbacks (15c825f)
+
+  - VectorOps
+   - Handle SVE VExtr a little better (2e69441)
+   - Handle SVE VFCADD a little better (1cb8e48)
+   - Handle SVE VURAvg a little better (3c5c23b)
+   - Handle SVE VFDiv a little better (9379257)
+   - Handle SVE VSMax/VSMin and VUMax/VUMin paths a little better (8238de0)
+
+  - Misc
+   - Preparatory patches for nzcv (5103f2d)
+   - Prep commits for NZCV modelling (e018917)
+   - (8f246b2)
+   - (c612fa8)
+
+  - github
+   - Enables Vixl simulator on x86 host for instcountci (9ba78c9)
+
+  - unittests
+   - Adds test for bug from #3162 (c77a3d6)
+
+   - ASM
+    - Adds unittest for implicit flag clobber for #3254 (65b7d40)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 07 Nov 2023 17:46:16 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2310~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - AppConfig
