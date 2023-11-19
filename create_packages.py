@@ -46,17 +46,32 @@ distro_build_depends_arch = [
      "  libstdc++-12-dev-i386-cross",
      "  libgcc-12-dev-i386-cross",
      ""],
-    ["  mlir-15-tools",
-     "  libmlir-15-dev",
-     "  clang-15",
-     "  clang-tools-15",
-     "  clang-format-15",
-     "  clang-tidy-15",
-     "  clangd-15",
-     "  libclang-15-dev",
-     "  libstdc++-12-dev-i386-cross",
-     "  libgcc-12-dev-i386-cross",
+    ["  mlir-17-tools",
+     "  libmlir-17-dev",
+     "  clang-17",
+     "  clang-tools-17",
+     "  clang-format-17",
+     "  clang-tidy-17",
+     "  clangd-17",
+     "  libclang-17-dev",
+     "  llvm-17-dev",
+     "  libstdc++-13-dev-i386-cross",
+     "  libgcc-13-dev-i386-cross",
      ""],
+]
+
+c_compiler = [
+    "clang",
+    "clang",
+    "clang",
+    "clang-17",
+]
+
+cxx_compiler = [
+    "clang++",
+    "clang++",
+    "clang++",
+    "clang++-17",
 ]
 
 supports_thunks = [
@@ -205,6 +220,8 @@ if Stage == 1:
     for distro in supported_distros:
         supports_thunk_option = supports_thunks[distro_index]
         thunk_files = supports_thunks_files[supports_thunk_option]
+        c_compiler_override = c_compiler[distro_index]
+        cxx_compiler_override = cxx_compiler[distro_index]
 
         distro_build_depends = ",\n".join(distro_build_depends_arch[distro_index])
 
@@ -255,6 +272,8 @@ if Stage == 1:
             SpecificRulesFile = DebSubFolder + "/" + "rules"
             SpecificRules = ReadFile(SpecificRulesFile)
             SpecificRules = SpecificRules.replace("@FEX_VERSION@", FEXVersion)
+            SpecificRules = SpecificRules.replace("@C_COMPILER@", c_compiler_override)
+            SpecificRules = SpecificRules.replace("@CXX_COMPILER@", cxx_compiler_override)
             SpecificRules = SpecificRules.replace("@TUNE_CPU@", "generic")
             SpecificRules = SpecificRules.replace("@TUNE_ARCH@", arch[1])
             if supports_thunk_option:
