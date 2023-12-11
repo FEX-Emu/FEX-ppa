@@ -1,3 +1,91 @@
+fex-emu-@ARCH_SUFFIX@ (2312~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2312
+
+  - Arm64Emitter
+   - Dedicate registers for PF/AF (9b64674)
+   - Fixes warning (bf147f4)
+
+  - Config
+   - Removes Threads option (3c73357)
+
+  - Dispatcher
+   - Fixes corruption when spilling SRA registers (f6b1434)
+
+  - EmulatedFiles
+   - Stop relying on O_TMPFILE (2e24f34)
+
+  - FEX
+   - Only pass CPU tunables to FEXCore and FEXLoader (b4eeb96)
+
+  - FEXCore
+   - Removes GetProgramStatus (c8ef77c)
+   - Removes InitializeContext API (b35fadf)
+   - Fixes passing arguments to ABI helpers (d0f54bc)
+   - Removes Get/SetCPUState (7de66ac)
+   - Optimize memcpy and memset when direction is compile time constant (85a1c1f)
+   - Removes FEX_PACKED from CPUState (8e892ec)
+   - Moves debug strings to gdbserver (3f02d7c)
+   - Start changing how thread creation works (f328fca)
+   - Moves more SignalDelegator functions to the frontend (6e8af29)
+   - Removes x86 DebugInfo table (8015ce2)
+   - Removes GetExitReason (bdf4089)
+   - Disables RPRES until AFP is audited and enabled (b027113)
+   - Fixes imul returning garbage data (389c6b1)
+   - Work around broken preserve_all support in Windows clang (98f9a65)
+
+  - FEXLoader
+   - Wire up gdbserver in the frontend (efc5eb2)
+
+  - FEXRootFSFetcher
+   - Supports extracting erofs images (aa1344a)
+
+  - GdbServer
+   - Switch over to a unix domain socket (0357bb2)
+
+  - IR
+   - Moves remaining NZCV operations to use DestSize (b619f38)
+
+  - IRDumper
+   - Fixes missing conditional name (8892580)
+
+  - InstCountCI
+   - Moves Sonic Mania code to 32-bit file (470615b)
+
+  - InstructionCountCI
+   - Remove Optimal flags (4a31b61)
+
+  - JIT
+   - Fixes crash in TestNZ (a8ab8bb)
+
+  - OpcodeDispatcher
+   - Optimize three sha instructions (0e1e4c1)
+   - Make "not" not garbage  (3767f36)
+
+  - ScopedSignalMask
+   - Clean up API and use std::unique_lock/shared_lock (8726c8f)
+
+  - Thunks
+
+   - libX11
+    - Change lock functions to nullptr by default (db63241)
+
+  - Misc
+   - Optimize BT/BTC/BTS/BTR (250ffb6)
+   - Improvements for WOW64 compat with newer wine (43cf2e4)
+   - More GdbServer improvements (1c11509)
+   - Optimize shifts/rotates (c1d5fae)
+   - Optimize selects & branches & more nzcv goodies (1e2d059)
+   - Keep guest SF/ZF/CF/OF flags resident in host NZCV (af32539)
+   - Add helper for deriving ops by opcode (3f1f7fa)
+
+  - unittests
+
+   - ASM
+    - Adds unittest found from Ender Lilies that crashed with NZCV (996a4c0)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 04 Dec 2023 02:18:40 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2311.1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2311.1
