@@ -1,3 +1,15 @@
+fex-emu-@ARCH_SUFFIX@ (2312.1~2~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - Fix Mantic clang tools
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 11 Dec 2023 23:03:33 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2312.1~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  - Fix Mantic clang tools
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 11 Dec 2023 22:55:44 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2312.1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2312.1
