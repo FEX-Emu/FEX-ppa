@@ -1,3 +1,167 @@
+fex-emu-@ARCH_SUFFIX@ (2402~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2402
+
+  - Arm64
+   - Removes a vtable indirection in syscalls  (743df8d)
+
+   - BranchOps
+    - Fix unused-variable warning (f515b1e)
+
+  - ArmEmitter
+   - Support single use forward labels (8c31630)
+
+  - CPUID
+   - Removes Init and just uses constructor (f5997a0)
+
+  - Config
+   - Fixes JSON parsing of "ArgumentHandler" types (bd1e029)
+
+  - Dispatcher
+   - Convert GetCompileBlockPtr to using PMF helper (82ce76b)
+   - Removes unused asserting CompileBlock function (5b4e9c6)
+
+  - Externals
+   - Update xbyak to v7.02 and switch away from fork (9da08b4)
+
+  - FEX
+   - Removes legacy kernel 32-bit allocator (de2cd46)
+
+  - FEXConfig
+   - Initialize paths before trying to read configuration files (79526b9)
+
+  - FEXCore
+   - Fix RCL/RCR shift wraparound behaviour (c0be974)
+   - Use TMP1-4 for values that need preserving across spills (0e97f8f)
+   - Decompose some std::function usage to regular pointers (615cfe0)
+   - Pass thread object to HandleUnalignedAccess (d488592)
+   - Removes SRA option, it's now permanently enabled (5467c3e)
+   - Removes context wide and map lookup (eea2e7b)
+   - Optimize HostFeatures and CPUID feature calculation (0071c1b)
+   - Warn if MDWE is set (00669a1)
+   - Changes ParentThread ownership from the CTX to the frontend, take 2 (b4b8e81)
+   - Describe exit function linking object with a structure (93ec676)
+   - Removes stale references to x86 JIT (8665490)
+   - Removes old InternalThreadState header (12b72f9)
+   - Moves OS thread creation to the frontend  (0a4e064)
+   - Moves XID check to the frontend (7524029)
+
+  - FEXLinuxTests
+   - Fix build warnings (d34302a)
+
+  - FEXLoader
+   - Moves thread management to the frontend  (5e26b77)
+   - Temporarily disable CLONE_CLEAR_SIGHAND (26c9d5d)
+   - Fix incorrect format strings (3a5ac39)
+
+  - GdbServer
+   - Fixes crash on gdb detach (a1cf14f)
+
+  - HostFeatures
+   - Supports runtime disabling of preserve_all (235f32c)
+
+  - InstCountCI
+   - Fixes test to not use relative data (3db31a6)
+
+  - JIT
+   - Fixes broken register in VTBX1 (9841983)
+
+  - Jitarm64
+   - Implements spin-loop futex for JIT blocks  (750b0b7)
+
+  - Linux
+   - Decouple thread object creation and tracking (5e5984a)
+   - Implements a fault safe memcpy routine (8e3d4a3)
+   - Adjust when clone allocates stack memory (bd13052)
+
+  - OpcodeDispatcher
+   - Fixes syscall rcx/r11 generation (56d8080)
+   - Initial support for runtime long-mode switch  (4b37921)
+   - Fixes flags generation in imul (3d2cbc5)
+   - Optimize SIB addr calculation  (81c85d7)
+
+  - PassManager
+   - Removes unused exit handler (12923ba)
+
+  - Scripts
+   - More changes to InstallFEX script (b613576)
+   - Updates InstallFEX with supported Ubuntu versions (eb5cf1a)
+
+  - SpinLockWait
+   - Fixes unexpected lock success (472a701)
+
+  - SpinWaitLock
+   - Removes unused variable in spin-loop fallback (a4a1d60)
+
+  - TestHarnessRunner
+   - Move to its own tool folder  (68d6cf5)
+
+  - ThreadManager
+   - StealAndDropActiveLocks in the child forked process (930d265)
+
+  - Thunks
+   - Add workarounds for pointers not readable by 32-bit guests (60b0852)
+   - Allow querying customized functions through vkGetInstanceProcAddr (86c6ca3)
+
+  - Tools
+   - Adds new FEXpidof tool (be4d1a8)
+   - Moves IRLoader to independent folder (9dda960)
+
+  - VDSO
+   - Fixes symbol fetching for a few symbols (4333261)
+
+  - Windows
+   - Commonise WOW64 logic that can be shared with ARM64EC (8ff4b52)
+
+  - X86Tables
+   - Converts tables to be mostly consteval (ec89a00)
+
+  - Misc
+   - Fix #3419 (780b486)
+   - Add NZCV+PF/AF optimization pass (df3d693)
+   - Fixes one mutex hang (ba41da7)
+   - Optimize test -1 (806e5b8)
+   - Optimize TST (4331753)
+   - Clean up access to possible nullptr (cdcc432)
+   - Revert "Add cmake option DISABLE_CLANG_PRESERVE_ALL" (435b67a)
+   - Revert "Revert "FEXLoader: Moves thread management to the frontend"" (a41ebe2)
+   - Eliminate spilling in sha256rnds2 and sha1rnds4 (557cb59)
+   - Revert #3303 (6993f4f)
+   - Improve XCHG operations (920a8db)
+   - Library Forwarding: Handle cross-architecture differences of integer types (9c37c0f)
+   - Optimize CDQOp (cec1814)
+   - Optimize rotates (4d49ac7)
+   - Code cleanup - mainly dead store removal; NFC (6d13d9f)
+   - Optimize shifts a bit (ae7dc25)
+   - Optimize bit manipulation instructions (f4086b2)
+   - Add cmake option DISABLE_CLANG_PRESERVE_ALL (37a611b)
+   - Library Forwarding: Don't attempt custom repacking for non-struct types (2884337)
+   - Check that path arguments to TestHarnessRunner exist (3036f3b)
+   - Allow upper garbage on a bunch of instructions (fa33520)
+   - Fix typos; NFC (bc67910)
+   - Optimize PTEST and VTESTP (31a4158)
+   - Optimize PDEP (58f3d3c)
+   - Library Forwarding: Flip order of nullptr check and custom repacking (d04f3a2)
+   - Library Forwarding: Test interaction of struct repacking and assume_compatible_data_layout (3bfb4be)
+   - Improvements to the Dockerfile (1627331)
+   - Library Forwarding: Implement assisted struct repacking (6efc4a9)
+   - Optimize GPR cmpxchg (f956f00)
+   - Library Forwarding: Implement automatic argument repacking (8320723)
+   - Fixes some new glibc allocations that cropped up (dae16aa)
+   - Linux uprev to v6.6 (c333aac)
+   - Revert "FEXLoader: Moves thread management to the frontend" (db7d7a6)
+   - FEXCore interface cleaning (04a88ed)
+   - Removes IRLoader, unittests, and public interface (f785b38)
+   - Support disabling SHA in CPUID (058e691)
+   - Library Forwarding: Emit layout helpers to allow repacking struct data (d806db5)
+   - Fixes Proton again (b1c3737)
+   - rm andn masking (0fe5e3d)
+
+  - instcountci
+   - Adds panicspill test from steamwebhelper (b937885)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 12 Feb 2024 18:48:58 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2312.1~2~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   - Fix Mantic clang tools
