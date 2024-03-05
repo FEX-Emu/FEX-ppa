@@ -1,3 +1,84 @@
+fex-emu-@ARCH_SUFFIX@ (2403~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2403
+
+  - ASM
+   - Another sign extend bug in #3421 (b7984e8)
+
+  - Arm64
+   - Stop moving source in atomic swap (98572b9)
+
+  - Arm64Emitter
+   - Introduce ARM64EC SRA mappings (6ec628f)
+
+  - CMake
+   - Define _M_ARM_64EC when building for ARM64EC (3e5694b)
+
+  - FEXCore
+   - Expose AbsoluteLoopTopAddress to the frontend (d4be2dc)
+   - Add a frontend pointer to InternalThreadState (5769ffb)
+
+  - FEXLoader
+   - Allocate the second 4GB of virtual memory when executing 32-bit (0b34035)
+
+  - FileFormatCheck
+   - Fixes FD leak (0505b30)
+
+  - InstCountCI
+   - enable preserve_all (2f9449c)
+   - add FMOD block (cc9c80d)
+   - add The Witcher 3 block (60e8da0)
+
+  - InstcountCI
+   - Add a monster of a game block (f41674b)
+   - Adds a vector addition loop from bytemark (44d1502)
+   - Adds addressing limitations to instcountci (cf06799)
+
+  - Linux
+   - Converts passthrough syscalls to direct passthrough handlers (b74de53)
+   - More safe stack cleanup for clone (9687ac5)
+   - Make sure to destroy thread object when thread shuts down (a7c7fe4)
+
+  - OpcodeDispatcher
+   - Don't use AddShift with no shift (d24446e)
+
+  - RedundantFlagCalculationElimination
+   - fix missing NEG case (32a4abb)
+
+  - Syscalls
+   - Fix SourcecodeMap generation for GDB JIT integration (7e2f20c)
+
+  - Misc
+   - Removes steamwebhelper config (d66a83a)
+   - Use SETF8/16 for 8/16-bit INC/DEC (ea7d169)
+   - Library Forwarding: Update Vulkan definitions to v1.3.278 (2dd922c)
+   - Optimize lock dec (009ae55)
+   - Misc little opts (f27e224)
+   - Fix reserving range check (4779fb7)
+   - Update xxhash to v0.8.2 (139367d)
+   - Optimize SBC (49e798a)
+   - Update vixl  (8c0d5c6)
+   - Capture a 64-bit process trying to jump to 32-bit syscall handler (946c805)
+   - Track unittest dependencies through to the custom target (118b8b2)
+   - Adds a unittest for a bug from #3421 (aa9d7c5)
+   - Optimize ADC (5f16f35)
+   - Fixes zero register flag generation (0ef72bf)
+   - Adds MGRR hottest block on render thread (49ca0e2)
+   - Fuse add + cmn -> adds (d8a1868)
+   - Moves SignalDelegator TLS tracking to the frontend (9b93495)
+   - Moves JITSymbol allocation (59ec88f)
+   - Fix instcountci (9025673)
+   - Simplify CalculateAF (5378ae2)
+   - Library Forwarding: Add support for 32-bit Wayland (66feea9)
+   - Implement small TSC scaling (2bcd285)
+   - Cleanup NZCV metadata (9c38332)
+   - Fixes VDSO crash in 64-bit code (bbac014)
+   - Library Forwarding: Allocate packed arguments on the guest stack if needed (9cab746)
+   - Library Forwarding: Disable struct padding for packed arguments (b888bb5)
+   - Optimize 8/16-bit adds/subs (4721825)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 05 Mar 2024 02:06:32 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2402~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2402
