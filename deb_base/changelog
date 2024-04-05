@@ -1,3 +1,107 @@
+fex-emu-@ARCH_SUFFIX@ (2404~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2404
+
+  - Allocator
+   - Cleanup StealMemoryRegions implementation (8a3d08e)
+
+  - ConstProp
+   - drop dead code (202a60b)
+
+  - ELFParser
+   - Stop using a VLA (32ec4a3)
+
+  - Externals
+   - Update Catch2 to v3.5.3 (b892da7)
+
+  - FEXCore
+   - Fixes priority of FEX_APP_CONFIG (7786c23)
+   - Move nearly all IR definitions to internal  (e2a0953)
+   - Moves CodeLoader to frontend (3bed305)
+   - Moves CPUBackend definition internal (f6639c3)
+   - Remove DebugStore map (2ad170b)
+   - Adds more TSO control levers (24fd28e)
+   - Removes vestigial mman SMC checking (542f454)
+   - Fallback to the memcpy slow path for overlaps within 32 bytes (167896d)
+   - Add non-atomic Memcpy and Memset IR fast paths (7dcacfe)
+
+  - FEXLoader
+   - Add a way to sleep a process on startup (624bc3f)
+   - Add some debug-only tracking for FEX owned FDs (79454ed)
+
+  - InstcountCI
+   - Adds a block that is causing panic spilling (150af80)
+
+  - IoctlEmulation
+   - Add missing nouveau ioctl (6d94d79)
+
+  - JIT
+   - Optimize pmovmaskb with a named vector constant (ab8ee64)
+
+  - Linux
+   - Expose support for v6.8 (e33a76a)
+
+   - Threads
+    - Fixes a stack memory leak for pthreads (3d31291)
+
+  - OpcodeDispatcher
+   - clean up shifts (c43af8e)
+   - drop ZeroMultipleFlags (b632f72)
+   - eliminate xblock liveness for rcl/rcr (cd9ffd2)
+   - eliminate branch in cmpxchg pair (aa26b62)
+   - Fixes 32-bit mode LOOP RCX register usage  (7698347)
+   - optimize LOOP/N/E (8852d94)
+   - Implement support for the various prefetch instructions (2a9fcc6)
+   - Implement rdpid (ba3029b)
+
+  - RA
+   - drop dead block interference code (f2d001e)
+   - Removes VLA usage (67baff8)
+   - Adds RIP when a block panic spills (a8b59c1)
+
+  - RCLSE
+   - Optimize store-after-store (ca6b2e4)
+
+  - Telemetry
+   - Allow redirecting directory that data is written to (970d5d5)
+   - Adds tracker for non-canonical memory access crash (7f90ca5)
+   - Rename old file instead of copying (002ca36)
+
+  - Misc
+   - Negate more to inline constants (aa8d04c)
+   - Minor cleanups around flags (37f2b41)
+   - Use scalar integer code to calculate PF (bd0b5ec)
+   - Eliminate xblock liveness with rep cmp/lod/scas (e8abc88)
+   - rewrite ROL/ROR (29c6281)
+   - Fix reference to out of bounds address in offsetof (4214d9b)
+   - optimize clc (b1ddd8c)
+   - Moves FHU TypeDefines to FEXCore includes (5c29c9d)
+   - Optimize cmpxchg with flagm (2a625a4)
+   - Eliminate crossblock liveness in xsave/xrstor (d25ace4)
+   - rewrite Demon Addition Adjust (DAA) and other demonic opcodes (7b74ca1)
+   - Library Forwarding/vulkan: Fix query of vkCreateInstance function pointer (4ea6305)
+   - Put <20M in double quotes to avoid truncate error (1450c92)
+   - Removes false termux support (0c24aea)
+   - Optimize DF representation (cd2a6ce)
+   - Library Forwarding: Don't map float/double to fixed-size integers (4e269d8)
+   - Disable assert in release (c37a12e)
+   - Improve 32bit ld/st addressing mode propagation (ff0c763)
+   - Library Forwarding: Fix accidental data copying when converting from host to guest layout (26a6679)
+
+  - unittests
+
+   - ASM
+    - Adds a test for overlapping memcpy using rep movs (6ce366e)
+    - Implements a unit test for #3478 (caff3cb)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Fri, 05 Apr 2024 22:30:31 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2403.1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Fix build
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 05 Mar 2024 19:28:13 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2403~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2403
