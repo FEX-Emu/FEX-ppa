@@ -1,3 +1,79 @@
+fex-emu-@ARCH_SUFFIX@ (2405~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2405
+
+  - Allocator
+   - Fixes compiling on Fedora 40 (7b88b0f)
+
+  - AllocatorHooks
+   - Mark JIT code memory as EC code on ARM64EC (bb24e14)
+
+  - AppConfig
+   - Disable libGL forwarding for steamwebhelper (02ebb6e)
+
+  - Arm64
+   - Adds another TSO hack to disable half-barrier TSO (1069cab)
+
+  - CI
+   - Drop use of obsolete ENABLE_X86_HOST_DEBUG setting (c126b20)
+
+  - CPUID
+   - Removes FEX version string from CPU model name (faa494c)
+   - Fix inverted RDTSCP check (9781b95)
+   - Enable enhanced rep movs in more situations (68e543c)
+
+  - DebugData
+   - Remove header (1616b4e)
+
+  - FEXCore
+   - Support x64 -> arm64ec calls (1a8b61b)
+
+  - FHU
+   - Switch over win32 file operations to std::filesystem (ae5e388)
+
+  - IR
+   - Remove VectorZero (a0f2cae)
+
+  - JIT
+   - fix neon vec4 faddv (fe70ec7)
+   - fix ShiftFlags shuffles (376936c)
+   - Adds support for spilling/Filling GPRPair (eedb120)
+
+  - LookupCache
+   - Track ARM64EC page state in the code cache (f0dad86)
+
+  - OpcodeDispatcher
+   - Implement support for SMSW (20bd864)
+   - Fixes disabling TSO access on RSP SIB stores (1ba678f)
+   - Add helper for making segment offset addresses (66cbb66)
+
+  - RCLSE
+   - disable store-after-store optimization (5cb11ae)
+
+  - X87
+   - Simplify constant loading for FLD family (271700e)
+
+  - Misc
+   - Library Forwarding: Support libGL/libvulkan without forwarding libX11 (b33e0e3)
+   - clang-format: allow overriding clang-format (3fda47e)
+   - Fix 8/16-bit ADC/SBC (9c6f749)
+   - Library Forwarding: Fix issues with libGL's fake X11 dependency (81a4206)
+   - Factor out SetWriteCursorBefore (a0bf6a4)
+   - WOW64 backend code invalidation fixes (81c219c)
+   - Clang Format file and script (53bed6d)
+   - CI workflow to check clang-format usage on pull requests (f9097c0)
+   - Add second reformat to git blame ignore file (55c054b)
+   - Reformat until fixed-point (07e58f8)
+   - Create .git-blame-ignore-revs with whole-tree reformat sha (7e97db8)
+   - Remove trace of clang-tidy experiment from CMakeLists.txt (7614ac9)
+   - Whole-tree reformat (1d806ac)
+   - Move const to the left in preparation for reformatting (028c220)
+   - Enable jemalloc for ARM64EC (a9b7ad8)
+   - Validate that we have no crossblock liveness (e91e1d5)
+   - Eliminate xblock liveness for shifts (cbfa426)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 02 May 2024 18:39:14 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2404~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2404
