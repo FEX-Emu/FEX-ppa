@@ -1,3 +1,119 @@
+fex-emu-@ARCH_SUFFIX@ (2406~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2406
+
+  - AOTIR
+   - Refactor interfaces to clarify ownership flow (3bac767)
+
+  - CMake
+   - Remove obsolete Catch2 setting (170204d)
+
+  - CPUID
+   - Adds Qualcomm Oryon product name (f7bfecd)
+
+  - Config
+   - Change default TSO options (6954ebe)
+
+  - ConstProp
+   - remove x86 jit leftover (58614ff)
+
+  - Constprop
+   - clean up (14bfe60)
+
+  - FEXCore
+   - Fixes the difference between CPL-0 and undefined instructions  (efe7c54)
+   - Get rid of DeferredSignalFaultAddress and use the InterruptFaultPage (f27f187)
+   - ARM64EC x64 entry/exit support  (2cae2f2)
+
+   - docs
+    - Adds programmer documentation about memory model emulation (a515b70)
+
+  - FEXLoader
+   - Cleanup FD extraction from environment variables (9dd6d8e)
+   - Changes frontend thread management to wrap FEXCore thread objects (ef6d640)
+
+  - FEXLogging
+   - Changes representation of timestamp (9b1b9c2)
+
+  - FEXServer
+   - Removes temporary variable allocation (cd249e2)
+
+  - FileManagement
+   - Fix fstatat/statx with self and NOFOLLOW (6052b33)
+
+  - Github
+   - Support a timeout on checkout (6d3471b)
+
+  - IR
+   - drop IRParser (10de2f8)
+
+  - InstCountCI
+   - Adds SSE4.2 operations (ad13442)
+   - Hardcode the offset to load tests into (663f3d8)
+
+  - InstructionCountCI
+   - add bytemark hot block (063b1eb)
+
+  - JIT
+   - factor out sub reg size conversion (948938b)
+
+   - VectorOps
+    - deduplicate common implementations (e3ec25d)
+
+  - LinuxSyscalls
+   - Cleanup envp copying in execve (55bfd63)
+
+  - NFC
+   - Fix typo (c5f8ea5)
+
+  - OpcodeDispatcher
+   - eliminate some Bfe's (7b4e484)
+   - reorder some moves (926eefc)
+
+  - Readme
+   - Remove misleading text about x86 hosts being supported (eddb7d1)
+
+  - RegisterAllocationPass
+   - drop AVX flag (1fde5d7)
+
+  - Misc
+   - Library Forwarding: Add support for 32-bit OpenGL (4dc8648)
+   - Find-and-replace OrderedNode* with Ref (c0bab70)
+   - optimize shld (9ab0fa0)
+   - (8c4860b)
+   - Fix segfault when starting TestHarnessRunner with missing arguments (f90d2ae)
+   - Optimize logical flags (20d5a26)
+   - Track tied sources in the IR (ee96d60)
+   - ConstProp fixes for Darwinia (ab0a6bb)
+   - Optimize PCMPESTRI flags a bit (35ec54f)
+   - Removes warnings (734258e)
+   - Delete a big chunk of IR/Passes/* (9d0ff79)
+   - (314fea3)
+   - (3b7d30d)
+   - Optimize asr (32f2dec)
+   - Optimize large sign-extended constants (5497240)
+   - Optimize sign-extension (0adcc77)
+   - Simplify/fix our validation passes (c90036a)
+   - Slightly improve pair coalescing + memcpy fix from RA branch (ca70e38)
+   - ConstProp, RCLSE: simplifications (9a48310)
+   - Allow garbage on more shifts (85776c2)
+   - clang-format: left-align escaped newlines (e3e7f02)
+   - (048c8de)
+   - Use erase-remove idiom to remove element (3eb7a5b)
+   - Fix left shift undefined behaviour (5bedf32)
+   - Fix exec path where file needs to be ignored (3a7aa83)
+   - SRA controlled burn (47242dc)
+   - Fix WOW64 frontend with recent wine versions (55d1d6b)
+   - Pass compulsory `mode` argument to `open` when `O_CREAT` is used (f70aafb)
+
+  - unittests
+   - add XeSS test (a01402d)
+
+   - bextr
+    - add SrcSize tests (033b1ce)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 13 Jun 2024 02:25:47 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2405~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2405
