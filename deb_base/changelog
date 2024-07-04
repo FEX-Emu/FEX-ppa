@@ -1,3 +1,159 @@
+fex-emu-@ARCH_SUFFIX@ (2407~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2407
+
+  - ARM64
+   - Adds new FMA vector instructions (00cf8d5)
+
+  - AVX128
+   - Fixes vmovlhps (e2d4010)
+   - Minor optimization to 256-bit vpshufb (5821054)
+   - Fixes scalar FMA accidentally using vector wide (4626145)
+   - Minor optimization to vmov{l,h}{ps,pd} (cf24d3c)
+   - Some quick bugfixes (739ac0f)
+   - Enable all the things (e519bf5)
+   - Fixes wide shifts (a031a49)
+   - F16C support (4d821b8)
+   - Implement support for gathers (6226c7f)
+   - FMA3 (7d939a3)
+   - fix VPCLMULQDQl (5da205d)
+   - More instructions Part 4 (77aaa9a)
+   - Fix vmovntdqa failing to zero upper 128-bits (7ff9622)
+   - Fixes SSE4.2 string compare instructions (dce1b24)
+   - More instructions Part 3 (8c751d7)
+   - More instructions (ddb9f6d)
+   - More various instructions (be8ff9c)
+   - Some pun pickles, moves and conversions (7bbbd95)
+   - Move moves! (f489135)
+
+  - Arm64
+   - Minor VBSL optimization with SVE128  (2e6b08c)
+   - Remove contiguous masked element optimization (dc44eb4)
+   - Implement support for emulated masked vector loadstores (3d26e23)
+
+  - Arm64Emitter
+   - drop out of date comment (825d2c9)
+
+  - BMI2
+   - Ensure rorx immediate masks by operation size correctly. (54a1f7d)
+
+  - CMake
+   - Add a clang version check (5d67223)
+
+  - CPUID
+   - Oops, forgot to enable AVX2 (58e949e)
+   - Update labeling on some reserved bits (2da1e90)
+
+  - CodeEmitter
+   - Fixes vector {ldr,str}{b,h} with reg-reg source (2e84f21)
+
+  - CoreState
+   - Move `InlineJITBlockHeader` to the start of the struct (933d622)
+
+  - Externals
+   - Update vixl submodule (b092b7a)
+
+  - FEX
+   - Consolidate JSON allocators and fix 3691 (643e964)
+
+  - FEXConfig
+   - Clear up TSO emulation string (8d92902)
+
+  - FEXCore
+   - remove very out-of-date optimizer docs (1a0d135)
+   - Fixes address size override on GPR sources and destinations (53b1d15)
+   - Implement AVX reconstruction helpers (6edf461)
+   - Disentangle the SVE256 feature from AVX (13ebfb1)
+   - Fixes Call with 32-bit displacement and address size override (e4ff3da)
+
+  - FEXGetConfig
+   - Support the ability to get TSO emulation facts (2e009be)
+
+  - Frontend
+   - Expose AVX W flag (2e5fa1e)
+
+  - HostFeatures
+   - Always disable AVX in 32-bit mode to protect from stack overflows (e99e252)
+   - Work around Qualcomm Oryon RNG errata (df96bc8)
+
+  - IR
+   - rename _VBic -> _VAndn (67e1ac0)
+
+  - InstCountCI
+   - add segment register cases (e7bdb86)
+   - explicitly disable AFP everywhere (7c7d767)
+
+  - JIT
+   - delete silly assert (61ff1b3)
+
+  - Linux
+   - Calculate cycle counter frequency for cpuinfo (76f3391)
+
+  - LinuxEmulation
+   - Add a helper for getting the ThreadStateObject from CPU frame (89b05a2)
+
+  - OpcodeDispatcher
+   - Implement support for non-temporal vector stores  (472a373)
+   - Optimize x86 canonical vector zero register  (a451420)
+   - Handle F16C operations (94fd100)
+   - Fixes bug in pshuf{lw,hw}  (dfda673)
+   - refactor Comiss helper (fac9972)
+   - Adds initial groundwork for decomposed AVX operations  (b2eb8aa)
+   - Refactor address modes (db0bdd4)
+   - refactor zero vector loads (c57e9e0)
+
+  - RA
+   - priorize remat over spilling (46ca53a)
+
+  - SMCTracking
+   - Fix incorrect mprotect tracking (d7348c8)
+
+  - Scripts
+   - add update_instcountci.sh script (1971404)
+
+   - InstallFEX
+    - update PPA URL (9744d8d)
+
+  - Vector
+   - Helper refactorings (3f232e6)
+
+  - Windows
+   - Small fixes for compat with newer toolchains/wine versions (4e5da49)
+
+  - X86Tables
+   - add Literal() helper (8f769ce)
+
+  - Misc
+   - Use number of jobs as defined by TEST_JOB_COUNT (f453e15)
+   - Revert removing RCLSE (02a218c)
+   - Optimize gathers slightly (ba04da8)
+   - Largest x87 blocks of code from games (500ad34)
+   - (1700d54)
+   - OpcodeDispatcher: optimize nzcv with asimd masked load/store  (2e32426)
+   - Tiny opt for vzeroall (ad4d4c9)
+   - Optimize vcvtps2ph (756fa2e)
+   - Remove RCLSE (d1d41f5)
+   - (1c24d63)
+   - Fix VMOVLHPS instruction (3a310b8)
+   - Adds back cmake error on x86-64 hosts (b2db04f)
+   - Set tag properly in X87 FST(reg) (6e3643c)
+   - Fixes AFP.NEP handling on scalar insertions (da21ee3)
+   - VAES support (d2baef2)
+   - Ignore python files for clang-format (053620f)
+   - FXCH should set C1 to zero (87fe1d6)
+   - First few commits from Ryan's AVX branch (29f6442)
+   - json_ir_generator: don't print unrecoverable temps (f863b30)
+   - Clean ups from my RCLSE branch (4965344)
+   - Revert "OpcodeDispatcher: optimize logical flags" (9aa82ec)
+   - Use FEX_HOSTFEATURES instead of FEX_ENABLEAVX (b17a2e9)
+
+  - unittests
+   - Adds MMX and x87 conflating unit test (d2437e6)
+   - Fixes typo in vpcmpgtw test (d884eb9)
+   - Split up vtestps unittest to accumulate flags in independent registers. (4d00a52)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 04 Jul 2024 01:11:45 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2406~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2406
