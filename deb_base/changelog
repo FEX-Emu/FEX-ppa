@@ -1,3 +1,9 @@
+fex-emu-@ARCH_SUFFIX@ (2407~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Fixes missing externals project from source package.
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 04 Jul 2024 01:22:41 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2407~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2407
