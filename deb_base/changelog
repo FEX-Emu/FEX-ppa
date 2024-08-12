@@ -1,3 +1,196 @@
+fex-emu-@ARCH_SUFFIX@ (2408~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2408
+
+  - AOTIR
+   - Change std::unique_ptr to fextl::unique_ptr (5fe405e)
+
+  - ARM64EC
+   - Install a custom call checker to bypass NTDLL function patches (2c3e6cb)
+   - Set appropriate AFP and SVE256 state on JIT entry/exit (85d1b57)
+   - Introduce FEX-side CRT and Windows API replacements (7b1d954)
+   - Handle direct syscall instructions (24ea4b7)
+   - Improvements to exception flag handling (cadb0a2)
+   - Support the JIT API as is used by Windows (7ffd3e5)
+
+  - AVX128
+   - Optimize blends  (4882f10)
+   - Optimize all cases of vpermq  (69ed39d)
+   - Implement support for scalar FMA with AFP (9201ac5)
+   - Improve VPERMILPS/PD and VPSHUFD  (f8c4c54)
+   - Fixes vmovq loading too much data (b9a6cae)
+   - Extends 32-bit indexes path for 128-bit operations  (7ccb252)
+   - Optimize the vpgatherdd/vgatherdps cases that would fall back to ASIMD (22b2669)
+   - Optimize QPS/QD variant of gather loads!  (3627de4)
+   - Extend 32-bit address indices when possible  (aad7656)
+   - Prescale addresses in gathers if possible (47d077f)
+
+  - AllocatorHooks
+   - Correct memory API usage on Windows (f98c010)
+   - Allocate from the top down on windows (9d0b6ce)
+
+  - ArgumentLoader
+   - Removes static fextl::vector usage (f81fc4e)
+
+  - Arm64
+   - Implements support for DAZ using AFP.FIZ  (f8c6baa)
+   - Implement support for SVE bitperm (b282620)
+   - Remove one move if possible in FMA operations  (3bea08d)
+   - Fixes long signed divide  (3d65b70)
+
+  - Arm64Emitter
+   - Reload STATE before SRA fill on ARM64EC (a742441)
+
+  - CMake
+   - Add option to build PDB debug info instead of DWARF (49b8dae)
+
+  - CPUID
+   - Adds a few missing CPU names for new CPU cores (c4ae761)
+
+  - CodeEmitter
+   - Removes vestigial vixl usage (2da819c)
+
+  - Config
+   - Little assume non-null check (f40bc13)
+   - Converts two LUT maps over linear scan arrays (c5fe872)
+   - Removes a static vector initializer (e0c783d)
+   - Search more locations for the config directory on Windows (1f59f0e)
+
+  - EmulatedFiles
+   - Adds a few leaf CPUID flags (d385e49)
+   - Fix bad formatting (d1249ec)
+
+  - F80
+   - Drop dependency on state stored in TLS (c3c2b61)
+
+  - FEX
+   - Moves HostFeatures querying to the frontend (434bffa)
+
+  - FEXCore
+   - Pass HostFeatures in to CreateNewContext directly (0ecfc65)
+   - Drop deferred signal handling on Windows (1007f87)
+   - Add a generic spill/fill-all syscall ABI and use for Windows (10ee963)
+   - Removes ThreadManager (403fd62)
+   - Refactor ExitHandler slightly (380ba0a)
+   - Removes CPUBackendFeatures (1fe497d)
+
+  - FixedSizePooledAllocation
+   - Fix a race when unclaiming disowned buffers (228009c)
+
+  - HostFeatures
+   - Removes feature flags always supported by FEX (633f624)
+
+  - IR
+   - garbage collect premature F80Cmp optimizations (da51169)
+
+  - InvalidationTracker
+   - Better match Windows code invalidation behaviour (4a3250d)
+
+  - Ioctl32
+   - Removes static fextl::vector in ioctlemulation (9688f5e)
+
+  - LogManager
+   - Removes fextl::vector usage (870e395)
+
+  - OpcodeDispatcher
+   - Force noinline for the function call in the Bind helper (19e8492)
+   - Replace hand-written wrapper templates with a generic utility (fc0b233)
+   - Fix 8/16-bit rcr masking (bbf8dde)
+   - Fixes rotates with zero not zero extending 32-bit result (97329cc)
+
+   - X87
+    - use less creative Refs (d92b6a9)
+
+  - RA
+   - fix interaction between SRA & shuffles (90a6647)
+
+  - Scripts
+   - Fix issue in aarch64_fit_native (94bb7eb)
+   - Workaround deprecated parse_version (c42808c)
+   - drop remnant of IR parser (991c694)
+
+  - Softfloat
+   - Fixes Integer indefinite return for 16-bit signed values  (f2d1f2d)
+
+  - SpinWaitLock
+   - Fixes missing newline in asm (1473129)
+
+  - Syscalls
+   - Updates for v6.10  (dd26b0c)
+
+  - Telemetry
+   - Remove VEX flag (5c9bb65)
+   - Change how visibility of telemetry values work (b8e864f)
+
+  - Threads
+   - Setup the stack tracker to not need global initialization (93eead2)
+
+  - VDSO
+   - Stop using a vector for a static (04592f8)
+
+  - WOW64
+   - Support the JIT API as used by Windows (03ca3e7)
+   - Mark the FEX dll as a wine builtin (635182b)
+
+  - Windows
+   - Pull in additional method and structure definitions from wine (f75bd2f)
+   - Commonise TSOHandlerConfig (2fdd80f)
+   - Report as an AMD64 processor when targeting ARM64EC (dbac23b)
+
+  - X87
+   - save uop in ReconstructFTW (f72cee4)
+
+  - Misc
+   - Directly use the EC code bitmap for determining page arch (201fe6e)
+   - Don't apply the address-size flag to segment addresses (83fedd6)
+   - Commonise logging and fallback to a log file for debug output on Windows (dedf4a9)
+   - Fix nasm warning in Rounding.asm (069e2ce)
+   - Reuse Top in ReconstructFSW_Helper (941fd9c)
+   - ASM Tests: X87 Rounding modes (d24d0a9)
+   - Fix call to FNINITF64 and refactor (c2092bf)
+   - Test running scripts tell ctest of skipped tests (a6cf7fa)
+   - json_ir_generator: stop prefixing arguments (6b91e0c)
+   - x87 Stack Optimization (d507f4c)
+   - Optimize zero x87 flags (77ec950)
+   - Add x87 memcpy instcountci tests (e4b7a65)
+   - Autogenerate LoweredX87() query, misc json_ir_generator cleanup in the area (17a55fb)
+   - X87 Stack Ops Auto-marking (d204155)
+   - Remove unused function MmapOverride (924b8c1)
+   - ARM64EC frontend (6df51a5)
+   - Remove Disabled_Tests file (e65545a)
+   - Try to delete RCLSE again (d79b7fc)
+   - Enable coverage configuration for FEX (b6e1469)
+   - Implement support for SSE4.1/AVX NT loads (e25918d)
+   - Fix all the warnings (9a8694c)
+   - OpcodeDispatcher: Avoid template monomorphization to reduce FEXLoader binary size (070a914)
+   - Drop deferred flag infrastructure (72d6c8e)
+   - Tests for X87 FTST (3ef9ea9)
+   - VCVT{T,}PD2DQ fixes and optimization (af6a0be)
+   - Use nproc only if TEST_JOB_COUNT not specified (4501123)
+   - FEXCore ARM64EC CI support (968d5e0)
+   - Fix CF with small shifts (9bad09c)
+   - Fix 8/16-bit RCR (653bf04)
+   - JIT: fix ShiftFlags masking (b77a25b)
+   - Fix 16-bit SBB (692c2fa)
+
+  - fextl
+   - Properly handle nullptr arguments in fextl::default_delete (8381d44)
+
+  - github
+   - Vixl simulator enable more asm tests (09c4a55)
+
+  - man
+   - Fixes newline issue with strenum (3d9114b)
+
+  - unittests
+   - Fixes vpblend unittest (f9bdf0b)
+   - Extends vinsert{i,f}128 tests for garbage data (95a9f32)
+
+  - x87StackOptimizationPass
+   - Default initialise StackMemberInfo members (3e59fc0)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 12 Aug 2024 22:10:36 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2407~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   Fixes missing externals project from source package.
