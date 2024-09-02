@@ -1,1 +1,1 @@
-usr/share/binfmts/FEX-x86_64
+usr/lib/binfmt.d/FEX-x86_64.conf

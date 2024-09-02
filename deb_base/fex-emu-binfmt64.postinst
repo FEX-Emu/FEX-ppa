@@ -2,11 +2,9 @@
 set -e
 
 update_binfmt() {
-	# Check for update-binfmts
-	command -v update-binfmts >/dev/null || return 0
-
 	# Setup binfmt_misc
-	update-binfmts --import FEX-x86_64
+	service systemd-binfmt restart
 }
 
 update_binfmt
+
