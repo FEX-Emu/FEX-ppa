@@ -21,6 +21,7 @@ Build-Depends-Arch:
   pkg-config,
   libclang-dev,
   llvm-dev,
+  libasound2-dev,
   libssl-dev,
   libdrm-dev,
   libxcb-present-dev,
