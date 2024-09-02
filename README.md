@@ -16,6 +16,7 @@ tar -cvpzf fex-emu_${PACKAGE_VERSION}.orig.tar.gz -C $TEMP_SOURCE/ .
 ${FEXPPA}/create_packages.py 0 ${FEX_VERSION} ${PACKAGE_VERSION} TestChanges fex-emu_${PACKAGE_VERSION}.orig.tar.gz
 ${FEXPPA}/create_packages.py 1 ${FEX_VERSION} ${PACKAGE_VERSION} TestChanges fex-emu_${PACKAGE_VERSION}.orig.tar.gz
 ${FEXPPA}/create_packages.py 2 ${FEX_VERSION} ${PACKAGE_VERSION} TestChanges fex-emu_${PACKAGE_VERSION}.orig.tar.gz
+# This step actually uploads the packages to launchpad.
 ${FEXPPA}/create_packages.py 3 ${FEX_VERSION} ${PACKAGE_VERSION} TestChanges fex-emu_${PACKAGE_VERSION}.orig.tar.gz
 rm -Rf $TEMP_SOURCE
 rm -Rf ${FEXPPA}/gen_ppa
@@ -57,36 +58,24 @@ This allows you to create a pbuilder to test building the package before uploadi
 
 * Depending on which builder you want, generate an image for whichever distro series
 
-`sudo pbuilder create --distribution focal --architecture amd64 --basetgz /var/cache/pbuilder/focal-amd64-base.tgz`
-
-`sudo pbuilder create --distribution jammy --architecture amd64 --basetgz /var/cache/pbuilder/jammy-amd64-base.tgz`
-
-`sudo pbuilder create --distribution kinetic --architecture amd64 --basetgz /var/cache/pbuilder/kinetic-amd64-base.tgz`
-
-`sudo pbuilder create --distribution focal --architecture arm64 --mirror "http://ports.ubuntu.com/ubuntu-ports/" --basetgz /var/cache/pbuilder/focal-arm64-base.tgz`
-
 `sudo pbuilder create --distribution jammy --architecture arm64 --mirror "http://ports.ubuntu.com/ubuntu-ports/" --basetgz /var/cache/pbuilder/jammy-arm64-base.tgz`
 
 `sudo pbuilder create --distribution kinetic --architecture arm64 --mirror "http://ports.ubuntu.com/ubuntu-ports/" --basetgz /var/cache/pbuilder/kinetic-arm64-base.tgz`
+
+`sudo pbuilder create --distribution noble --architecture arm64 --mirror "http://ports.ubuntu.com/ubuntu-ports/" --basetgz /var/cache/pbuilder/noble-arm64-base.tgz`
 
 # Perform the build
 This will attempt building the package provided with the dsc file.
 Result will be in `/var/cache/pbuilder/result/`
 
-`sudo pbuilder build --distribution focal --architecture amd64 --basetgz /var/cache/pbuilder/focal-amd64-base.tgz ../fex-emu_$FEX_VERSION.dsc`
-
-`sudo pbuilder build --distribution jammy --architecture amd64 --basetgz /var/cache/pbuilder/jammy-amd64-base.tgz ../fex-emu_$FEX_VERSION.dsc`
-
-`sudo pbuilder build --distribution kinetic --architecture amd64 --basetgz /var/cache/pbuilder/kinetic-amd64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}~k.dsc`
-
-`sudo pbuilder build --distribution focal --architecture arm64 --basetgz /var/cache/pbuilder/focal-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}~f.dsc`
-
 `sudo pbuilder build --distribution jammy --architecture arm64 --basetgz /var/cache/pbuilder/jammy-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}~j.dsc`
 
 `sudo pbuilder build --distribution kinetic --architecture arm64 --basetgz /var/cache/pbuilder/kinetic-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}~k.dsc`
 
+`sudo pbuilder build --distribution noble --architecture arm64 --basetgz /var/cache/pbuilder/noble-arm64-base.tgz gen_ppa/fex-emu-armv8.0_${PACKAGE_VERSION}~n.dsc`
+
 # Cleanup
-` sudo rm /var/cache/pbuilder/impish-amd64-base.tgz`
+` sudo rm /var/cache/pbuilder/noble-arm64-base.tgz`
 
 ## After this step you will need to do the `Setting up a pbuilder` step again
 
