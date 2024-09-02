@@ -100,11 +100,9 @@ debfiles_tocopy = [
     "fex-emu-binfmt32.install",
     "fex-emu-binfmt32.triggers",
     "fex-emu-binfmt32.postinst",
-    "fex-emu-binfmt32.prerm",
     "fex-emu-binfmt64.install",
     "fex-emu-binfmt64.triggers",
     "fex-emu-binfmt64.postinst",
-    "fex-emu-binfmt64.prerm",
     "source/",
 ]
 
