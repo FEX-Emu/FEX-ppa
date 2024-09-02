@@ -31,6 +31,7 @@ Build-Depends-Arch:
   libxcb-shm0-dev,
   libxrandr-dev,
   libxshmfence-dev,
+  libwayland-dev,
   clang-tools,
   libc6-dev-i386-cross,
 @BUILD_DEPENDS_ARCH@
