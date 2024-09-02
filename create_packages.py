@@ -20,9 +20,6 @@ supported_distros = [
 ]
 
 distro_build_depends_arch = [
-    ["  libstdc++-12-dev-i386-cross",
-    "  libgcc-12-dev-i386-cross",
-    ""],
     ["  mlir-16-tools",
      "  libmlir-16-dev",
      "  clang-16",
