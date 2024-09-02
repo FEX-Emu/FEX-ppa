@@ -79,7 +79,7 @@ supports_thunks_files = [
     # False
     "",
     # True
-    "usr/lib/fex-emu/*\n",
+    "usr/lib/aarch64-linux-gnu/fex-emu/*\n",
 ]
 
 # Supported CPUs split by features

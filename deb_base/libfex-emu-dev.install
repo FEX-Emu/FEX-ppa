@@ -1,2 +1,2 @@
-usr/lib/libFEXCore*
+usr/lib/aarch64-linux-gnu/libFEXCore*
 usr/include/FEXCore/*
