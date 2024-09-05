@@ -1,3 +1,154 @@
+fex-emu-@ARCH_SUFFIX@ (2409~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2409
+
+  - ARM64EC
+   - Always use the CPU area context for BeginSimulation (cc589ba)
+   - Fix ContextFlag member tests (47b3637)
+
+  - AVX128
+   - Fixes 256-bit float compares (2478abb)
+   - Fixes incorrect size usage in AVX128_Vector_CVT_Int_To_Float (a4db585)
+
+  - Arm64
+   - Implement support for strict in-process split-locks (74e95df)
+   - Ensure 256-bit operations always assert without 256-bit SVE (90f7cc9)
+   - Fixes SIGBUS handler for FEAT_LRCPC (2357253)
+   - Allow directly correlating an ARM register back to an x86 register (92c951c)
+   - Handle backpatching in a thread-safe manner  (226f5e2)
+
+  - CMake
+   - Adds an AArch64 cross-compile toolchain file (06497fd)
+   - Don't install binfmts for MinGW builds (f009a00)
+
+  - CPUID
+   - add missing Apple core part numbers (8296bfc)
+
+  - ConstProp
+   - stop pooling inline constants (5013b8a)
+
+  - DeadStoreElimination
+   - handle PF/AF invalidate (03832b2)
+
+  - External
+   - Update robin-map from 1.2.1 to 1.3.0 (96055cb)
+   - Update fmt from 10.1.1 to 11.0.2 (f1d7879)
+
+  - FEX
+   - Moves sigreturn symbols to frontend (4baeffe)
+
+  - FEXCore
+   - Dynamically scale TSC (46a2a06)
+   - Splits up atomic enablement checks (689b461)
+   - Stop installing static library (4abac0c)
+   - Disable vixl linking if vixl disasm or simulator is disabled (5e706df)
+
+  - FEXInterpreter
+   - Support portable installs (9336e35)
+
+  - FEXLoader
+   - don't install FEXUpdateAOTIRCache (1e1bcc4)
+
+  - FEXQConfig
+   - Add strict split-lock option (8fe1e95)
+
+  - FEXQonfig
+   - Fix minor saving/loading quirks (e234e11)
+   - Minor followup changes (c74df6a)
+
+  - FEXRootFSFetcher
+   - Allow UI override through options (5b65f30)
+
+  - Frontend
+   - short-circuit code generation on invalid instructions with multiblock (92ddc00)
+
+  - HostFeatures
+   - Moves MIDR querying to the frontend (fbf62f1)
+   - Removes vixl usage  (1caa31c)
+   - fix clang reformat constantly with missing comment (86e5e1a)
+
+  - IR
+   - fix scalar FMA tied sources (a66fac6)
+
+  - InstCountCI
+   - include x86 instruction count  (50a9cea)
+
+  - InstructionCountCI
+   - explicitly enable flagm for multiinst (33558e6)
+
+  - LinuxEmulation
+   - Implement support for seccomp (b368223)
+   - Moves guest signal frame generation to its own file (d9544e7)
+
+  - LinuxSyscalls
+   - Adds missing header (4f40416)
+   - Implements less invasive assertion only EFAULT handlers (ce88f5f)
+   - Some minor cleanups (27cd399)
+
+  - OpcodeDispatcher
+   - Convert more template handlers to Bind handlers (2829ad5)
+   - Allow x86 code to read CNTVCT on ARM64EC (e6aa268)
+   - fix tso checks (2a170cf)
+   - Remove old bad assumption in INC/DEC (c634c53)
+
+  - SignalDelegator
+   - Refactor how thread local data is stored (114112a)
+   - Changes AFmt to ERROR_AND_DIE_FMT (f897579)
+   - Make sure to defer a signal if the guest signal mask desires (8617150)
+
+  - SpinWaitLock
+   - Update comment about WFE spurious wakeups (894aaa9)
+
+  - Thunks
+   - Removes global static initializer (b4a67a6)
+
+  - VDSO
+   - Fixes a pretty nasty bug where we were never using the host VDSO (0754aff)
+
+  - WOW64
+   - Improve exception handling (8e1695a)
+
+  - Windows
+   - Load per-application configs (49b40b7)
+   - Fix missing pragma and license text (e415b94)
+   - Fill in per-core MIDR information (7a9eb01)
+   - Fix some file operations on actual Windows (b6cb897)
+   - Implement CreateDirectoryW CRT function (eadb502)
+   - Install libraries to CMAKE_INSTALL_LIBDIR (21f9841)
+   - Support CPU feature detection from ID registry keys (97c229d)
+
+  - Misc
+   - More EFAULT handlers (62e1767)
+   - Add Qt-based config editor (3020a0d)
+   - Install GDBSymbol integration in the correct location (ac814ac)
+   - Eliminate a move in 64-bit umul (2039950)
+   - Adds more syscall memory access checks (b526c60)
+   - Fix multiblock on ARM64EC (812224a)
+   - Optimize AXFLAG-less systems (42f2851)
+   - Optimize `adc x, 0` (43cd897)
+   - Optimise `test al, 1` (0e5f5a2)
+   - Optimize test (cfa2ad8)
+   - Rearrange SRA to let us coalesce cmpxchg moves (877b2f4)
+   - Optimize AVX load/store with ldp/stp (5ac7d5d)
+   - Optimize BTC (a7138f2)
+   - Improvements from bytemark "huffman" (99afd87)
+   - binfmt_misc: Support systemd binfmt_misc (d2c82ba)
+   - Library Forwarding: Follow up from #3964 (e5149fb)
+   - Install libraries in the correct location (abbd655)
+   - Clean up our JSON dependencies (00ef1ba)
+   - small optimizations for returns (933c65d)
+   - Support cooperative suspend on ARM64EC (df0ecad)
+   - Add a hack for multiple destinations & make good use of it (aa5d2ff)
+   - Little opcodedispatcher optimizations (6f43c8f)
+   - Invert carry flag internally (8aa7d1a)
+
+  - x32
+
+   - Signals
+    - Fixes bug in the sigqueue syscalls (0416950)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 05 Sep 2024 19:52:45 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2408~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2408
