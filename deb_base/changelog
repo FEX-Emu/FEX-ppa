@@ -1,3 +1,126 @@
+fex-emu-@ARCH_SUFFIX@ (2410~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2410
+
+  - AOTIR
+   - Move debugdata structure to internal header (304b5de)
+
+  - ARM64EC
+   - Dynamically determine syscall numbers under wine. (967c04e)
+   - AVX register save/restore support under wine (e9d34c7)
+   - Patch the call checker before calling any syscall exports (2672e06)
+   - Switch to exception-based native syscall dispatch (07f117b)
+
+  - Arm64
+   - Fix warning (ebae1bf)
+
+  - CMake
+   - Disable vixl compiling if not enabled (f99900b)
+   - Compile with system libraries for xxhash, Catch2, and fmt, if available (a4acd64)
+
+  - CPUBackend
+   - Remove unused functions (5f79761)
+
+  - CPUID
+   - Update to something a little more modern (5bd0afa)
+
+  - Config
+   - Be a bit smarter in ReloadMetaLayer (b5c9eb3)
+   - Fixes stack usage in EnvLoader (4f8d7cb)
+
+  - ConstProp
+   - speed it up (36e4f9a)
+
+  - FEXConfig
+   - Add the ability to watch and configure global rootfs (f49d82d)
+
+  - FEXCore
+   - Remove BlockSamplingData (9310ac5)
+   - Convert Base tables over to constexpr (20fb0da)
+   - Remove Context header include when unneeded (4cb4c0e)
+   - Delete ThreadsState struct (219a477)
+   - Move `CustomIRResult` to internal header (29f0e9b)
+   - Move `JITSymbolBuffer` to internal header (b75efc4)
+
+   - Context
+    - Removes unused features (05be944)
+
+  - FEXLoader
+   - Drop the binfmt_misc `I` flag (e190d02)
+
+  - FEXRootFSFetcher
+   - Fallback to TTY if zenity isn't installed (bebd740)
+
+   - XXHash
+    - Fix double fd close (360ea53)
+
+  - FEXServer
+
+   - PipeScanner
+    - Stop writing null to incoming pipes (0a35029)
+
+  - JIT
+   - always use 64-bit moves for SRA (cd4c224)
+
+  - Linux
+   - Optimize CreateNewThread and HandleNewClone stack usage (d547f2b)
+
+  - LinuxEmulation
+   - Update syscalls for v6.11 (aaa8eef)
+   - Update DRM for v6.11 (c036868)
+
+  - LinuxSyscalls
+   - Update max reported kernel version to 6.11 (9716fc7)
+   - With poll syscall, ensure fds is writable only if nfds is not zero (f77841d)
+
+  - OpcodeDispatcher
+   - Fixes segment prefixing on vector element loadstores  (2726f35)
+   - Constexpr-ify all the tables possible (9d6865f)
+   - Do not forbid INT 2E syscalls on 64-bit Windows (bbef4d7)
+
+  - SignalDelegator
+   - Let the frontend inform AVX support (9100235)
+
+  - Thunks
+   - Move to the frontend (f640dcc)
+
+   - Vulkan
+    - Updates thunks to v1.3.296 (1670c89)
+
+  - Tools
+   - Delete imgui FEXConfig (c0b8a0d)
+
+  - VDSO
+   - Implements v6.11 vdso getrandom (e902ad5)
+
+  - VDSOEmulation
+   - Stop using dlopen for VDSO (5745b41)
+
+  - Windows
+   - Switch supported MinGW CRT to UCRT (c2f2c58)
+   - Don't assume the log file was successfully opened (f20e626)
+
+  - Misc
+   - speed up the JIT (e82d2c7)
+   - Fixes fprem (b89f5b8)
+   - x87 small cleanups; NFC (5e9c211)
+   - Build host tools without jemalloc (49de1fa)
+   - Fix FScale'ing zero that should return zero (4d62e75)
+   - Stop installing binfmt_misc on x86 (b6d3df0)
+   - Fix (v)maxss on non-AFP platforms (9e4de3b)
+   - Support for emulated overcommit on Windows  (4a2b4be)
+   - Bunch of little things reported by coverity (b4c797c)
+   - Global flag optimizations (1c59bfe)
+
+  - gitignore
+   - ignore build symlink (90dbd47)
+
+  - unittests
+   - Be more strict with -- separator (3c205eb)
+   - Fixes incorrect argument (c8f3fe3)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 07 Oct 2024 18:18:48 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2409~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2409
