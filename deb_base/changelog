@@ -1,3 +1,11 @@
+fex-emu-@ARCH_SUFFIX@ (2412~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2412
+
+  Disable ctest testing
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 03 Dec 2024 20:24:16 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2412~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2412
