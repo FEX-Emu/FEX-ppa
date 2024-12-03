@@ -1,3 +1,119 @@
+fex-emu-@ARCH_SUFFIX@ (2412~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2412
+
+  - AVX128
+   - Fixes some AVX bugs (c4306f2)
+
+  - CMake
+   - Generate test list even when testing is disabled (ee592ba)
+
+  - FEXCore
+   - Removes ExitHandler and RunUntilExit (41c8731)
+   - Removes GetGPRSize and convert all uses to GetGPROpSize (9febdde)
+   - Removes stale function definition (c7098d0)
+   - Removes CoreShuttingDown from ContextImpl (65a162b)
+   - Removes remaining RunningEvents from InternalThreadState  (baddfe0)
+   - Moves InternalThreadState ExecutionThread to the frontend (95d5b14)
+   - Move InternalThreadState StartRunning to frontend (e89f48f)
+   - Removes ExitReason from InternalThreadState (f59fc0f)
+   - Moves ThreadWaiting to the frontend  (56fadec)
+   - Constify CTX ptr in InternalThreadState (649a494)
+   - Moves StatusCode to the frontend (aa2180d)
+   - Moves DeferredSignalFrames to the frontend (fad2214)
+   - Moves SignalThread/SignalEvent to Frontend (b440e17)
+   - Removes EarlyExit running event (56c6b0d)
+   - Moves TLS initialization for Alloc::OSAllocator (0596a96)
+   - Adds support for CPU Index through TPIDRRO (992d6e8)
+   - Change yield implementation to use wfe  (ff51435)
+   - adds support for compat input prctl (6a07ea7)
+
+  - FEXLoader
+   - Align stack base (09bfe58)
+   - Fixes newer wine versions and Fedora (d66ed71)
+
+  - FEXServer
+   - Fix auto-shutdown regression (1b11f2f)
+   - Listen on both abstract & named sockets (d5c9655)
+
+  - FileManagement
+   - Hide the FEX RootFS fd from /proc/self/fd take 2 (4278c48)
+   - Hide the FEX RootFS fd from /proc/self/fd (55b3d67)
+
+  - GdbServer
+   - Minor work (b2e61c3)
+
+  - IR
+   - Convert OpSize over to enum class (5ad7fdb)
+   - Converts base IR operations to store OpSize sizes (5c6de4e)
+   - Fix some missing OpSize conversions (0c29f8f)
+
+  - JIT
+   - Remove implicit OpSize conversions (493b952)
+   - Moves Arm64 JIT up one folder (079e70f)
+
+  - LinuxEmulation
+   - Personality handling (0897cd8)
+
+  - OpcodeDispatcher
+   - drop PossiblySetNZCV (f41b9bc)
+   - Various missed OpSize implicit cast fixes (00ab3f8)
+   - Convert address size helpers to use OpSize (704841f)
+   - Convert flags helpers over to OpSize (c122f3f)
+   - Convert {Load,Store}GPRRegister to OpSize (04c701e)
+   - Minor optimization to small pushf  (f6cdb16)
+   - Unify PSHUF{L,H}W implementations (5d1fda7)
+
+  - TestHarnessRunner
+   - Fixes FS/GS usage in tests (eeb8eb1)
+
+  - Utils
+
+   - StringUtil
+    - Fixes ltrim and adds a unittest (0463512)
+
+  - VDSOEmulation
+   - Support loading VDSO thunk as shared (389ad73)
+
+  - WOW64
+   - Set the software CPU area flag (22058c0)
+
+  - X86Tables
+   - Removes XOP tables (f60388d)
+
+  - Misc
+   - Check that LDPath is not empty (60c52e3)
+   - Support CLONE_FS and CLONE_FILES with fork() semantics (bcfdf39)
+   - Add some more tests as unsupported by vixl (c1db7a7)
+   - Avoid warning on assertionless builds (1bf06f8)
+   - Check if a candidate home directory exists before using it (e675f42)
+   - Convert all of the IR operations to use OpSize (c0a9463)
+   - Fix IR operation usage to use OpSize when possible (d2aa521)
+   - X87 Code Simplification (0190e1a)
+   - Optimize bsf, bsr, register cmpxchg, pcmpistri (caaacb6)
+   - Disable RPRES in instcounci files (767c61c)
+   - add Ubuntu 24.10 and remove unsupported releases (368162d)
+   - Fix FXTRACT for 0.0 and -0.0 (a421ff1)
+   - Implement explicit state switch between X87 and MMX (4b945a9)
+   - Remove file since FXAM_Simple is not a Linux test (5026bf8)
+
+  - instcountci
+   - testing multiple 80bit ldst using SVE (731e4d6)
+
+  - unitests
+
+   - ASM
+    - Removes unused MemoryRegion configs (e5ceaa1)
+
+  - unittests
+
+   - ASM
+    - Fixes x87 80-bit loads on the edge of page boundaries. (2e7fc60)
+    - Adds missing unaligned atomic tests (b5b34df)
+    - Ensures FNSAVE and FRSTOR only store as much data as required (c00f781)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 03 Dec 2024 19:07:03 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2410~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2410
