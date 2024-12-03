@@ -73,6 +73,9 @@ override_dh_dwz:
 override_dh_strip:
 	# Nothing here
 
+override_dh_auto_test:
+	# Explicitly disabled
+
 # We need to ignore any shlib dependencies from the GuestThunks
 override_dh_shlibdeps:
 	dh_shlibdeps -XGuestThunks
