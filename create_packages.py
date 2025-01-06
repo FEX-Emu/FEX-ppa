@@ -90,8 +90,11 @@ supported_cpus = [
     ["armv8.4", "armv8.4-a"],
 ]
 
-debfiles_tocopy = [
+shared_debfiles_tocopy = [
     "changelog",
+]
+
+debfiles_tocopy = [
     "control",
     "copyright",
     "files",
@@ -150,6 +153,7 @@ def GetDateInCorrectFormat():
 if len(sys.argv) < 5:
     sys.exit()
 
+RootBaseShared = "deb_shared"
 RootBaseDeb = "deb_base"
 RootGenPPA = os.path.abspath("gen_ppa")
 RootPackageName = "fex-emu"
@@ -188,7 +192,7 @@ if CheckPrograms() == False:
 if Stage == 0:
     print("Generating Changelog")
     CurrentDate = GetDateInCorrectFormat()
-    DebChangelogBase = ReadFile(RootBaseDeb + "/changelog_template")
+    DebChangelogBase = ReadFile(RootBaseShared + "/changelog_template")
     CurrentChangelog = ReadFile(CurrentChangelogFile)
 
 # Replace portions of the change log that are common
@@ -199,10 +203,10 @@ if Stage == 0:
     DebChangelogBase = DebChangelogBase.replace("@CHANGE_TEXT@", CurrentChangelog)
 
 # Prepend the changelog to the base as an update
-    PrependChangelog(RootBaseDeb + "/changelog", DebChangelogBase)
+    PrependChangelog(RootBaseShared + "/changelog", DebChangelogBase)
     print(DebChangelogBase)
 
-    print("\tMake sure to check {} before starting stage 2".format(RootBaseDeb + "/changelog"))
+    print("\tMake sure to check {} before starting stage 2".format(RootBaseShared + "/changelog"))
 
 if Stage == 1:
     print("Generating debian file structure trees")
@@ -227,8 +231,19 @@ if Stage == 1:
             os.makedirs(DebSubFolder, exist_ok = True)
 
             BaseDeb = "./" + RootBaseDeb + "/"
+            SharedBaseDeb = "./" + RootBaseShared + "/"
+
             ResultFolder = DebSubFolder + "/"
             # Copy over each file that needs to be straight copied
+            for debfile in shared_debfiles_tocopy:
+                DebFile = SharedBaseDeb + debfile
+                if os.path.isdir(DebFile):
+                    os.makedirs(ResultFolder + "/" + debfile, exist_ok = True)
+                    for file in os.listdir(DebFile):
+                        shutil.copy(DebFile + file, ResultFolder + debfile)
+                else:
+                    shutil.copy(DebFile, ResultFolder)
+
             for debfile in debfiles_tocopy:
                 DebFile = BaseDeb + debfile
                 if os.path.isdir(DebFile):
