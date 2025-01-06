@@ -92,11 +92,11 @@ supported_cpus = [
 
 shared_debfiles_tocopy = [
     "changelog",
+    "copyright",
 ]
 
 debfiles_tocopy = [
     "control",
-    "copyright",
     "files",
     "install",
     "rules",
