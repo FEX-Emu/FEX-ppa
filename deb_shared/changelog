@@ -1,3 +1,122 @@
+fex-emu-@ARCH_SUFFIX@ (2501~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Fix wine
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 07 Jan 2025 21:54:54 +0000
+
+fex-emu-@ARCH_SUFFIX@ (2501~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2501
+
+  - ArchHelpers
+
+   - Arm64
+    - Fixes LDAPUR and STLUR backpatching (1e827ec)
+
+  - ConstProp
+   - fix 32-bit masking behaviour (c902b88)
+
+  - Context
+   - Constify GPRs passed to ReconstructCompactedEFLAGS (a86c922)
+
+  - External
+   - Update bundled libfmt (7e257cc)
+
+  - FEXCore
+   - Emulate EFLAGS.TF (e88c92d)
+   - Override x87 precision control when necessary  (8111b7c)
+   - Don't `WaitForEmptyJobQueue` if CodeObjectCacheService isn't used (5a4691f)
+
+  - FEXLoader
+   - Increase minimum kernel requirement from 5.0 to 5.15 (6bc7a83)
+   - Enable early logs output to stderr (e32c538)
+
+  - Frontend
+   - Fix ModRM handling with 3DNow! (15a1a0f)
+
+  - GdbServer
+   - Fixes encoding of hex (735a4f9)
+   - Support 32-bit context definitions (072cf4c)
+   - Implement support for `$vKill` (46fb858)
+
+  - IR
+   - Change convention from number of elements to elementsize (a6c67ca)
+
+   - Passes
+    - Adds missing comment that clang-format keeps complaining about locally (b03b02d)
+
+  - InstCountCI
+   - Adds more LRCPC2 tests that are missed (cd6722f)
+   - Implement support for TSO and LRCPC and add hot block that could be optimized (9fb69ed)
+
+  - InstructionCountCI
+   - add some hot blocks from Factorio (e44d1f1)
+
+  - Linux
+   - Fixes typo in removing RESOLVE_IN_ROOT flag (e55b5d0)
+
+   - FaultSafeUserMemAccess
+    - Break out fault safe handler (57178ab)
+
+  - LinuxEmulation
+   - Don't use clone3 for fork (71187d3)
+
+  - LinuxSyscalls
+   - Log unhandled clone3 fork flags (c3261b4)
+   - Ensure CSIGNAL is merged back in to flags for clone2 (c7fb95a)
+   - Fixes exit syscall (bdae4f6)
+
+  - OpcodeDispatcher
+   - Fixes FEX's H0F3A table handling of REX.W  (90b1ac4)
+   - Minor division improvement  (04e785e)
+
+  - ThreadManager
+   - Add some sanity asserts (d8ef702)
+
+  - Threads
+   - Fix memory leak in joinable() (f906c6a)
+
+  - Thunks
+
+   - gen
+    - Add support for compiling against clang 19 (7b2fc37)
+
+  - Utils
+
+   - FileLoading
+    - Fix LoadFileImpl (527752c)
+
+  - Windows
+   - Only deinit the thread CRT when destroying the current thread (d2bac45)
+   - Track RWX regions in mapped images (27ededf)
+
+  - Misc
+   - Just a few things picked up from static analysis (8913c59)
+   - Support a merged RootFS (and a bunch of related fixes) (2d66bc2)
+   - Fix float->int conversion overflow behaviour (d2f86e4)
+   - Library Forwarding: Allow reading standard library headers from a development x86 rootfs (d66cd16)
+   - Support inline self modifying code (656477e)
+   - Revert #4118 (7472b21)
+   - Generate SVE for 80bit load/stores when possible (8427731)
+
+  - docs
+   - Remove Arch from the release process. (f8b6edf)
+
+  - unittests
+   - Adds a 3DNow! ModRM SIB encoding test (3abe6c1)
+
+   - ASM
+    - Fix incorrect instruction form test (b391fe6)
+    - Adds missing MMX PADDQ test (fc1b500)
+
+   - gvisor
+    - Disable memfd tests (8bee101)
+
+  - x87StackOptimizationPass
+   - Minor opt to f80 fchs and fabs  (f51812a)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 07 Jan 2025 21:13:03 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2412~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2412
