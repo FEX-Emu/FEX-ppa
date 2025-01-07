@@ -32,8 +32,6 @@ export DEB_LDFLAGS_MAINT_STRIP = \
 
 DEB_HOST_ARCH      ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
-PATH := $(PWD)/llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64/bin/:$(PATH)
-
 confflags =
 buildflags = \
 	CXXFLAGS="-Wno-deprecated-enum-enum-conversion"
@@ -63,12 +61,12 @@ override_dh_auto_configure:
 	ls -l
 	mkdir build_arm64ec
 	mkdir build_wow64
-	cd build_arm64ec && $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=arm64ec-w64-mingw32 ..
-	cd build_wow64 && $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=aarch64-w64-mingw32 ..
+	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=arm64ec-w64-mingw32 ..
+	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=aarch64-w64-mingw32 ..
 
 override_dh_auto_build:
-	cd build_arm64ec && ninja
-	cd build_wow64 && ninja
+	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64/bin/:$(PATH) ninja
+	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64/bin/:$(PATH) ninja
 
 override_dh_auto_install:
 	export
