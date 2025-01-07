@@ -109,6 +109,14 @@ debfiles_tocopy = [
     "source/",
 ]
 
+debwinefiles_tocopy = [
+    "control",
+    "rules",
+    "files",
+    "install",
+    "source/",
+]
+
 def ReadFile(filename):
     if not os.path.isfile(filename):
         print("Couldn't open file! {}".format(filename))
@@ -155,8 +163,10 @@ if len(sys.argv) < 5:
 
 RootBaseShared = "deb_shared"
 RootBaseDeb = "deb_base"
+RootBaseDebWine = "deb_wine_base"
 RootGenPPA = os.path.abspath("gen_ppa")
 RootPackageName = "fex-emu"
+RootPackageNameWine = "fex-emu-wine"
 Stage = int(sys.argv[1])
 FEXVersion = sys.argv[2]
 RootPackageVersion = sys.argv[3]
@@ -209,7 +219,7 @@ if Stage == 0:
     print("\tMake sure to check {} before starting stage 2".format(RootBaseShared + "/changelog"))
 
 if Stage == 1:
-    print("Generating debian file structure trees")
+    print("Generating debian file structure trees - Linux")
 # First thing's first, bifurcate all of our options
     os.makedirs(RootGenPPA, exist_ok = True)
     distro_index = 0
@@ -328,6 +338,91 @@ if Stage == 1:
             os.symlink(os.path.abspath(SourceTar), TargetSymlink)
         distro_index += 1
 
+    print("Generating debian file structure trees - Wine")
+    distro_index = 0
+    for distro in supported_distros:
+        supports_thunk_option = supports_thunks[distro_index]
+        thunk_files = supports_thunks_files[supports_thunk_option]
+        c_compiler_override = c_compiler[distro_index]
+        cxx_compiler_override = cxx_compiler[distro_index]
+
+        # Create subfolder
+        SubFolder = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0]
+        os.makedirs(SubFolder, exist_ok = True)
+
+        # Create debian folder
+        DebSubFolder = SubFolder + "/debian"
+        os.makedirs(DebSubFolder, exist_ok = True)
+
+        BaseDeb = "./" + RootBaseDebWine + "/"
+        SharedBaseDeb = "./" + RootBaseShared + "/"
+
+        ResultFolder = DebSubFolder + "/"
+        # Copy over each file that needs to be straight copied
+        for debfile in shared_debfiles_tocopy:
+            DebFile = SharedBaseDeb + debfile
+            if os.path.isdir(DebFile):
+                os.makedirs(ResultFolder + "/" + debfile, exist_ok = True)
+                for file in os.listdir(DebFile):
+                    shutil.copy(DebFile + file, ResultFolder + debfile)
+            else:
+                shutil.copy(DebFile, ResultFolder)
+
+        for debfile in debwinefiles_tocopy:
+            DebFile = BaseDeb + debfile
+            if os.path.isdir(DebFile):
+                os.makedirs(ResultFolder + "/" + debfile, exist_ok = True)
+                for file in os.listdir(DebFile):
+                    shutil.copy(DebFile + file, ResultFolder + debfile)
+            else:
+                shutil.copy(DebFile, ResultFolder)
+
+        # These need to be copied with rename
+        shutil.copy(BaseDeb + "/fex-emu-wine.install", ResultFolder + "/fex-emu-wine.install")
+
+        # Modify the install file in place
+        SpecificInstallFile = ResultFolder + "/fex-emu-wine.install"
+        SpecificInstall = ReadFile(SpecificInstallFile)
+        StoreFile(SpecificInstallFile, SpecificInstall)
+
+        # Modify the changelog file in place
+        SpecificChangelogFile = DebSubFolder + "/" + "changelog"
+        SpecificChangelog = ReadFile(SpecificChangelogFile)
+        SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES_LETTER@", distro[0])
+        SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES@", distro[1])
+        # Not actually an arch suffix, but reuses it.
+        SpecificChangelog = SpecificChangelog.replace("@ARCH_SUFFIX@", "wine")
+        StoreFile(SpecificChangelogFile, SpecificChangelog)
+
+        # Modify the rules file in place
+        SpecificRulesFile = DebSubFolder + "/" + "rules"
+        SpecificRules = ReadFile(SpecificRulesFile)
+        SpecificRules = SpecificRules.replace("@FEX_VERSION@", FEXVersion)
+
+        StoreFile(SpecificRulesFile, SpecificRules)
+
+        # If this is armv8.0 then append the binfmt_misc builds to its control file
+        # Debian only allows one source package to provide a binary package
+        SpecificControlFile = DebSubFolder + "/" + "control"
+
+        # Strip ', '
+        ArchConflicts = ArchConflicts[:-2]
+        LibArchConflicts = LibArchConflicts[:-2]
+
+        SpecificControl = ReadFile(SpecificControlFile)
+
+        StoreFile(SpecificControlFile, SpecificControl)
+
+        # Create a softlink to the source folder which is unchanged between each distro
+        # This is terrible. It doesn't even go in to the package specific folder but instead the folder above it.
+        TargetSymlink = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0] + ".orig.tar.gz"
+        if os.path.islink(TargetSymlink):
+            os.remove(TargetSymlink)
+
+        os.symlink(os.path.abspath("wine_{}".format(SourceTar)), TargetSymlink)
+        distro_index += 1
+
+
 @dataclass
 class DebuildOutput:
     def __init__(self, Distro, Arch, LogFileName, LogFD, Process):
@@ -351,6 +446,31 @@ class DebuildOutput:
 
     def name(self):
         return "{}_{}".format(self.Arch[1], self.Distro[1])
+
+    def pid(self):
+        return self.Process.pid
+
+class DebuildWineOutput:
+    def __init__(self, Distro, LogFileName, LogFD, Process):
+        self.Distro = Distro
+        self.LogFileName = LogFileName
+        self.LogFD = LogFD
+        self.Process = Process
+
+    def Wait(self):
+        self.Process.wait();
+
+    def ErrorCode(self):
+        return self.Process.returncode;
+
+    def Close(self):
+        self.LogFD.close()
+
+    def poll(self):
+        return self.Process.poll()
+
+    def name(self):
+        return "wine_{}".format(self.Distro[1])
 
     def pid(self):
         return self.Process.pid
@@ -428,10 +548,38 @@ if Stage == 2:
     # Wait for all processes to exit
     ActiveProcesses = WaitForProcesses(ActiveProcesses, 0)
 
+    print("Generating debuild files for wine: Spinning up {} processes".format(len(supported_distros) * len(supported_cpus)))
+    print("Don't kill this early otherwise you'll get background lintian processes running!")
+
+    ActiveProcesses = {}
+    for distro in supported_distros:
+        print("Building package for {}.".format(distro[1]))
+        SubFolder = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0]
+        SubFolderLogs = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0] + "_logs"
+        os.makedirs(SubFolderLogs, exist_ok=True)
+        SubFolderLogFiles = SubFolderLogs + "/log.txt"
+        SubFolderLogFile = open(SubFolderLogFiles, "w")
+
+        p = subprocess.Popen(["debuild", "-S"], cwd = SubFolder, stderr=subprocess.STDOUT, stdout=SubFolderLogFile)
+        Process = DebuildWineOutput(distro, SubFolderLogFiles, SubFolderLogFile, p)
+        ActiveProcesses[Process.pid()] = Process
+
+        # If at max processes then wait
+        ActiveProcesses = WaitForProcesses(ActiveProcesses, 9)
+
+    # Wait for all processes to exit
+    ActiveProcesses = WaitForProcesses(ActiveProcesses, 0)
+
 if Stage == 3:
-    print("Uploading results")
+    print("Uploading results for Linux")
     for distro in supported_distros:
         for arch in supported_cpus:
             PackageName = RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0] + "_source.changes"
             p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
             p.wait()
+
+    print("Uploading results for Wine")
+    for distro in supported_distros:
+        PackageName = RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0] + "_source.changes"
+        p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
+        p.wait()

@@ -1,0 +1,2 @@
+install/libarm64ecfex.dll usr/lib/wine/aarch64-windows/
+install/libwow64fex.dll usr/lib/wine/aarch64-windows/

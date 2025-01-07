@@ -1,0 +1,29 @@
+Source: fex-emu-wine
+Section: misc
+Priority: optional
+Maintainer: Ryan Houdek <houdek.ryan@fex-emu.com>
+Uploaders: Ryan Houdek <houdek.ryan@fex-emu.com>
+Standards-Version: 4.5.1
+Build-Depends:
+  debhelper-compat (= 12),
+  cmake (>= 3.14),
+  ninja-build,
+  python3,
+  gzip,
+  git,
+  tree,
+Build-Depends-Arch:
+  pkg-config,
+Homepage: https://fex-emu.com/
+Vcs-Browser: https://github.com/FEX-Emu/FEX
+Vcs-Git: https://github.com/FEX-Emu/FEX.git
+Rules-Requires-Root: no
+
+Package: fex-emu-wine
+Section: misc
+Architecture: any
+Depends:
+ ${shlibs:Depends}, ${misc:Depends}
+Provides: fex-emu-wine
+Description: x86 and x86-64 Linux emulator
+ FEX is very much work in progress, so expect things to change.
