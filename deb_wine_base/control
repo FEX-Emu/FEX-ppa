@@ -24,6 +24,7 @@ Section: misc
 Architecture: any
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
+Conflicts: hangover-libwow64fex, hangover-libarm64ecfex
 Provides: fex-emu-wine
 Description: x86 and x86-64 Linux emulator
  FEX is very much work in progress, so expect things to change.
