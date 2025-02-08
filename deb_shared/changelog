@@ -1,3 +1,135 @@
+fex-emu-@ARCH_SUFFIX@ (2502~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2502
+
+  - ARM64EC
+    - Set EC_ENTRY_CPUAREA_REG at inline SMC dispatcher entry (20b00ec)
+
+  - Allocator
+    - Fix format string (e1f378c)
+
+  - Arm64
+    - Fix bitmask used to match load/store instructions (0019bde)
+
+  - CMake
+    - Default enable clang thunk building (1becbab)
+    - Check for compatible Catch2 versions (c892899)
+    - Simplify vixl-related options (d01db8f)
+    - Compile vixl if ENABLE_VIXL_DISASSEMBLER is set (a52dd71)
+
+  - CPUBackend
+    - Make guest RIP reconstruction offsets signed (981eea6)
+
+  - CPUID
+    - Remove duplicated ARM Neoverse-N2 (de431f1)
+
+  - CodeEmitter
+    - Fixes clang_format (bf1e319)
+    - Various cleanups (c257204)
+    - Auto-format .inl headers (1aa8c6f)
+
+  - FEX
+    - Allocate a VMA allocator when running on a 48-bit VA (c2f8b5b)
+
+  - FEXConfig
+    - Fixes instcount not being editable by keyboard (90db948)
+
+  - FEXCore
+    - Don't copy IR after compilation (d39dea1)
+
+    - JIT
+      - Encode the JITRIPReconstructionEntries using variable length integer (e94643d)
+
+    - vl64
+      - Fixes int16 encoding (b3a69af)
+
+  - FEXLoader
+
+    - ELFCodeLoader
+      - Be robust against zero length environment variables (2a4c169)
+
+  - FEXServer
+    - Fixes FEX_PORTABLE usage (ee47b5b)
+    - Lower close timeout (26e50ef)
+
+  - Frontend
+    - Split blocks at jump target boundaries (eaddd44)
+    - Disallow cross-page branches in multiblock (3b8c368)
+    - End multiblocks early after hitting 2 consecutive null bytes (48c03d7)
+    - Stop all decoding once MaxInst/DecodeBufferSize is reached (f635a12)
+
+  - GdbServer
+    - Implement new netstream that can be interrupted (d2a56eb)
+
+  - IRDumper
+    - Allow const RA data (713ebf1)
+
+  - InstCountCI
+    - Hardcode xchg instructions (f4c9275)
+
+  - InstcountCI
+    - Adds a hotblock for 32-bit TSO testing (e8cd655)
+
+  - IoctlEmulation
+
+    - drm
+      - Update for v6.13 (bb6e98a)
+
+  - JIT
+    - Avoid OOB EC bitmap checks in ExitFunction (8c02bd4)
+
+  - LinuxEmulation
+    - Ensure syscall wrapper declaration has CpuStateFrame as the first argument (8d6a43d)
+
+  - LinuxSyscalls
+    - Update for new v6.13 syscalls (ac1b6d9)
+
+  - NFC
+    - Code cleanup (2e989e4)
+
+  - Profiler
+    - Setup for usage on Windows (8e2b4a3)
+
+    - GPUViz
+      - Stop allocating memory (fb2a59a)
+      - Fixes typo in instant TraceObject (ae69c4d)
+
+  - Scripts
+    - Fix indentation of changelog items (276e9ad)
+
+  - SignalDelegator
+    - Protect first page of the altstack (62cfc26)
+
+  - WINE
+    - Fixes FEX_PORTABLE usage (9af52fb)
+
+  - Windows
+    - Fix wine check (fd09ded)
+
+    - CRT
+      - Fixes FD leak (a18b2d0)
+
+  - Misc
+    - Add option StartupSleepProcName (55cbb0b)
+    - Revert "Enable RA of SVE Predicate Registers" (db7fb56)
+    - Skip 3DNow tests with precision issues (2bed744)
+    - Predicate cache alternative implementation (b148cc6)
+    - Library Forwarding/wayland: Fix regression caused by erroneous format (bd1bca2)
+    - Update upload-artifact action to v4 (e9bd037)
+    - Pass through FPRs argument (adff4bb)
+    - Fix slight inaccuracy in test 3_F7_05_2 (42c931c)
+    - Fix crashes in Paranoid TSO mode (56c95e3)
+    - Fix warnings about unused objects (840f306)
+    - Drop assume-asserting logging macros (9def89d)
+    - x87 fst/fld optimization for different addrmodes (3f788eb)
+    - Revert pred cache (8cfc016)
+    - Print arg type f80Bit (8c94b78)
+
+  - cmake
+    - Adds some missing STATIC qualifiers (2293d30)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sat, 08 Feb 2025 09:09:10 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2501~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   Fix wine
