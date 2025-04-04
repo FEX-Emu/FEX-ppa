@@ -1,3 +1,177 @@
+fex-emu-@ARCH_SUFFIX@ (2504~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2504
+
+  - AVX128
+    - Remove old comment from VEXTRACT{F,I}128 (d5234a4)
+    - Optimize vpalignr  (f0b208e)
+
+  - Addressing
+    - Remove unnecessary assert in LoadEffectiveAddress() (d34c287)
+    - Amend binary AND into logical AND in SelectAddressMode() (f169fa5)
+
+  - Arm64Emitter
+    - Removes warning (d18d043)
+
+  - CMake
+    - Propagate cpp-optparse include directories automatically (af2ee42)
+
+  - CodeEmitter
+    - Generify data writing (8b38a6d)
+
+    - SVEOps
+      - Add SVE2 crypto operations (fd28783)
+
+  - Config
+    - Stop using config values with list when unnecessary (a8bc20f)
+
+  - ConstProp
+    - optimize StoreContext(128-bit zero) (3079855)
+
+  - ELFContainer
+    - Removes unused debug print functions (63a8b66)
+
+  - ELFParser
+    - Sanity check ELF program headers (b145e89)
+
+  - Externals
+    - Update fmt to 11.1.4 (from 11.1.0) (498c86b)
+
+  - FEX
+    - Remove xbyak dependency  (4929480)
+
+  - FEXCore
+    - Remove CPUID option for SHA (2887416)
+
+    - Frontend
+      - Remove logically dead code (0bd924e)
+      - Changes how VEX operand encoding flags are encoded (3155590)
+
+  - FEXRootFSFetcher
+    - Move strings in GetDistroInfo() (b8b6f81)
+
+  - General
+    - Replace deprecated std::is_trivial/std::is_trivial_v trait usages (25c4fb8)
+
+  - IR
+    - Implement support for sha256h{2,} (852109c)
+    - Remove some static analysis warnings (8ed9f8a)
+
+  - InstructionCountCI
+    - add blocks using F->I conversion (d8e4e00)
+
+  - IoctlEmulation
+    - Stop using std::pair and memmove (726228c)
+
+  - JIT
+    - Simplify SVE 256 operation asserts (b5ed804)
+    - Fix typo in VSha256U1 (c3de7c6)
+    - eliminate a zext in bfi (f6dd87a)
+    - Optimize CAS (10d34c9)
+    - Fixe scalar reciprocal when AFP is supported (7fcb5fc)
+    - Optimize SVE offset VL loadstores (55dea33)
+
+  - LibraryForwarding
+
+    - gen
+      - Fixes compiling with LLVM 20 (61acc76)
+
+    - vulkan
+      - Add missing vkCmdPushDescriptorSetWithTemplate declaration (871d140)
+      - Update to 1.4.310 (806e989)
+
+  - LinuxSyscalls
+    - Emulate futimesat syscalls (31ee8d8)
+
+  - OpcodeDispatcher
+    - Implement support for sha256rnds2 using ARM instructions (74cb225)
+    - Fix potential for uninitialized value use in RCRSmallerOp() (8058391)
+    - Remove unnecessary 128-bit check in VPGATHER() (2123343)
+    - drop useless mask in trivial cmpxchg (6bafca6)
+    - fix BT flags (ef83add)
+
+  - RA
+    - small cleanups (fbe3a86)
+
+  - SMCTracking
+    - Fix order of VMAs tracked per MappedResource (6426428)
+
+  - Scripts
+    - Update CPU classification (e092a38)
+
+    - DefinitionExtract
+      - Make output consistent with clang-format (9ae04b5)
+
+  - SignalDelegator
+    - Clear DF and RF on signal  (53a55ba)
+
+  - Softfloat
+    - Define INLINE (a2fd3c0)
+
+  - StructVerifier
+    - Use isystem for system header includes (bdd078d)
+
+  - Syscalls
+    - Minor cleanup (7d1351f)
+
+  - Telemetry
+    - Removes unnecessary indirection (8ac296b)
+
+  - VDSOEmulation
+    - Safe fallback if host VDSO can't be parsed (aab9e1b)
+
+  - Various
+    - More static analysis warnings cleanup (929b111)
+    - Adds missing SPDX file headers (b773354)
+
+  - WINE
+    - Support sleeping a process (53356f1)
+
+  - Windows
+    - Small fixups (1b18bfa)
+    - Support newer mingw toolchains (711021e)
+
+  - X87
+    - Minor optimization in how GPRs are moved in to vector registers (1700a73)
+
+  - Misc
+    - Update tests for fincstp and fdecstp (acfb24f)
+    - Initialize OutputFS to -1 (6065e7a)
+    - Optimize float->integer conversions with Feat_FRINTTS (8aecdc5)
+    - Fix 66 90 decoding to a nop (0ca34d1)
+    - Enable maxinst to 1 only if singlestep exists and is enabled (bf3275b)
+    - Remove some warnings from Config.cpp (b744ca1)
+    - Static analysis warning fixes (bd1d682)
+    - Pair PF/AF when spilling static regs (ec976f3)
+    - Initialize class fields to null/zero (b816581)
+    - Fix pylance warning about possible unbound var (fdb4a07)
+    - Fix x18 register saving (9672197)
+    - Improve JSON file validation and error reporting (123c5d8)
+    - Tie VBSL source (e504a8c)
+    - Implement PE volatile metadata support (7efd827)
+    - Convert config options once (2f6f8b9)
+    - Drop some masking in shld (d48413c)
+    - Fix address modes calculation on 32bit guests (ab7f648)
+    - Library Forwarding: Add experimental support for 32-bit Vulkan (2d56f5e)
+    - Add tests for F(U)COMI(P) (fa1d991)
+    - Remove some brackets from expected results in tests (531ab5b)
+
+  - actions
+    - Update to step-security change-files action (0f9d791)
+
+  - unittests
+
+    - ASM
+      - Move test to correct folder (2e57ad6)
+
+  - x87OptimizationPass
+    - Fixes {Inc,Dec}StackPop (d5db2cc)
+
+  - x87StackOptimizationPass
+    - Initialize a couple of arrays (949b205)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Fri, 04 Apr 2025 22:04:11 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2503~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2503
