@@ -1,3 +1,100 @@
+fex-emu-@ARCH_SUFFIX@ (2503~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2503
+
+  - ArchHelpers
+
+    - Arm64
+      - Fix loadstore mask (df718d5)
+
+  - ArgumentLoader
+    - Fixes double load (97070aa)
+
+  - Async
+    - Add framework for multiplexing IO on network sockets and other file descriptors (7579330)
+
+  - CPUBackend
+    - Move bool to end of JITCodeTail (d22bd9c)
+
+  - CodeEmitter
+    - Adds missing assert checks (2435ebe)
+    - Minor fixes to SVE fcvtz{u,s} (da76023)
+
+  - CommonTools
+    - Removes ELFSymbolDatabase (c37dc81)
+
+  - Config
+    - Correctly handle relative paths with portable  (1fc8270)
+    - Enable multiblock by default (a49d30f)
+
+  - FEX
+    - Implements new sampling based stats (6a39a8d)
+
+  - FEXCore
+    - Keep PCMPISTRI arguments in vectors longer (1b144ba)
+    - Optimize VPCMPISTRX implicit length calculation (2943cff)
+
+    - JIT
+      - Pass Softfloat arguments as vector registers  (0d7a9f9)
+
+    - Profiler
+      - Implement support for JIT float fallbacks  (9eccc01)
+
+  - FEXServer
+    - Fixes background startup (dce9de2)
+
+  - FEXServerClient
+    - Fix searching for FEXServer (7a03681)
+
+  - FEXpidof
+    - Fixes searching for wine applications (717015b)
+
+  - FileManagement
+    - Throw a warning if `/proc` can't be opened (a7c6fdb)
+
+  - InstCountCI
+    - fix turnip instcountci (d7223d5)
+
+  - JIT
+    - Optimize packed float min/max if AFP is supported  (4f46f55)
+    - Optimize memory stores with zero  (b46e5d4)
+
+  - Linux
+    - Fixes PAGESIZE checks that could return <= 0 (afa5ad5)
+
+  - OpcodeDispatcher
+    - Reuse PSHUFD shuffle mask for sha data shuffling  (57ed466)
+    - Emulate SHA1RNDS4 with ARM sha extensions  (dbb58d1)
+    - Implements a few more pshufd masks  (beef9ee)
+    - Implement support for SHA1MSG2 using SHA instructions  (34a274d)
+    - Implement SHA256MSG2 using SHA256 operation (02d7261)
+    - Use offset for LRCPC2 more frequently  (a85cc85)
+
+  - Profiler
+    - Fixes potential crash due to uninitialized variables (4b17506)
+    - Drop accidentally included debugging code (b09b948)
+    - Fixes zeroing of allocated slots. (54412f1)
+    - Add Tracy backend (6651f9e)
+
+  - Seccomp
+    - Fix a couple minor things. (f69ef86)
+
+  - Various
+    - Removes warnings about uninitialized variables (3964018)
+
+  - Misc
+    - Implement SIDT/LSL (81434cd)
+    - Improve reciprocal estimate and tests (b7f58e6)
+    - Update vixl to ff82b3328c59fa4cf2fe36697b44eae15a650371 (530d3d8)
+    - Library Forwarding: Add GUI for enabling use of individual host libraries (caf15a2)
+    - Remove unused code in various places (6b82664)
+    - Library Forwarding: Fix build problems on some platforms (d14b6e1)
+    - Fixes a couple locations where is variable is copied when it could be moved (b76a296)
+    - Fixes some instances of auto usage with unintentional copy (42b0fbd)
+    - Remove unused IMGui header and obsolete debugger documentation (4186b2a)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 05 Mar 2025 17:54:49 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2502~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2502
