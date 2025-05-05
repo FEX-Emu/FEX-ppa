@@ -17,6 +17,7 @@ supported_distros = [
     ["j", "jammy"],
     ["n", "noble"],
     ["o", "oracular"],
+    ["p", "plucky"],
 ]
 
 distro_build_depends_arch = [
@@ -55,21 +56,36 @@ distro_build_depends_arch = [
      "  libstdc++-14-dev-i386-cross",
      "  libgcc-14-dev-i386-cross",
      ""],
+    ["  mlir-20-tools",
+     "  libmlir-20-dev",
+     "  clang-20",
+     "  clang-tools-20",
+     "  clang-format-20",
+     "  clang-tidy-20",
+     "  clangd-20",
+     "  libclang-20-dev",
+     "  llvm-20-dev",
+     "  libstdc++-15-dev-i386-cross",
+     "  libgcc-15-dev-i386-cross",
+     ""],
 ]
 
 c_compiler = [
     "clang",
     "clang-17",
     "clang-18",
+    "clang-20",
 ]
 
 cxx_compiler = [
     "clang++",
     "clang++-17",
     "clang++-18",
+    "clang++-20",
 ]
 
 supports_thunks = [
+    True,
     True,
     True,
     True,
