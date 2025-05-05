@@ -1,3 +1,130 @@
+fex-emu-@ARCH_SUFFIX@ (2505~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2505
+
+  - Arm64
+    - Mark several functions as internally linked (572a58e)
+
+  - CodeEmitter
+    - Fix clang-format (02f90fb)
+    - Fixes misaligned function (94499ed)
+
+    - ASIMDOps
+      - Constrain Q and D register requirements with concept (e0e9f5a)
+      - Support RADDHN{2}/RSUBHN{2} (68f8c24)
+
+    - LoadStoreOps
+      - Add Memory Copy and Memory Set category (0cbbd91)
+
+    - LoadstoreOps
+      - Add Load/store register (PAC) group (79e57c3)
+
+    - ScalarOps
+      - Add two more instruction categories (b4eb38e)
+
+  - Emitter
+    - Add missing ASIMD crypto operations (571a533)
+
+  - FEXConfig
+    - Fix layout issues on Qt 6.9 (c837108)
+
+  - FEXCore
+    - Fixes x87 reduced precision (f97cd24)
+    - Reduce stack usage in CalculateNumberOfCPUs (5d385c5)
+
+    - Allocator
+      - Removes old workaround for kernel 4.17 (e3f8a81)
+
+    - Emitter
+      - Stop creating a vector on the heap (45b638f)
+
+    - JIT
+      - Switch over to new vl64pair for RIP reconstruction  (4f2d2e6)
+
+    - Softfloat
+      - Wire up cephes math library for transcendental operations (dd8a1f0)
+
+  - FEXServer
+    - Fixes squashfs/erofs with newer fuse releases (40e0a71)
+
+  - FHU
+    - Add a non-block thread local ringbuffer (9dbbd44)
+
+  - Frontend
+    - Be more tolerant of bad instruction encodings (211bec6)
+
+  - InstcountCI
+    - Changes how code size is calculated  (3f7ad04)
+    - Ensure RIP of blocks is consistent  (6069d05)
+
+  - JIT
+    - Move interpreter ABI handlers in to the dispatcher  (00ff549)
+    - Make code patching during (un-/)linking thread-safe (99114e1)
+    - Align JITCodeTail to native alignment (6beb4b0)
+    - Moves VPCMPESTRX handler to use vectors  (23a8462)
+    - Fix warning about unused variable (3da6fc3)
+
+  - Linux
+
+    - SMCTracking
+      - Stop calling mprotect on a memory region times the number of threads (afcd93f)
+
+  - LinuxEmulation
+    - Copy the host persona on thread startup (3ea7c2b)
+    - Fixes remaining memory leak on pthread teardown (4d02126)
+
+  - LinuxSyscalls
+    - Fixes a major stack memory leak (156b674)
+    - Update signal mask at deferring time (8ff7497)
+    - Fixes 32-bit llseek result (5b802d1)
+
+  - NFC
+    - FEXCore: Removes unused argument on CreateThread (1dff707)
+
+  - OpcodeDispatcher
+    - Mark NZCV as dirty when clobbering in FCOMIF64 (73593ad)
+
+  - Scripts
+
+    - InstCountCI
+      - Restrict git-add to relevant JSON files only (9ba46e3)
+
+  - Various
+    - UBSAN fixes around unaligned accesses (8864637)
+
+  - Windows
+    - Misc cleanups and fixes (6680753)
+
+  - X86Tables
+    - Set FLAGS_BLOCK_END for more faulting ops (f912295)
+
+  - Misc
+    - (a6a203c)
+    - Fix 32-bit fadvise64 (31e5f70)
+    - Marshal freeram in sysinfo (794c80e)
+    - Make shmdt reset the unmapped pages in the 32-bit allocator (cf5fcb2)
+    - mprotect last page of CodeBuffer (e1d032b)
+    - 80-bit cephes prep work (f99691b)
+    - Link to mincore instead of kernelbase on ARM64EC (3c8bb53)
+    - updated Dockerfile to reflect latest FEX-Emu releases (8cc23d0)
+    - X87 state block reset (b7790e1)
+    - Improve tracking of executable mappings (674f939)
+    - ASIMD_Tests: Enable PMULL/PMULL2 tests (c42b185)
+    - Enable -fno-strict-aliasing (6f5588f)
+    - A couple of barrier and timing fixes. (572d6e0)
+    - ASIMD_Tests: Re-enable tests disabled due to dissassembly bugs (d7df4be)
+    - Add no-sanitize flags to UBSAN (f227722)
+    - Fix cast in ValidateCode impl (7c0bc2d)
+    - Cleanup info test files for 32bits (2919c32)
+    - Cleanup compile warnings (f1d007c)
+    - Add option to enable UBSAN (5235190)
+    - Softfloat-3e: Add support for f128 (09e622d)
+
+  - cephes
+    - Rewrite to use softfloat-3e 128-bit  (bc72239)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Mon, 05 May 2025 18:41:03 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2504~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2504
