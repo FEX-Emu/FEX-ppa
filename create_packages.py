@@ -84,19 +84,7 @@ cxx_compiler = [
     "clang++-20",
 ]
 
-supports_thunks = [
-    True,
-    True,
-    True,
-    True,
-]
-
-supports_thunks_files = [
-    # False
-    "",
-    # True
-    "usr/lib/aarch64-linux-gnu/fex-emu/*\n",
-]
+supports_thunks_files = "usr/lib/aarch64-linux-gnu/fex-emu/*\n"
 
 # Supported CPUs split by features
 # By package suffix, -march flavour
@@ -240,8 +228,6 @@ if Stage == 1:
     os.makedirs(RootGenPPA, exist_ok = True)
     distro_index = 0
     for distro in supported_distros:
-        supports_thunk_option = supports_thunks[distro_index]
-        thunk_files = supports_thunks_files[supports_thunk_option]
         c_compiler_override = c_compiler[distro_index]
         cxx_compiler_override = cxx_compiler[distro_index]
 
@@ -290,7 +276,7 @@ if Stage == 1:
             # Modify the install file in place
             SpecificInstallFile = ResultFolder + "/fex-emu-" + arch[0] + ".install"
             SpecificInstall = ReadFile(SpecificInstallFile)
-            SpecificInstall = SpecificInstall.replace("@THUNK_FILES@\n", thunk_files)
+            SpecificInstall = SpecificInstall.replace("@THUNK_FILES@\n", supports_thunks_files)
             StoreFile(SpecificInstallFile, SpecificInstall)
 
             # Modify the changelog file in place
@@ -309,10 +295,7 @@ if Stage == 1:
             SpecificRules = SpecificRules.replace("@CXX_COMPILER@", cxx_compiler_override)
             SpecificRules = SpecificRules.replace("@TUNE_CPU@", "generic")
             SpecificRules = SpecificRules.replace("@TUNE_ARCH@", arch[1])
-            if supports_thunk_option:
-                SpecificRules = SpecificRules.replace("@SUPPORTS_THUNKS@", "True")
-            else:
-                SpecificRules = SpecificRules.replace("@SUPPORTS_THUNKS@", "False")
+            SpecificRules = SpecificRules.replace("@SUPPORTS_THUNKS@", "True")
 
             StoreFile(SpecificRulesFile, SpecificRules)
 
@@ -357,8 +340,6 @@ if Stage == 1:
     print("Generating debian file structure trees - Wine")
     distro_index = 0
     for distro in supported_distros:
-        supports_thunk_option = supports_thunks[distro_index]
-        thunk_files = supports_thunks_files[supports_thunk_option]
         c_compiler_override = c_compiler[distro_index]
         cxx_compiler_override = cxx_compiler[distro_index]
 
