@@ -12,76 +12,82 @@ NeededApplications = [
     "tree",
 ]
 
-# Supported distros in the form of: letter, series name
-supported_distros = [
-    ["j", "jammy"],
-    ["n", "noble"],
-    ["o", "oracular"],
-    ["p", "plucky"],
-]
-
-distro_build_depends_arch = [
-    ["  mlir-14-tools",
-     "  libmlir-14-dev",
-     "  clang-14",
-     "  clang-tools-14",
-     "  clang-format-14",
-     "  clang-tidy-14",
-     "  clangd-14",
-     "  libclang-14-dev",
-     "  libstdc++-12-dev-i386-cross",
-     "  libgcc-12-dev-i386-cross",
-     ""],
-    ["  mlir-17-tools",
-     "  libmlir-17-dev",
-     "  clang-17",
-     "  clang-tools-17",
-     "  clang-format-17",
-     "  clang-tidy-17",
-     "  clangd-17",
-     "  libclang-17-dev",
-     "  llvm-17-dev",
-     "  libstdc++-13-dev-i386-cross",
-     "  libgcc-13-dev-i386-cross",
-     ""],
-    ["  mlir-18-tools",
-     "  libmlir-18-dev",
-     "  clang-18",
-     "  clang-tools-18",
-     "  clang-format-18",
-     "  clang-tidy-18",
-     "  clangd-18",
-     "  libclang-18-dev",
-     "  llvm-18-dev",
-     "  libstdc++-14-dev-i386-cross",
-     "  libgcc-14-dev-i386-cross",
-     ""],
-    ["  mlir-20-tools",
-     "  libmlir-20-dev",
-     "  clang-20",
-     "  clang-tools-20",
-     "  clang-format-20",
-     "  clang-tidy-20",
-     "  clangd-20",
-     "  libclang-20-dev",
-     "  llvm-20-dev",
-     "  libstdc++-15-dev-i386-cross",
-     "  libgcc-15-dev-i386-cross",
-     ""],
-]
-
-c_compiler = [
-    "clang",
-    "clang-17",
-    "clang-18",
-    "clang-20",
-]
-
-cxx_compiler = [
-    "clang++",
-    "clang++-17",
-    "clang++-18",
-    "clang++-20",
+supported_distro_list = [
+    [
+        # Distro information
+        ["j", "jammy"],
+        # Distro series depends
+        ["  mlir-14-tools",
+         "  libmlir-14-dev",
+         "  clang-14",
+         "  clang-tools-14",
+         "  clang-format-14",
+         "  clang-tidy-14",
+         "  clangd-14",
+         "  libclang-14-dev",
+         "  libstdc++-12-dev-i386-cross",
+         "  libgcc-12-dev-i386-cross",
+         ""],
+        # C/CXX Compiler
+        [ "clang", "clang++", ],
+    ],
+    [
+        # Distro information
+        ["n", "noble"],
+        # Distro series depends
+        ["  mlir-17-tools",
+         "  libmlir-17-dev",
+         "  clang-17",
+         "  clang-tools-17",
+         "  clang-format-17",
+         "  clang-tidy-17",
+         "  clangd-17",
+         "  libclang-17-dev",
+         "  llvm-17-dev",
+         "  libstdc++-13-dev-i386-cross",
+         "  libgcc-13-dev-i386-cross",
+         ""],
+        # C/CXX Compiler
+        [ "clang-17", "clang++-17", ],
+    ],
+    [
+        # Distro information
+        ["o", "oracular"],
+        # Distro series depends
+        ["  mlir-18-tools",
+         "  libmlir-18-dev",
+         "  clang-18",
+         "  clang-tools-18",
+         "  clang-format-18",
+         "  clang-tidy-18",
+         "  clangd-18",
+         "  libclang-18-dev",
+         "  llvm-18-dev",
+         "  libstdc++-14-dev-i386-cross",
+         "  libgcc-14-dev-i386-cross",
+         ""],
+        # C/CXX Compiler
+        [ "clang-18", "clang++-18", ],
+    ],
+    [
+        # Distro information
+        ["p", "plucky"],
+        # Distro series depends
+        ["  mlir-20-tools",
+         "  libmlir-20-dev",
+         "  clang-20",
+         "  clang-tools-20",
+         "  clang-format-20",
+         "  clang-tidy-20",
+         "  clangd-20",
+         "  libclang-20-dev",
+         "  llvm-20-dev",
+         "  libstdc++-15-dev-i386-cross",
+         "  libgcc-15-dev-i386-cross",
+         ""],
+        # C/CXX Compiler
+        [ "clang-20", "clang++-20", ],
+    ],
 ]
 
 supports_thunks_files = "usr/lib/aarch64-linux-gnu/fex-emu/*\n"
@@ -226,16 +232,15 @@ if Stage == 1:
     print("Generating debian file structure trees - Linux")
 # First thing's first, bifurcate all of our options
     os.makedirs(RootGenPPA, exist_ok = True)
-    distro_index = 0
-    for distro in supported_distros:
-        c_compiler_override = c_compiler[distro_index]
-        cxx_compiler_override = cxx_compiler[distro_index]
+    for distro in supported_distro_list:
+        c_compiler_override = distro[2][0]
+        cxx_compiler_override = distro[2][1]
 
-        distro_build_depends = ",\n".join(distro_build_depends_arch[distro_index])
+        distro_build_depends = ",\n".join(distro[1])
 
         for arch in supported_cpus:
             # Create subfolder
-            SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0]
+            SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0]
             os.makedirs(SubFolder, exist_ok = True)
 
             # Create debian folder
@@ -282,8 +287,8 @@ if Stage == 1:
             # Modify the changelog file in place
             SpecificChangelogFile = DebSubFolder + "/" + "changelog"
             SpecificChangelog = ReadFile(SpecificChangelogFile)
-            SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES_LETTER@", distro[0])
-            SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES@", distro[1])
+            SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES_LETTER@", distro[0][0])
+            SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES@", distro[0][1])
             SpecificChangelog = SpecificChangelog.replace("@ARCH_SUFFIX@", arch[0])
             StoreFile(SpecificChangelogFile, SpecificChangelog)
 
@@ -330,21 +335,16 @@ if Stage == 1:
 
             # Create a softlink to the source folder which is unchanged between each distro
             # This is terrible. It doesn't even go in to the package specific folder but instead the folder above it.
-            TargetSymlink = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0] + ".orig.tar.gz"
+            TargetSymlink = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0] + ".orig.tar.gz"
             if os.path.islink(TargetSymlink):
                 os.remove(TargetSymlink)
 
             os.symlink(os.path.abspath(SourceTar), TargetSymlink)
-        distro_index += 1
 
     print("Generating debian file structure trees - Wine")
-    distro_index = 0
-    for distro in supported_distros:
-        c_compiler_override = c_compiler[distro_index]
-        cxx_compiler_override = cxx_compiler[distro_index]
-
+    for distro in supported_distro_list:
         # Create subfolder
-        SubFolder = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0]
+        SubFolder = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0]
         os.makedirs(SubFolder, exist_ok = True)
 
         # Create debian folder
@@ -385,8 +385,8 @@ if Stage == 1:
         # Modify the changelog file in place
         SpecificChangelogFile = DebSubFolder + "/" + "changelog"
         SpecificChangelog = ReadFile(SpecificChangelogFile)
-        SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES_LETTER@", distro[0])
-        SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES@", distro[1])
+        SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES_LETTER@", distro[0][0])
+        SpecificChangelog = SpecificChangelog.replace("@DISTRO_SERIES@", distro[0][1])
         # Not actually an arch suffix, but reuses it.
         SpecificChangelog = SpecificChangelog.replace("@ARCH_SUFFIX@", "wine")
         StoreFile(SpecificChangelogFile, SpecificChangelog)
@@ -412,13 +412,11 @@ if Stage == 1:
 
         # Create a softlink to the source folder which is unchanged between each distro
         # This is terrible. It doesn't even go in to the package specific folder but instead the folder above it.
-        TargetSymlink = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0] + ".orig.tar.gz"
+        TargetSymlink = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0] + ".orig.tar.gz"
         if os.path.islink(TargetSymlink):
             os.remove(TargetSymlink)
 
         os.symlink(os.path.abspath("wine_{}".format(SourceTar)), TargetSymlink)
-        distro_index += 1
-
 
 @dataclass
 class DebuildOutput:
@@ -442,7 +440,7 @@ class DebuildOutput:
         return self.Process.poll()
 
     def name(self):
-        return "{}_{}".format(self.Arch[1], self.Distro[1])
+        return "{}_{}".format(self.Arch[1], self.Distro[0][1])
 
     def pid(self):
         return self.Process.pid
@@ -467,7 +465,7 @@ class DebuildWineOutput:
         return self.Process.poll()
 
     def name(self):
-        return "wine_{}".format(self.Distro[1])
+        return "wine_{}".format(self.Distro[0][1])
 
     def pid(self):
         return self.Process.pid
@@ -522,15 +520,15 @@ if Stage == 2:
         print("Couldn't setup gpg key with signing dummy file")
         sys.exit(-1)
 
-    print("Generating debuild files: Spinning up {} processes".format(len(supported_distros) * len(supported_cpus)))
+    print("Generating debuild files: Spinning up {} processes".format(len(supported_distro_list) * len(supported_cpus)))
     print("Don't kill this early otherwise you'll get background lintian processes running!")
 
     ActiveProcesses = {}
-    for distro in supported_distros:
+    for distro in supported_distro_list:
         for arch in supported_cpus:
-            print("Building package for {} on {}.".format(arch[1], distro[1]))
-            SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0]
-            SubFolderLogs = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0] + "_logs"
+            print("Building package for {} on {}.".format(arch[1], distro[0][1]))
+            SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0]
+            SubFolderLogs = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0] + "_logs"
             os.makedirs(SubFolderLogs, exist_ok=True)
             SubFolderLogFiles = SubFolderLogs + "/log.txt"
             SubFolderLogFile = open(SubFolderLogFiles, "w")
@@ -545,14 +543,14 @@ if Stage == 2:
     # Wait for all processes to exit
     ActiveProcesses = WaitForProcesses(ActiveProcesses, 0)
 
-    print("Generating debuild files for wine: Spinning up {} processes".format(len(supported_distros) * len(supported_cpus)))
+    print("Generating debuild files for wine: Spinning up {} processes".format(len(supported_distro_list) * len(supported_cpus)))
     print("Don't kill this early otherwise you'll get background lintian processes running!")
 
     ActiveProcesses = {}
-    for distro in supported_distros:
-        print("Building package for {}.".format(distro[1]))
-        SubFolder = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0]
-        SubFolderLogs = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0] + "_logs"
+    for distro in supported_distro_list:
+        print("Building package for {}.".format(distro[0][1]))
+        SubFolder = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0]
+        SubFolderLogs = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0] + "_logs"
         os.makedirs(SubFolderLogs, exist_ok=True)
         SubFolderLogFiles = SubFolderLogs + "/log.txt"
         SubFolderLogFile = open(SubFolderLogFiles, "w")
@@ -569,14 +567,14 @@ if Stage == 2:
 
 if Stage == 3:
     print("Uploading results for Linux")
-    for distro in supported_distros:
+    for distro in supported_distro_list:
         for arch in supported_cpus:
-            PackageName = RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0] + "_source.changes"
+            PackageName = RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0] + "_source.changes"
             p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
             p.wait()
 
     print("Uploading results for Wine")
-    for distro in supported_distros:
-        PackageName = RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0] + "_source.changes"
+    for distro in supported_distro_list:
+        PackageName = RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0] + "_source.changes"
         p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
         p.wait()
