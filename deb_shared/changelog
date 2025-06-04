@@ -1,3 +1,102 @@
+fex-emu-@ARCH_SUFFIX@ (2506~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2506
+
+  - Async
+    - Don't destruct on self-moves (5e10336)
+
+  - CMake
+    - Generate DATA_DIRECTORY dynamically unless explicitly set (2a713a1)
+    - Allow disabling explicit -mcpu usage (b3297d1)
+
+  - Config
+    - Use CMAKE_INSTALL_FULL_LIBDIR when templating default values (06541f2)
+    - Clean up use of templates (3dc8a3d)
+
+  - ConstProp
+    - optimize XOR with all-1 (221ae2d)
+
+  - FEXCore
+
+    - CPUID
+      - Remove warning (6f83728)
+
+  - FEXServer
+    - Don't time out while clients are still connected (2164d7b)
+
+  - IR
+    - Inline registers into the IR (dc9f8aa)
+    - drop DestSize inference (debc57e)
+
+  - InstcountCI
+    - Adds tests for instructions discovered by #4597 (e81c84e)
+
+  - InstructionCountCI
+    - fix sdiv case (7bd64d9)
+    - add more cases for mov 0/~0 (cdea8d7)
+
+  - JIT
+    - use .ID() even less (9b573ef)
+    - stop using .ID() pattern (9127d20)
+
+  - LibraryForwarding
+    - Use CMAKE_INSTALL_FULL_LIBDIR instead of constructing the library install paths manually (ba162bb)
+    - Change target env to gnu (861ecbe)
+
+  - Linux
+
+    - SMCTracking
+      - Fixes nasty race condition causing invalid memory tracking (a08a6ce)
+
+  - LinuxEmulation
+    - Minor cleanup by separating VMA definitions (47f1ad6)
+    - Implement custom longjump that is fortification safe (89e5041)
+    - Fix bad compile time definition check (8b3e731)
+
+  - LinuxSyscalls
+    - Reduce code duplication between 32-bit and 64-bit paths (99816a2)
+
+  - OpcodeDispatcher
+    - optimize X87FTWTag (ef6dc3d)
+
+  - Scripts
+
+    - InstallFEX
+      - Add plucky (a73fab3)
+
+  - SyscallsVMATracking
+    - Minor cleanup (b8b516f)
+
+  - TestHarnessRunner
+    - Stop setting the guest RSP for ARM test runner. (8e079c1)
+
+  - ThreadPoolAllocator
+    - Add support for updating the size of managed data (fec1ffa)
+    - Fix assertion in _GLIBCXX_DEBUG builds (3857980)
+
+  - Windows
+    - Fix building with llvm-libcxx (2d0e19e)
+
+  - Misc
+    - Optimize CDQ (6549b66)
+    - Fixes FEXServer path search (2ff9546)
+    - Constant fold on the fly (fedad27)
+    - Stop using hashmap in DCE (c865eb9)
+    - Error when JSON config includes unknown options (5ff9bb3)
+    - Reduce JIT time by 25% by sharing code buffers between threads (e794584)
+    - Pair push/pop (4928af5)
+    - LogManager: Print source location when failing assertions  (ded8b32)
+    - Fix callee saved floating-point arguments order issue (0147f7a)
+    - Use -print-libgcc-file-name to get the compiler-rt file name (7a4fff8)
+    - Run gcc target tests with block size 1 (ae9a5b1)
+
+  - unittests
+
+    - futimesat
+      - Fixes flake (68dc903)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 04 Jun 2025 17:58:36 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2505~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2505
