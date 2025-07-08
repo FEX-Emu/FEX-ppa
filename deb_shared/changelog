@@ -1,3 +1,61 @@
+fex-emu-@ARCH_SUFFIX@ (2507~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2507
+
+  - Build
+    - Add nix-based helpers to facilitate cross-compilation (492b0fd)
+
+  - EmulatedFiles
+    - Emulate `current_clocksource` (c6aae9e)
+
+  - External
+    - Update Tracy submodule to version 0.12.1 (bf83569)
+
+  - FEXConfig
+    - Add icon (0072b28)
+
+  - Fix
+    - wrong magic value in fpstate. (95b4618)
+
+  - IR
+    - merge integer division & remainder (534b338)
+
+  - InstructionCountCI
+    - add 32-bit division cases (9d2f557)
+
+  - JIT
+    - Optimize x87 FSINCOS (640f024)
+
+  - LibraryForwarding
+    - Fix various Wayland issues (94af96d)
+    - Infer folders for 32-bit wrappers automatically (6cd78fc)
+
+    - wayland
+      - Add new interface objects (62de100)
+
+  - Linux
+    - Implement enough of ptrace to allow Ubisoft launcher (1f15a4e)
+
+  - RegisterAllocationPass
+    - assert an invariant in post-RA prop (95ca20c)
+
+  - Misc
+    - Fix build with LLVM >= 21 (6f089a4)
+    - Fix Hades (fa0a54d)
+    - Optimize some constant cpuid/xgetbv cases (afbc7da)
+    - Optimize long division (afabe7c)
+    - Remove code generation build step for install prefix (e685ab8)
+    - Some static code analysis fixes (5f2a72b)
+    - Update Readme.md (a5fad89)
+    - Improve log message formatting (3d0c20a)
+    - Merge moves that are immediately consumed (1c38b8b)
+    - Move data files to Data/ (c346aca)
+
+  - unittests
+    - Adds unittest for no-exec testing (bb072c0)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 08 Jul 2025 06:53:23 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2506~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2506
