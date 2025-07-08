@@ -1,3 +1,11 @@
+fex-emu-@ARCH_SUFFIX@ (2507~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2507~1
+
+  Fix Wine
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 08 Jul 2025 08:08:02 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2507~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2507
