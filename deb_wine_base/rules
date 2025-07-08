@@ -47,7 +47,7 @@ confflags += \
 	-DTUNE_ARCH=generic \
 	-GNinja \
 	-DCMAKE_INSTALL_LIBDIR=/ \
-	-DCMAKE_TOOLCHAIN_FILE=../toolchain_mingw.cmake \
+	-DCMAKE_TOOLCHAIN_FILE=../Data/CMake/toolchain_mingw.cmake \
 	-DOVERRIDE_VERSION=@FEX_VERSION@
 
 override_dh_clean:
