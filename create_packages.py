@@ -52,25 +52,6 @@ supported_distro_list = [
     ],
     [
         # Distro information
-        ["o", "oracular"],
-        # Distro series depends
-        ["  mlir-18-tools",
-         "  libmlir-18-dev",
-         "  clang-18",
-         "  clang-tools-18",
-         "  clang-format-18",
-         "  clang-tidy-18",
-         "  clangd-18",
-         "  libclang-18-dev",
-         "  llvm-18-dev",
-         "  libstdc++-14-dev-i386-cross",
-         "  libgcc-14-dev-i386-cross",
-         ""],
-        # C/CXX Compiler
-        [ "clang-18", "clang++-18", ],
-    ],
-    [
-        # Distro information
         ["p", "plucky"],
         # Distro series depends
         ["  mlir-20-tools",
