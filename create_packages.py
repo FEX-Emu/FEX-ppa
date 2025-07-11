@@ -69,6 +69,25 @@ supported_distro_list = [
         # C/CXX Compiler
         [ "clang-20", "clang++-20", ],
     ],
+    [
+        # Distro information
+        ["q", "questing"],
+        # Distro series depends
+        ["  mlir-20-tools",
+         "  libmlir-20-dev",
+         "  clang-20",
+         "  clang-tools-20",
+         "  clang-format-20",
+         "  clang-tidy-20",
+         "  clangd-20",
+         "  libclang-20-dev",
+         "  llvm-20-dev",
+         "  libstdc++-15-dev-i386-cross",
+         "  libgcc-15-dev-i386-cross",
+         ""],
+        # C/CXX Compiler
+        [ "clang-20", "clang++-20", ],
+    ],
 ]
 
 supports_thunks_files = "usr/lib/aarch64-linux-gnu/fex-emu/*\n"
