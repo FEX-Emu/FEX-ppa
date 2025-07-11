@@ -1,3 +1,11 @@
+fex-emu-@ARCH_SUFFIX@ (2507.1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2507.1
+
+  PRs #4655 and #4646 cherry-picked
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Fri, 11 Jul 2025 18:44:47 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2507~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2507~1
