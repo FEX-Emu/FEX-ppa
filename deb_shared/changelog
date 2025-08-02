@@ -1,3 +1,179 @@
+fex-emu-@ARCH_SUFFIX@ (2508~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2508
+
+  - 64BitAllocator
+    - Removes pair usage in allocator (e80270a)
+
+  - ARM64EC
+    - Rely on syscall export sorting for deriving their IDs (b2eeaf7)
+
+  - ASIMDOps
+    - Remove unused permute overloads (0457bdc)
+    - Move remaining base opcodes into implementing function (7e54c27)
+    - Move most remaining base opcodes into their implementing functions (ba85dbf)
+    - Constrain more instructions with IsQOrDRegister (318b311)
+    - Move base opcode into ASIMDModifiedImm()/ASIMDShiftByImm() (a190086)
+    - Move base opcode into ASIMD2RegMisc() (23d0d7d)
+    - Move base opcode into implementation function for some categories (e49155f)
+    - Merge half-float 3-reg same with single/double variants (aec7dec)
+    - Merge half-float 2-reg misc with single/double variants (c1fe841)
+
+    - SVEOps
+      - Use IsStandardFloatSize() even more (564e966)
+
+  - ArchHelpers
+    - Remove pair usage in unaligned handler (493a7cc)
+
+  - Arm64
+    - Remove pair usage in 128-bit loader (cd56b85)
+
+  - Arm64Emitter
+    - Fix signed overflow (170fbb5)
+
+  - CMake
+    - Work around QCom disabling SVE in their chips (d073066)
+    - Set CMAKE_AR for MinGW toolchains (10c69d5)
+
+  - CPUID
+    - Update documentation comments (b0c74e1)
+
+  - ELFContainer
+    - Remove tuple usage (57c0d0f)
+
+  - EmulatedFiles
+
+    - cpuinfo
+      - Add a few missing flags (e71e10a)
+
+  - External
+    - Update jemallocs (b7ac641)
+    - Update libfmt to master to support clang 21 (2be619b)
+
+  - FEXCore
+    - Remove unused refcount_shared_mutex (90b9414)
+    - Replace CustomIREntry tuple with struct (7877068)
+    - Remove reference SHA implementation  (bffb812)
+    - Reintroduce support for CSSC (5123ca5)
+    - Implement a mostly NOP implementation of waitpkg (3456686)
+    - Implement support for NX bit. (35e4ac5)
+    - Implement xsaveopt (2a37289)
+
+    - Frontend
+      - Ensure multiple prefix bytes work (265525e)
+
+    - OpcodeDispatcher
+      - Removes tuple usage for Dispatch tables (e36a64e)
+      - Fix a spurious crash that can occur with multiblock (e0ca04b)
+
+  - FileManagement
+    - Remove pair usage from GetEmulatedFDPath (c0762bb)
+
+  - Frontend
+    - Remove arbitrary check (6724673)
+    - Raise #UD on invalid VEX/REX encodings (60f63ca)
+
+  - IR
+    - Remove tuple usage from NodeIterator (c0008af)
+
+  - InstcountCI
+    - Fix bad encoded moffset instructions (cf43e5e)
+
+  - InvalidationTracker
+    - Fix queries in the non-intersecting RWX case (8103cdb)
+
+  - JIT
+    - Add more padding (f5efe1d)
+
+  - LibraryForwarding
+
+    - wayland
+      - Add method signatures required by steam-runtime-launch-options (fc1ca01)
+
+  - OpcodeDispatcher
+    - Remove pair usage from DecodeNZCVCondition (b68272b)
+    - Mark functions as const/static where applicable (5fe06b7)
+    - Fix several cases where incorrectly sized loads/stores could be used (bd136ea)
+
+  - PoolBufferWithTimedRetirement
+    - Unclaim in dtor (e669370)
+
+  - Profiler
+    - Decouple profile stats from the profiler option (976b68f)
+
+  - RegisterAllocationPass
+    - defer next-use analysis (e6de17e)
+
+  - SVEOps
+    - Make use of IsStandardFloatSize() more (dd5c172)
+
+  - SecondaryGroupTables
+    - Specify FLAGS_SF_MOD_REG_ONLY for more ops (f44af48)
+
+  - VectorOps
+    - Correct benign VFAddV op cast (b72bdf9)
+
+  - VixlUtils
+    - Fix null pointer dereference vector in IsImmLogical() (ebd0a3c)
+
+  - WOW64
+    - Wrap BTCpuSimulate to ensure correct unwinding (d226331)
+
+  - WinAPI
+    - Avoid sign-extension of processor count in GetSystemInfo (98abfa4)
+
+  - Windows
+    - Lock invalidation tracking for the entire duration of memory ops (f6fd9e1)
+    - Force-disable SVE usage for now (6e93b0a)
+    - Correctly report noexec faults (fe61aab)
+    - Support enabling hardware TSO on Asahi Linux (29fccd0)
+
+  - XXFileHash
+    - Drop unnecessary use of value_or (a80d8b1)
+    - Remove a tuple usage (4f60573)
+
+  - Misc
+    - Implement inline SMC handling for linux FEX (a5260f4)
+    - Runtime mode switch take 2 (369ca5c)
+    - Pool constants as we go (123f8c9)
+    - Readme.md: Mention Ubuntu 25.04 as supported (53ff6d5)
+    - Implement call-ret stack optimisations (bf8b5ed)
+    - Implement x87 invalid operation bit on F80 mode (525462e)
+    - Inline SMC fixes and support for WOW64 (507b3a6)
+    - External/code-format-helper: Update requirements (3387f51)
+    - Add --changed flag to reformat.sh script (251ac14)
+    - Whole-tree reformat with clang-format-19 (e17c2c8)
+    - Disable GCS in simulator and userspace (1d4b6c6)
+    - Ensure .clang-format-ignore is compatible with clang-format-19 (befae52)
+    - Drop unnecessary uses of maybe_unused (5b0e703)
+    - Miscellaneous log changes (05742a8)
+    - code-format-helper: Fix formatting for the format helper (88f30af)
+    - Drop TODO defines (e6f319d)
+    - Set clang-format-19 as the version git-clang-format should run in wor… (70ce323)
+    - Support multiple entrypoints into a multiblock and executable permission tracking (2e7b86e)
+    - (5d4bddc)
+    - Upgrade to clang-format-19 (67bfd38)
+    - Fix divisor masking (d8a4d03)
+
+  - cmake
+    - Move legacy binfmt arch-specific targets to combined (ac42034)
+
+  - github
+    - Upload armtifacts (c6733a6)
+
+  - unittests
+    - Fixes thunk unittest path (f7e9967)
+    - Update vcvtsd2si test (40378cd)
+
+    - instcountci
+      - Adds a long-lived ymm_high test (30fb992)
+      - Adds missing lock xadd tests (8e5db99)
+
+  - x87StackOptimizationPass
+    - Removes pair usage (5db494d)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sat, 02 Aug 2025 01:29:18 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2507.1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2507.1
