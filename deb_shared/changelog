@@ -1,3 +1,11 @@
+fex-emu-@ARCH_SUFFIX@ (2509.1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2509.1
+
+  - Minor regression fixes
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 16 Sep 2025 01:37:09 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2509~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2509
