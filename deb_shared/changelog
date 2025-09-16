@@ -1,3 +1,196 @@
+fex-emu-@ARCH_SUFFIX@ (2509~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2509
+
+  - ARM64EC
+    - Cooperatively suspend if needed when leaving the JIT (4f84c28)
+
+  - AsyncNet
+    - Simplify declaration of ancillary buffer (f1016e8)
+
+  - AtomicOps
+    - Reimplement AtomicNeg using 8.1 CAS atomics (8009f4a)
+
+  - CPUBackend
+    - Remove unused variable in CheckCodeBufferUpdate (a804cb5)
+
+  - CodeCache
+    - Remove legacy interfaces (b98acdf)
+
+  - CodeLoader
+    - Tidy up interface (2cfd333)
+
+  - Common
+    - Remove duplicated StringUtil functionality (3f71517)
+    - Remove EnvironmentLoader.cpp/.h (f565939)
+
+  - Config
+    - Remove unused Context.h include (09793d2)
+
+  - ConstProp
+    - Remove file (f66066c)
+
+  - Core
+
+    - Thunks
+      - Remove unused IR header/forward declarations (e76af56)
+
+  - Dispatcher
+    - Move the EC entrypoint check prior to the L1 lookup (5e467c7)
+    - Reduce header dependencies (06c5135)
+    - Centralize SignalDelegator config creation (839e3ac)
+    - Most minor of optimizations for f64 x87 (2472aee)
+
+  - ELFCodeLoader
+    - Fixes BRK allocation with non-PT_DYN ELF files (a156752)
+
+  - F80Fallbacks
+    - Remove unnecessary memset (5e19202)
+
+  - FEXConfig
+    - Fix RootFS override in muvm-based setups (ac20880)
+
+  - FEXCore
+    - Move most instruction tables to be constexpr (f09db0c)
+    - Move LDT/GDT management to the frontend (83e4496)
+    - Split GDT and LDT prep work  (c881055)
+    - Fixes 32-bit zero-extend semantics on cmpxchg  (b3d1aad)
+    - Fixes 16-bit operand size Enter and Leave instructions (6811406)
+
+    - Allocator
+      - Remove unused headers (1121f2a)
+
+  - FileLoading
+    - Add missing self-header (80c199c)
+
+  - FileManagement
+    - Minor interface cleanup (ae90040)
+
+  - Frontend
+    - Force acq/rel semantics for known Unity ringbuffer offsets (bd0cae9)
+    - Fix tailcall handling when mono hacks are enabled (6ae9458)
+    - Always explore fallthrough branches with multiblock (c6ccc68)
+    - Remove log about VEX map_select (63a910d)
+
+    - OpcodeDispatcher
+      - Remove unused headers (decd112)
+
+  - General
+    - std::alignment_of -> alignof (b7173a3)
+    - Replace usages of .at(0) with .data() where applicable (e126cec)
+
+  - Github
+    - Force FEX portable config (6ba32da)
+
+  - HostFeatures
+    - Fix insufficient documentation to reproduce 3DNow! bug (63ae262)
+
+  - HostRunner
+    - Fixes bug with saving CSFSGS (61d3d5b)
+
+  - IR
+    - Remove unnecessary forward declarations/headers (317f92f)
+    - Remove some unimplemented prototypes (fbf982f)
+
+  - IRDumper
+    - Add missing PrintArg for IndexNamedVectorConstant (3df3999)
+    - Clean up formatting using fmt (67e9b40)
+
+  - InternalThreadState
+    - Remove unused includes (e9f8c01)
+    - Make bool operator explicit (71d42d7)
+
+  - IntrusiveIRList
+
+    - RegisterAllocationData
+      - Remove unused headers (03c968a)
+
+  - InvalidationTracker
+    - Disable mono hacks when multiblock is disabled (5a7ff47)
+
+  - LinuxEmulation
+    - add basic supports for v4l2 driver of wine32. (e235395)
+
+  - LinuxSyscalls
+    - Support modify_ldt on x64  (714856f)
+    - Save and restore segment registers on signal (9072571)
+
+  - LogManager
+    - Evaluate non-predicate arguments for assertions lazily (993d917)
+
+  - OpDispatcher
+    - Force a recheck of TF after POPF (343a529)
+
+  - OpcodeDispatcher
+    - Simplify CALLOp return addr calc (2f930b2)
+    - Implement support for CALLF/RETF  (2825ac2)
+    - Implement support for far jump (1e1c4e0)
+    - optimize SetX87FTW (5db6a64)
+
+  - RegisterAllocationPass
+    - simplify next-use logic (7897b6a)
+
+  - Scripts
+    - Fix use of removed helper script (3b32fd5)
+
+  - Syscalls
+    - Fix DEBUG_STRACE build (c28b948)
+
+  - Utils
+
+    - Threads
+      - Minor cleanup (a0883c9)
+
+  - VixlUtils
+    - Use std::countl_zero where applicable (e34de22)
+
+  - VolatileMetadata
+    - Clean up implementation using ranges::views::split (7df1ed2)
+
+  - WinAPI
+    - Force WOW64 allocations to start >4GB (0ca438e)
+
+  - Windows
+    - Support EnvLoader via _environ (26b4195)
+    - Misc race and correctness fixes (b71879e)
+    - Ignore MEM_RESET(_UNDO) allocation protection notifications (7d818e1)
+
+  - X86Tables
+    - Convert AVX tables to constexpr (9566910)
+
+  - Misc
+    - VDSO_Emulator: Cull unnecessary includes (dd34471)
+    - Fix mapping for VS and VC condition codes (1988b43)
+    - Common Utils: Remove unused/unnecessary inclusions from headers (ea8ae2b)
+    - config_generator: Remove superfluous format arguments (694bc33)
+    - json_ir_generator: Clean up generated assertion statements (1ca6443)
+    - gvisor_tests: Update expectations for kernel 6.16 (5a73134)
+    - Fix IEEE 754 unordered comparison detection in x87 floating-point operations (4a71edf)
+    - Remove visibility on functions that is no longer necessary (f866ad5)
+    - More BRK fixes (7431495)
+    - Reduce use of maybe_unused attributes (62b8090)
+    - Do not use diff_from_common_commit (2a76066)
+    - Implement support for additional provided volatile metadata (6310c20)
+    - Clear IE flag on fninit (bc2e959)
+    - Implementation of FCNLEX to clear IE flag (2a4bfe4)
+    - Local JIT translation time wins (297677c)
+    - Avoid OOB reads for mem sources in some float conversion ops (a47c947)
+    - Drop ConstProp (2f925ae)
+    - Implement mono specific hacks (aa979e4)
+    - Disable 3DNow by default on WOW64 FEX (baddc56)
+    - asm_tests: Tests for fninit (4dbfa2f)
+
+  - unittests
+    - Adds missing movsxd edge case (7aeb478)
+
+    - 3DNow
+      - Fix femms test (095b2a8)
+
+    - ASM
+      - Adds support for classifying more requirements (3db1f1e)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 09 Sep 2025 16:25:13 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2508.1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2508.1
