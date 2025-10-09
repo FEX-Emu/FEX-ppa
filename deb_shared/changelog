@@ -1,3 +1,9 @@
+fex-emu-@ARCH_SUFFIX@ (2510~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Fix build option
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 09 Oct 2025 01:04:02 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2510~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2510
