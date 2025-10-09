@@ -57,16 +57,16 @@ override_dh_clean:
 
 override_dh_auto_configure:
 	ls -l
-	tar -xf llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64.tar.xz
+	tar -xf llvm-mingw-ucrt-ubuntu-20.04-aarch64.tar.xz
 	ls -l
 	mkdir build_arm64ec
 	mkdir build_wow64
-	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=arm64ec-w64-mingw32 ..
-	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=aarch64-w64-mingw32 ..
+	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=arm64ec-w64-mingw32 ..
+	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=aarch64-w64-mingw32 ..
 
 override_dh_auto_build:
-	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64/bin/:$(PATH) ninja
-	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20241218-ucrt-ubuntu-20.04-aarch64/bin/:$(PATH) ninja
+	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) ninja
+	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) ninja
 
 override_dh_auto_install:
 	export

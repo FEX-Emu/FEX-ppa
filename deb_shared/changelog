@@ -1,3 +1,198 @@
+fex-emu-@ARCH_SUFFIX@ (2510~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2510
+
+  - Addressing
+    - Shave 8 bytes off AddressMode (9626a64)
+
+  - Allocator
+    - Name FEX's VMA regions for allocation (5f8cb0d)
+
+  - Arm64Emitter
+    - Cull unnecessary includes (88e90a6)
+
+  - Build
+    - Update toolchain for WoA builds (b0b60fb)
+
+  - CMake
+    - Update our python minspec to 3.10 (13199ad)
+    - Remove CPack, completely unused (ffb1cf4)
+    - Merge BUILD_TESTS into BUILD_TESTING (8c1e9ed)
+    - Enable runtime-only installation (58c86d1)
+
+  - CPUID
+    - Adds new CPU product names that exist (30dd9ed)
+
+  - CodeCache
+    - Introduce new interfaces (6171911)
+
+  - Common
+
+    - StringConv
+      - std::stoull -> std::strtoull for enum handler (75206c7)
+
+  - Core
+    - Drop support for TSO auto migration (b9ec942)
+
+  - Dispatcher
+    - Fix FABI_F32_I16_F80_PTR argument size (dcb8897)
+
+  - Docs
+    - Fix wrong link in `Readme_CN.md` (4e92607)
+
+  - EnumUtils
+    - Remove fmt include (bd5188e)
+    - Further simplify enum passthrough formatting (802f3be)
+    - Add define for default passthrough formatting (b5d93bc)
+
+  - FEX
+    - Fixes SIGILL reporting (6de5fb2)
+    - Rebrand FEXInterpreter as FEX (c9fc347)
+
+  - FEXBash
+    - Remove ArgLoader usage (7bd0789)
+
+  - FEXCore
+    - Implement support for AVX gathers with overflow  (74b09d5)
+    - Fixes OOB access on x87 reduced precision loads (5f0a1d5)
+
+  - FEXInterpreter
+    - Remove FEXLoader (be84a43)
+
+  - FEXLinuxTests
+    - Adds a small sleep for consistency (376d6ba)
+
+  - FEXLoader
+    - Move to FEXInterpreter (964165e)
+
+  - FEXRootFSFetcher
+    - Removes argloader usage (c0ef0a7)
+
+  - FEXServer
+    - Remove usage of ArgLoader (eb9fb9e)
+
+  - Frontend
+    - Improve DecodeInst size from 128 bytes to 80  (bdbeef3)
+
+  - General
+    - Migrate to std::bit_cast (9db9be9)
+
+  - IR
+    - Remove Swap1/Swap2 ops (06ff0a4)
+    - Move RegisterAllocationPass forward decl to JITClass (38a8559)
+    - Convert RegisterClassType to an enum class (8689803)
+    - Remove TypeDefinition struct (d41b21a)
+    - Convert MemOffsetType to enum class (a5d3bf0)
+    - Convert rounding modes to enum class (96145e8)
+    - Convert CondClassType over to enum class (c64d6f2)
+    - Remove unnecessary friend class declarations from OrderedNode (034a27c)
+
+  - IREmitter
+    - Add register class helpers (c35b81d)
+    - Remove friend class declarations (aa3df39)
+
+  - Interface
+
+    - Context
+      - Remove unnecessary headers/forward declarations (997d041)
+
+  - IoctlEmulation
+    - Finish v4l2 implementation (8f47b46)
+
+  - JIT
+    - Check for suspend interrupts at back-edges  (91c6d69)
+
+  - JITClass
+    - Mark functions as static where applicable (d9520c9)
+
+  - Linux
+    - Implement support for extended volatile metadata  (18d0dec)
+
+  - OpcodeDispatcher
+    - Remove unimplemented function prototypes (2017100)
+    - Default alignment parameters for store helpers (a2b0d59)
+    - Move off implicit _Select (c948d53)
+    - Implement support for imm variants of SSE4a extrq/insertq (a9fffe7)
+    - Fixes telemetry on legacy segment read (533dd1a)
+    - Fixes fxsave x87 register storing  (892e44a)
+    - Removes a log about unknown segments (2d53a9b)
+    - Fix misaligned clang-format (ef7b2a9)
+    - Only flush MMX registers on MMX -> x87 transitions (3c6eba5)
+    - Don't assert on invalid ALU op encoding (0d77af5)
+
+  - PrctlUtils
+    - Move to include folder (3cc0cae)
+
+  - RedundantFlagCalculationElimination
+    - Eliminate unnecessary vector copy (3825483)
+
+  - SignalDelegator
+    - Correctly save and restore x87 state.  (3058a82)
+
+  - StringConv
+    - Merge integral-handling facilities together (c17b9de)
+    - Fix std::enable_if usage (5858c50)
+
+  - SysCalls
+    - Remove unimplemented prototypes (9c606a2)
+
+  - SyscallHandler
+    - Shrink definition struct from 24 to 16 bytes (3b88947)
+
+  - TestHarnessRunner
+    - Don't attempt to build on MinGW (cbd8217)
+    - Removes ArgumentLoader (226233d)
+
+  - ThreadManager
+    - Make StatAlloc instance private (f05be01)
+    - Fix mmap usage to not take guest space (a94059a)
+
+  - WOW64
+    - Fix CsSeg initialization (a3435f2)
+
+  - Windows
+    - Avoid redeclaring strtoll as unimplemented (05eeffe)
+
+  - Wow64
+    - Ensure extended volatile metadata is removed (7520461)
+
+  - X86Tables
+    - Remove unused LateInitCopyTable() (bfda91a)
+
+  - X87
+    - Better cache intermediate results in the X87 slowpath (4a9170e)
+
+  - Misc
+    - json_ir_generator: Minor cleanup (7c2c0f7)
+    - Implement remaining SSE4a instructions (85937a7)
+    - (c4d0199)
+    - (e4a4a52)
+    - Change required Python version from 3.10 to 3.9 (6ecec77)
+    - Update fmt to 12.0.0 (0c5ef1c)
+    - Fix quiet and signalling nan propagation (e5680e0)
+    - Remove unused IsZero; NFC (4593099)
+    - Support configuration-specific known failures in asm_tests (b3d88c0)
+    - VDSO_Emulation: Remove duplicate span include (4a14003)
+    - Update code formatting (0eedd55)
+
+  - fextl
+
+    - string
+      - Correct <filesystem> include to <functional> (1b8e03e)
+
+  - unittests
+    - Remove FEXLoader usage from unittests (6c8edcb)
+
+    - ASM
+      - Implement modrm OOB tests (8ead4a3)
+      - Enables some previously disabled tests (cfeba85)
+      - Fixes xlat test so it can be run (38ed7c9)
+
+  - vixl
+    - Update submodule (4de1762)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 09 Oct 2025 00:12:02 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2509.1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2509.1
