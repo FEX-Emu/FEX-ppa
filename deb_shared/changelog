@@ -1,3 +1,152 @@
+fex-emu-@ARCH_SUFFIX@ (2511~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2511
+
+  - ARM64EC
+    - Emulate unaligned atomic access in non-JIT EC code  (cbb9017)
+
+  - ArchHelpers
+    - Adds ESR name helper (bbc2b0b)
+
+  - Arm64
+    - Fix XZR register handling in ARM64EC unaligned STLXR emulation (908313e)
+
+  - BPFEmitter
+    - Minor cleanup (d2e2e18)
+
+  - Config
+    - Prevent duplicate lookup in EnvLoader::Load()  (764432c)
+
+  - Core
+    - Add missing std::move in AddForceTSOInformation() (3247e77)
+
+  - ELFParser
+    - Avoid unnecessary copies (5024526)
+
+  - FEX
+    - Update CPUID and detect script for newer qemu (b3c2ff4)
+    - Disable trace profiler by default (edde5c8)
+    - Name remaining allocations as "Misc" (4080dca)
+
+  - FEXConfig
+    - Fix crash caused by no longer recognized option (fbac6f8)
+
+  - FEXCore
+    - Have non-repeat strings operations listen to non-tso config (46d019f)
+    - Adds some more per-thread stats. (0cf105b)
+    - Remove ABILocalFlags hack (d716e22)
+    - Remove Paranoid TSO mode. (3c554cd)
+    - Adds option to disable L2 cache lookups (ed5774b)
+    - Remove the last recursive_mutex (4731dba)
+    - Remove InlineSyscall (8f572de)
+
+    - Allocator
+      - Fixes two bugs (fd33cf1)
+      - Fixes FlexBitSet (1e7f54d)
+
+    - CoreState
+      - Removes some unused pointers (62e5ee2)
+
+    - JIT
+      - Add support for recovering from branch encoding failures (3ccdf65)
+
+    - fexl
+      - Support a named monotonic_buffer_resource  (f8ff46f)
+
+  - FEXpidof
+    - Fixes potential crash (87e8a9b)
+
+  - FileManagement
+    - Minor string churn avoiding (48a5167)
+
+  - Frontend
+    - Detect partial decoded instructions (ed1952a)
+
+  - HostFeatures
+    - Enable AVX for 32-bit by default (31d4b4a)
+
+  - InstallFEX
+    - Add support for 25.10 (a2ea767)
+
+  - IoctlEmulation
+    - Update to v6.17  (e11349b)
+
+  - JIT
+    - Restore behaviour of emitting interrupt checks at every block entry (199effd)
+
+  - JSONPool
+    - Make allocator funcs internally linked (678985c)
+
+  - LinuxSyscalls
+    - Fix base address inference for ELF binaries (197facb)
+
+    - Threads
+      - Fixes typo in long jump handler (d56f689)
+
+  - LookupCache
+    - Convert mutex to new WritePriorityMutex  (438501e)
+    - Fixes assert (36ae4ce)
+    - Adds an option to dynamically scale L1 cache  (96f2077)
+
+  - OpcodeDispatcher
+    - Fix #4982 (fbb428c)
+    - Move FEX reserved instruction (39e8f51)
+    - Amend wonky bitwise AND usage in LoadMemPairAutoTSO/_StoreMemPairAutoTSO (b7df102)
+
+  - Profiler
+    - Fix missing include (bd7edd8)
+
+  - SHMStats
+    - Add a 16-byte alignment guarantee (eda8ca5)
+
+  - SignalDelegator
+    - Remove bool for deferring signals (4cbba94)
+
+  - SyscallHandler
+    - Avoid self-referencing global (0333102)
+
+  - SyscallsVMATracking
+    - Make list management internally linked (c22fb80)
+
+  - Thunks
+    - Fixes symbol conflict between GL and Vulkan (326cde7)
+
+  - Wow64
+    - Disable AVX (c5b1cd6)
+
+  - Misc
+    - f80 stack xchg optimization for fast path (93e58bc)
+    - Remove InterpretAsFloat from x87StackOptimizationPass (1f2d702)
+    - Switch back to jemalloc to fix regression in muvm-based setups (7610243)
+    - Switch over to rpmalloc instead of jemalloc.  (e1a45a2)
+    - SpinWaitLock, etc: Make use of std::atomic_ref over reinterpret_cast (9c5ccb1)
+    - Removes some hardcoded 4096 constants (35dd897)
+    - (f4eaab6)
+    - Revert quiet/signaling nan detection (69f5aa8)
+    - (2a57428)
+    - Add F_ADD_SEALS and F_GET_SEALS support to 32-bit fcntl (072e7bd)
+    - (972aaf9)
+
+  - pidof
+    - Fixes another unexpected throw location (cbe2b44)
+
+  - unitests
+
+    - ASM
+      - Fix typo in 09_XX_07.asm (e0c1767)
+
+  - unittests
+
+    - ThunkLibs
+      - Fix build with LLVM 21 (81a474f)
+
+  - wow64
+
+    - arm64ec
+      - Call GetTLS less frequently (9e5f226)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 05 Nov 2025 22:18:09 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2510~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   Fix build option
