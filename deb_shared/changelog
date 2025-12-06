@@ -1,3 +1,138 @@
+fex-emu-@ARCH_SUFFIX@ (2512~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2512
+
+  - Async
+    - Adapt precondition checks when receiving FDs (3b83bdd)
+    - Move file descriptor checks from read_some() to read()  (da0668c)
+
+  - CMake
+    - Disable libstdc++'s debug mode when compiling thunkgen (53db3ad)
+
+  - CPUID
+    - Fixes regression from #5033 (a27c4b3)
+    - Fixes APICID for processor count calculation.  (0427d48)
+
+  - CodeCache
+    - Implement offline compiler for cache generation (d0e47f9)
+    - Introduce code maps (32f1dcd)
+
+  - CodeEmitter
+    - Removes a few spurious asserts (de1d37e)
+
+  - Config
+    - Document the new `FEX_APP_CACHE_LOCATION` option (a251e61)
+    - Refactor value getter interface (9e9f2cc)
+
+  - Docs
+    - fix typo (73a32ff)
+
+  - Externals
+    - Update catch2 from 3.5.3 to 3.11.0 (f4e3e4a)
+    - Update fmt to 12.1.0 (2febb52)
+
+  - FEX
+    - Moves FEX thunk callback function generation to the frontend  (aaef344)
+    - Implements support for JIT CodeBuffer guard page restart  (b383691)
+
+    - VDSO
+      - Fixes symbol lookup (e0305ea)
+
+  - FEXConfig
+    - Fix string list handling (fbefd78)
+
+  - FEXCore
+    - Fixes JITGuardPage calculation in a threaded environment (faf74ee)
+    - Remove usage of "remote atomic" xor (3c9f6c8)
+
+    - CodeCache
+      - Move spin-loop over to a WFE loop (e2f4065)
+
+    - Common
+      - Adds the ability to override HostFeatures registers by config. (06c2319)
+
+    - Config
+      - Expose GetConv members (5ee190a)
+
+    - Win32
+      - Move WritePriorityMutex away from SRWLock  (22c3cd5)
+
+  - FEXInterpreter
+    - Fixes crash with code maps (379dc40)
+
+  - FEXServer
+    - Add support for a `wait_fd` (d74b5c4)
+
+  - Github
+    - Add a steamrt4 builder (427b235)
+
+  - HostFeatures
+    - Extend LRCPC2 errata to more CPUs (92d5ba5)
+    - Disable SupportsTSOImm9 for some CPUs (57e23b2)
+
+  - IR
+    - Replace hand-written operators with three-way comparison (f290d2f)
+
+  - JIT
+    - Add support for serializing relocations (6af9057)
+    - Prepare FEX relocations for code caching (e4fa399)
+    - Fix indirect delinker branch distance (8214ffc)
+    - Handle long ADR/ADRP (5d908d9)
+
+  - Linux
+    - Disable io_uring (3dd591e)
+
+  - LinuxSyscalls
+    - Fix null pointer dereference in LookupExecutableFileSection (b34df33)
+    - Fixes alloca use-after-free in `RecvMMsg` (4afbdd9)
+    - Fix incorrectly inferred base address observed in glxtest (0b52e1c)
+
+  - LookupCache
+    - Fix use of invalidated iterators (3969d0a)
+
+  - OpcodeDispatcher
+    - Simplify convoluted logic for computing call offsets (39fb266)
+
+  - SVE256
+    - Fixes AVX scalar round with insert  (8bb3398)
+
+  - Scripts
+    - Clean-up  (3a014f8)
+
+    - InstallFEX
+      - Fixes two issues (6004971)
+
+  - SteamRT4
+    - Adds support for building the steam depot (bd7215d)
+
+  - SyscallsSMCTracking
+    - Workaround assert in ELF mapping (bd13c02)
+
+  - Utils
+
+    - WritePriorityMutex
+      - Support being forkable (a12b892)
+
+  - Misc
+    - Remap /proc/pid/cmdline with PR_SET_MM_MAP (c460cf0)
+    - Set current code block in x87 pass (90c8fcf)
+    - Reflect application changes to argv[0] in /proc/self/cmdline (9c72113)
+    - Support detecting unsquashfs>4.7.0 decompressors (6fd471e)
+    - Minor fixes (3d69029)
+    - Support (downstream) kernel-side unaligned atomic handling (The rebase sequel) (d3bf87f)
+    - Implement address size modifier handling in CMPSOp and SCASOp (5205ae4)
+    - Introduce two-pass code invalidation model (40c2db4)
+    - Fix movzx instruction syntax (aba0c57)
+    - Refactoring of storing code in x87 opt. stack pass (cf37617)
+    - Align code with clang-format (0be8485)
+    - Use gradual memory growth (1e3c642)
+    - Update xxhash to v0.8.3 (747ea0a)
+
+  - docs
+    - Update ProgrammingConcerns (53b2245)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sat, 06 Dec 2025 00:16:35 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2511~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2511
