@@ -1,3 +1,163 @@
+fex-emu-@ARCH_SUFFIX@ (2601~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2601
+
+  - ARM64Emitter
+    - Force NOP padding to be enabled (9e8915e)
+
+  - Arm64Emitter
+    - Initial work for LoadConstant padding audit (d582356)
+
+  - BranchOps
+    - Use RIP relocs for direct branch targets (c57df73)
+
+  - CMake
+    - Move CMakeModules to Data/CMake (651ef64)
+    - Fix mingw if host has libxxhash-dev installed (900c179)
+    - Support overriding version/hash via CMake args (19d3450)
+
+  - CodeCache
+    - Fix misparenthesized expression in SaveData() (9101e70)
+    - Rebase block entrypoint info (5747d1c)
+    - Make LoadData Thread argument an optional pointer  (bc069f2)
+    - Implement automatic cache generation (eb425fe)
+    - Implement runtime cache validation (93f6a8c)
+    - Trigger delayed cache loading for the main executables and its interpreter (71c8436)
+    - Implement cache loading (ec67670)
+
+  - Common
+    - Use LOCALAPPDATA for GetCacheDirectory on WOW64/ARM64EC (499970d)
+
+  - Config
+    - Remove stdout from OutputLog (e1c6a91)
+
+  - Dispatcher
+    - Silence warning on ARM64EC (9a12868)
+
+  - FEXCore
+    - Cleanup pointers structure  (b29a78c)
+    - Fixes circular dependency with thunk callback (5627ddf)
+    - Switch constant emission to default to `NoPad` (2b4492c)
+    - Revert literal optimization from #4884 (da46d51)
+
+  - FEXOfflineCompiler
+    - Implement SyscallHandler::LookupExecutableFileSection (5ca549e)
+
+  - FEXServer
+    - Add protocol interface to request code cache population (805a4c1)
+
+  - Frontend
+    - Only decode REX if it is at the correct location (c8d72ea)
+    - Also fetch relocations and section bounds when validating (0a18ea8)
+
+  - ImageTracker
+    - Load AOT images (a3779be)
+    - Load PE relocations when generating code caches (b87bb1d)
+    - Support codemap file generation (c54dfd9)
+    - Track loaded PE images for LookupExecutableFileSection (212a3f4)
+
+  - Interpreter
+    - Moves around the thread and ELF initialization code (ed1d495)
+
+  - JIT
+    - Fixes typo (c4258be)
+
+  - LinuxSyscalls
+
+    - x32
+      - Fixes fcntl assert (6c06f47)
+
+  - LookupCache
+    - Fix mistake in nested CacheBlockMapping call (a957f1f)
+
+  - OpcodeDispatcher
+    - Explicitly calculate flags after _TelemetrySetValue (281981e)
+
+  - Relocations
+    - Disable 6-byte size optimization in `InsertGuestRIPMove` (c7eb4c8)
+    - Switch to robin_map to improve lookup perf (4889596)
+
+  - SHMStats
+    - Avoid ISB usage when stats are disabled (6a49b8c)
+
+  - Scripts
+    - Have InstallFEX check kernel version (b407688)
+
+  - Steam
+    - Don't let the FEXServer inherit FEXServerManager's original stdout (53925dc)
+
+  - Syscalls
+    - Fix DEBUG_STRACE printing (e859109)
+
+  - Thunks
+
+    - Vulkan
+      - Update for v1.4.337  (668e027)
+
+  - Tools
+
+    - pidof
+      - Fixes FEXpidof after #5097 (7e4e017)
+
+  - VDSO
+    - Forgot to remove a if check (144c4bf)
+
+  - WOW64
+    - Lock the JIT context and block suspend during context operations (a25d90d)
+
+  - WinAPI
+    - Implement Sleep (37b0e9e)
+
+  - Windows
+    - Improve handling of RWX memory (d592e2a)
+    - Invalidate code in freed memory after the free syscall (cb7de45)
+    - Fix RtlWaitOnAddress signature (f098b41)
+    - Implement _[w]sopen file APIs (f819999)
+    - Introduce ImageTracker for tracking per-loaded-image data  (dc764db)
+    - Switch GetSection/ExecutableFilePath to returning full paths (956f97e)
+    - Split out CRT/WinAPI reimplementation (ebdbf58)
+
+  - WritePriorityMutex
+    - Add some more documentation (9fa8148)
+    - Fix rare case of dropped read waiter wakes (ce9824a)
+
+  - Misc
+    - [cmake] explicit platform and bit-width checks (dbd802c)
+    - [cmake] more parenthesis cleanups, linker gc module, more same-line stuff (1f6b3d5)
+    - [cmake] refactor: compiler and architecture handling (51f6722)
+    - [cmake] better option descriptions + more consistent language (9c0c969)
+    - `Constant` audit (fd2ee4e)
+    - `_Constant` audit (851fbae)
+    - First round of `LoadConstant` auditing (5bbbe4d)
+    - [cmake] Use a Find module for xxhash (5a47565)
+    - [cmake] do not use uppercase command names (f24f88e)
+    - [cmake] reduce usage of trivial variables (0edf961)
+    - [cmake] prefer end parenthesis on same line, no space after some calls (b41b967)
+    - [cmake] FEXCore: further reduce library redundancy (f153d86)
+    - [cmake] propagate `-ISource` to all Tools (bd8f6f1)
+    - [cmake] use `MINGW` builtin rather than custom detection (7cdef04)
+    - Some minor NFC (974ba78)
+    - Guest relocation support (fef1993)
+    - Various trivial fixes for #5106 (296988b)
+    - code-format-helper: Update urllib3 dependency (2e2563a)
+
+  - github
+
+    - steamrt4
+      - Additional comments (bf9ab7f)
+
+  - unittests
+
+    - ASM
+      - Adds test for flags clobber in `TelemetrySetValue` (eb27576)
+      - Test 32-bit displacement encoding (d197300)
+
+    - FEXLinuxTests
+      - Fix gcc build (fedebf4)
+      - Force clang building for tests (62383a1)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 07 Jan 2026 22:24:30 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2512~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2512
