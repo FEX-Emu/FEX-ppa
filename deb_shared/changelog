@@ -1,3 +1,179 @@
+fex-emu-@ARCH_SUFFIX@ (2603~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2603
+
+  - AVX128
+    - Convert vzeroupper/vzeroall zeroing to dc zva (f5b08bb)
+
+  - CI
+    - Checkout with tags and non-shallow (9275f09)
+    - Update containers to inherit DEBIAN_FRONTEND (9e35254)
+    - Clean up syntax assertions and remove redundant log-name parameter (5dce162)
+    - Move MinGW triple set to a single step (1c465b5)
+    - Deduplicate common build/rootFS setup steps (06f4ca6)
+    - Deduplicate VIXL_SIM_ENABLED steps (8cedccc)
+    - Move noisy build targets generation to a separate step (08a7498)
+    - Update actions deps (2531d33)
+    - Use a composite action for Wine DLL builds (d66cb54)
+    - Refactor tests to use a composite action (87de3ec)
+    - Remove redundant build mkdir and `--config` (7f13185)
+    - Remove redundant runner.workspace and working-directory directives (c39eef1)
+    - Remove unnecessary upload steps (6b9590a)
+    - Namespace uploaded artifacts by runner label (6e11a46)
+    - Merge InstCountCI Diff steps into one (4428dbf)
+    - Don't specify `shell: bash` every time (b91dc75)
+    - fix pr-code-format (14667c1)
+    - Update tunables for artifact builds (a0d3aed)
+
+  - CMake
+    - Use a single install(FILES) command for SteamRT (6d23625)
+    - Also search for `include-what-you-use` if IWYU is enabled (2a574e8)
+    - Split version/commit identifier to two lines (da766dd)
+    - Print FEX version strings found (43a14c9)
+    - Avoid global include_directories in favor of propagation (55a2688)
+    - Avoid add_definitions in favor of newer add_compile_definitions (0ff9277)
+    - Allow unordered_dense to be used as a system package (34c426a)
+    - Use a Find module for Zydis/Zycore (cf61d73)
+
+  - CPUID
+    - Add option for hiding hybrid Big.Little CPUs (217d039)
+    - Adds AmpereOneC identifier (6438a83)
+
+  - CodeCache
+    - Fix validation of large binaries (8dfdfdf)
+    - Avoid unnecessary copying of CodeBuffer contents (df3d236)
+
+  - Config
+    - Remove unused function from the old code cache skeleton implementation (5849001)
+    - Fixes bad vector to string cast (93eee39)
+    - Properly follow XDG directory specifications (504d1e3)
+
+  - Core
+    - Use long commit hash instead of abbreviating (6027247)
+
+  - CoreState
+    - Add some more alignment checks (97bc2c5)
+
+  - ELFCodeLoader
+    - Fixes accidental vector copy (6f7f086)
+
+  - External
+
+    - rpmalloc
+      - Update for named VMA regions (871fc0a)
+      - Fix rpmalloc on mingw (e9fd300)
+
+    - vixl
+      - Use the right commit hash (366e760)
+      - Rebase on upstream (6536ccf)
+
+  - FEX
+    - Ensure VDSO and Stack are pushed as high in the VA space as possible (b6b64c6)
+    - Move SBRK handling to the frontend (d7d870c)
+
+  - FEXCore
+    - Fixes VEX float compare operations (27dea3b)
+    - Default to a larger CodeBuffer size when code caching is enabled (ca2bdbc)
+    - Disable 48-bit VA optimization (aabdded)
+    - Early exit for invalid VEX.vvvv on 32-bit (fda4d38)
+    - Move two functions to the frontend (a5ceb2a)
+    - Fix initial PF flag value (778a286)
+    - use ankerl::unordered_dense over tsl (78fd9b4)
+
+    - Allocator
+      - Disable additional VMA name attempts on failure (45376f0)
+      - Slightly more verbose logs (d62038e)
+
+  - FEXInterpreter
+    - Override glibc set program invocation name (7b2b639)
+    - Removes three static objects (b324cfb)
+
+  - FEXLinuxTests
+    - Adds execveat with mfd_cloexec test and related fixes. (e3dcb4b)
+
+  - JIT
+    - Ensure code cache consistency by zero-initializing padding bytes (3247195)
+    - Support avoiding spilling CPU flags (c0724d9)
+
+  - LibraryForwarding
+    - Redo Vulkan definitions update (50ff4cc)
+
+  - Linux
+    - Work around binfmt_misc bug (bd72eb5)
+    - Ensure seccomp inheritence occurs unconditionally (710ab4a)
+    - Moves DRM LRU FD cache to be per-thread (1b18f85)
+    - Updates minimum altstack requirements (15a6ba7)
+    - Fixes personality inheritence (251a3ba)
+
+    - x32
+      - Fixes sign extension in ftruncate (08a1bc8)
+      - Only copy rusage on success (70a8bea)
+
+  - Scripts
+    - Add support for Ampere tuning (537d159)
+    - Cleanups and POSIX compliance (687b66d)
+
+  - SignalDelegator
+    - Make sure to store XSTATE_MAGIC2 (bcf5345)
+
+  - Softfloat
+    - Remove weird tail padding from X80SoftFloat (f295212)
+
+  - Steam
+    - Update VERSIONS.txt requirements (c0ec3d9)
+    - Install a VERSIONS.txt file (011fe6a)
+
+    - Toolmanifest
+      - Update commandline tool (9e93473)
+
+  - ThreadManager
+    - Name CallRet stacks (fb7681d)
+
+  - VDSOEmulation
+    - Adds some checks for corrupt guest VDSO ELF (8c536e4)
+
+  - X87Tables
+    - Handle aliases for FSTP (3c4de59)
+    - Handle aliases for FXCH (1cec200)
+    - Add handling for FCOMP DE D0 aliases (4c49036)
+
+  - Misc
+    - Fix mingw builds with LLVM 22. (4968dc4)
+    - Fix building under clang-22 (3c517f5)
+    - Add vcmp**_full tests (5ee1838)
+    - Remove unused X11 libraries (4618ca7)
+    - json_ir_generator: Generate docstring for IR op emitters (f75ea6e)
+    - Fix InstallFEX.py not running FEXRootFSFetcher correctly (73822b9)
+    - Revert "CodeCache: Use defaulted dtor for ExecutableFileInfo" (49a37c7)
+    - Inline softfloat i16/i32/f32/f64 to extF80 conversions in dispatcher (36ec090)
+    - Fixes remaining quirks of the ARPL implementation (1387aec)
+    - code-format-helper: Update minimum for dependabot again (1cade38)
+    - Switch over to rpmalloc instead of jemalloc (57504f2)
+    - Fix Buffer Overflow in LoadFileImpl (1ed3b22)
+    - Enable automatic code formatting for X86Tables.h (cc54724)
+    - Add Zydis x86/x86-64 disassembler support (28c486d)
+    - gitlab-ci: Adds steamrt4 runner (4c7b9fd)
+    - code-format-helper: Update requirements (1d411df)
+    - Accurate stack mapping, fixes #5149 (4c50a92)
+
+  - gitignore
+    - ignore CMakeLists.txt.user (b2c1ad7)
+
+  - unittests
+
+    - ASM
+      - Adds unittests for undocumented x87 instruction encodings (6edde86)
+      - Fix accidentally deleted file (3398684)
+      - Removes superfluous warnings from nasm (548dfdc)
+
+    - FEXLinuxTests
+      - Ensures that signals are in expected order (030d332)
+
+  - x87
+    - Implement FCOM/FCOMP st(i) decoding fixes (8230b5f)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 04 Mar 2026 20:47:29 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2601~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2601
