@@ -1,3 +1,115 @@
+fex-emu-@ARCH_SUFFIX@ (2604~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2604
+
+  - Allocators
+    - Remove legacy NOREPLACE handling (b77ddcf)
+
+  - Arm64EC
+    - Invert suspend doorbell and move out of hot path (0695249)
+
+  - Arm64Emitter
+    - Disable 32-bit constant optimization when NOP-padding is requested (de11c05)
+
+  - CPUBackend
+    - Enable Transparent Huge Pages on JIT buffers (afc7248)
+
+  - CPUID
+    - Add basic stub handling for AVX10 info (6bd476f)
+
+  - Cmake
+    - Default to release builds with a message (194eb69)
+
+  - CodeCache
+    - Fix glibc debug mode assertion (bc533c8)
+    - Support ELF relocations (8360105)
+
+  - Config
+    - Finish wiring up Regex app overrides  (c6d2ce0)
+    - Fix issue with config overrides (5c1300a)
+    - Enable Dynamic L1 and Disabled L2 caches by default (957c1fc)
+    - Fixes (d21351e)
+
+  - FEX
+    - Workaround Docker seccomp bug (ce65f53)
+    - Disable THP on key allocations that consume memory (53702f9)
+
+  - FEXCore
+    - Use WritePriorityMutex for Code Invalidation Mutex  (51144c9)
+    - Update CPU frequency to be 64-bit (f894cd9)
+
+  - FEXGetConfig
+    - Test for showing fault granularity (34b48c4)
+
+  - FEXRootFSFetcher
+    - clear Unknown when distro is set on the CLI (b478e48)
+    - Improve hashing performance (dc48a4f)
+
+  - FEXServer
+    - Try both fusermount and fusermount3 (56de0d1)
+
+  - FEXpidof
+    - Fixes another missing std::filesystem throw (c18fb3c)
+
+  - HostFeatures
+    - Group feature ifdefs together more (5558c3a)
+    - Drop in feature testing for FEAT_MOPS (a17d7ce)
+
+  - IR
+    - Adds support for printing strings (ae3fa6a)
+
+  - JIT
+    - Reset relocations on restart (6a6a823)
+    - Use struct for Spill/Fill default arguments (2467596)
+
+  - Linux
+
+    - GuestFrames
+      - Ensure MXCSR is saved and restored on signal  (5b4a596)
+
+  - LinuxSyscalls
+    - Skip reading ELF files when code caching is disabled (3ef6775)
+    - Don't try to parse relocations unless ELF parsing succeeded (6da963a)
+    - Re-open file descriptors for parsing ELF headers (65a436c)
+
+  - MemoryOps
+    - Collapse duplicate add/sub in Memset (8c72aa7)
+    - Drop MOPS handling into place for MemSet/MemCpy (68480f6)
+
+  - OpcodeDispatcher
+    - Fixes nop encoded prefetch instruction (251398a)
+    - Special case optimize a broadcast  (73ffff7)
+    - Fixes memory leak in IREmitter pool allocator (e27d12e)
+
+  - SMCTracking
+    - Remove relocation log (5149ebc)
+    - Move read check up for ELF parsing (9f9b20e)
+
+  - Syscalls
+    - Fixes crash in ELF parsing code (cc02edb)
+
+  - Tests
+
+    - ASM
+      - Add FISTTP unit tests for 16, 32, 64-bit as well as negatives (494dd64)
+
+  - Win32
+    - Enable support for virtual naming and THP control  (5c34c57)
+
+  - Misc
+    - JIT-inline F64SIN, F64COS, and F64TAN for reduced precision x87 path (4229154)
+    - Fix most GCC build issues (73c1f4c)
+    - Add test for shifts preserving flags (f3e9042)
+    - code-format-helper: Another dependabot upgrade (e4ae6ce)
+    - External/code-format-helper: Update dependencies (6177ab9)
+    - Handle zero length in ChangeProtectionFlags (9d4a71b)
+    - gitlab-ci: Update requirements (58d9755)
+
+  - github
+    - Stop running unittests always on build failure (5c4c468)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 09 Apr 2026 20:48:48 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2603~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2603
