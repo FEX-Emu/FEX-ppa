@@ -1,3 +1,9 @@
+fex-emu-@ARCH_SUFFIX@ (2605~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Fix resolute wine hopefully
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sat, 09 May 2026 21:24:53 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2605~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2605
