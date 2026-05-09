@@ -1,3 +1,85 @@
+fex-emu-@ARCH_SUFFIX@ (2605~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2605
+
+  - Allocator
+    - Mark large unmapped regions as DONTDUMP (670fd19d3)
+
+  - ArchHelpers
+    - Allow atomic memory operations in non-JIT handler (2ea0de92f)
+
+  - CodeCache
+    - Fix crash when guest library wrappers aren't installed (e517f3259)
+    - Slightly optimize cache file writing (ed216c8d4)
+    - Delay cache loading for guest library wrappers until after LoadLib (7506cb4ea)
+    - Make FEXServer call FEXOfflineCompiler by absolute path (e5f6a7d85)
+    - Move bounds check to FEXOfflineCompiler (886faf0bd)
+
+  - FEXCore
+    - Drop unused CompileService (1efed7169)
+
+  - OpcodeDispatcher
+    - Optimize MMX pshufw  (05ebb0775)
+    - Fix FIST 16-bit IE for denormal inputs  (9db211ac9)
+    - Ensure FIST* operations avoid TSO/GPR (821efab8a)
+
+  - Scripts
+    - Move arch check first in InstallFEX (441116e1e)
+
+  - SignalDelegator
+    - Simplify support for musl's sigset_t (f0764aeaf)
+
+  - SoftFloat
+    - Fix FSCALE(0, +Inf) to raise IE and return a quiet NaN (e91bda776)
+
+  - Steam
+
+    - CompatTool
+      - Fixes Graphics Provider path handling (4b02c04af)
+      - Support `STEAM_COMPAT_GRAPHICS_PROVIDER` for rootfs path (701555e40)
+
+  - VectorOps
+    - Fix MAXPS/MAXPD NaN and signed-zero tie selection (b1381fd3b)
+
+  - Windows
+    - Setup `tu_override_uncached_as_cache_coherent` inside of dlls (1bfb3aefc)
+
+  - X86Features
+    - Fix AVX/RAND/PCMLULQDQ feature detection on intel (098c4c57b)
+
+  - X87
+    - Fix FXTRACT with Inf and NaN inputs (8ab00758b)
+
+  - Misc
+    - read /proc/self/stat using %lu (694e68b83)
+    - use portable format specifiers (47e173e54)
+    - make 64bit symbols visible to enhance portability (musl) (93015a026)
+    - include missing header unistd.h (d238db69d)
+    - remove dead code (ObjectCacheRefCounter) (e0ead236b)
+    - fix include redirect for <poll.h> and <signal.h> (85773995e)
+    - determine sigset_t fieldname to enhance portability (musl) (197e6de19)
+    - include <libgen.h> for basename (9908ea4c2)
+    - add header and classpath for tgkill (c402b15bd)
+    - use <signal.h> instead of glibc header to enhance portability (musl) (a3f3118ac)
+    - use <sys/prctl.h> to enhance portability (clang) (215658bf2)
+    - Fix push/pop fs/gs segments and unittests (dd145aaa8)
+    - JIT-inline F64ATAN and F64FYL2X for reduced precision x87 path (deed99e7a)
+    - Snapdragon X2 Elite fixes (59755ec11)
+    - JIT-inline F64SCALE and F64F2XM1 for reduced precision x87 path (d41d52b88)
+
+  - arm64ec
+    - Fixes crash in many games with SDL+Dualsense (feae76fc4)
+
+  - unittests
+
+    - ASM
+      - Add unittests to ensure correct cmpxchg8b/16b flag setting (7dc1f54fb)
+
+  - win32
+    - Query DCZID_EL0 so clzero works (4db2a98d7)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sat, 09 May 2026 19:38:22 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2604~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2604
