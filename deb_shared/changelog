@@ -1,3 +1,9 @@
+fex-emu-@ARCH_SUFFIX@ (2607~1-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Fixing Wine
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sat, 04 Jul 2026 21:19:52 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2607-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2607

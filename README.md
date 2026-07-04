@@ -4,7 +4,7 @@
 export TEMP_SOURCE=$(mktemp -d -t FEX-XXXXXXXXXX)
 export FEX_VERSION=$(date +%y%m)
 export UBUNTU_SUBVERSION= # If exists then tilde plus a number
-export PACKAGE_VERSION=${FEX_VERSION}-1${UBUNTU_SUBVERSION}
+export PACKAGE_VERSION=${FEX_VERSION}${UBUNTU_SUBVERSION}-1
 export FEXPPA=$(readlink -f .)
 git clone --recurse-submodules --depth=1 --branch=FEX-${FEX_VERSION} https://github.com/FEX-Emu/FEX.git $TEMP_SOURCE
 rm -Rf $TEMP_SOURCE/External/{fex-gcc-target-tests-bins,fex-gvisor-tests-bins,fex-posixtest-bins}
