@@ -181,11 +181,8 @@ Stage = int(sys.argv[1])
 FEXVersion = sys.argv[2]
 RootPackageVersion = sys.argv[3]
 CurrentChangelogFile = sys.argv[4]
-SourceTar = sys.argv[5]
-
-if "-" in RootPackageVersion:
-    print("Can't have dash in package version. Breaks things")
-    sys.exit()
+SourceTar = RootGenPPA + "/" + sys.argv[5]
+SourceWineTar = RootGenPPA + "/wine_" + sys.argv[5]
 
 if not os.path.isfile(CurrentChangelogFile):
     print("Couldn't open file! {}".format(CurrentChangelogFile))
@@ -193,6 +190,9 @@ if not os.path.isfile(CurrentChangelogFile):
 
 if not os.path.isfile(SourceTar):
     print("Couldn't open file! {}".format(SourceTar))
+    sys.exit()
+if not os.path.isfile(SourceWineTar):
+    print("Couldn't open file! {}".format(SourceWineTar))
     sys.exit()
 
 UploaderName = "Ryan Houdek"
@@ -341,6 +341,13 @@ if Stage == 1:
 
             os.symlink(os.path.abspath(SourceTar), TargetSymlink)
 
+            TargetSymlink = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion.split("-")[0] + ".orig.tar.gz"
+            if os.path.islink(TargetSymlink):
+                os.remove(TargetSymlink)
+
+            print("Creating symlink: {}".format(TargetSymlink))
+            os.symlink(os.path.abspath(SourceTar), TargetSymlink)
+
     print("Generating debian file structure trees - Wine")
     for distro in supported_distro_list:
         # Create subfolder
@@ -416,7 +423,15 @@ if Stage == 1:
         if os.path.islink(TargetSymlink):
             os.remove(TargetSymlink)
 
-        os.symlink(os.path.abspath("wine_{}".format(SourceTar)), TargetSymlink)
+        print("Wine: Creating symlink: {}".format(TargetSymlink))
+        os.symlink(SourceWineTar, TargetSymlink)
+
+        TargetSymlink = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion.split("-")[0] + ".orig.tar.gz"
+        if os.path.islink(TargetSymlink):
+            os.remove(TargetSymlink)
+
+        print("Wine: Creating symlink: {}".format(TargetSymlink))
+        os.symlink(SourceWineTar, TargetSymlink)
 
 @dataclass
 class DebuildOutput:

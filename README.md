@@ -4,7 +4,7 @@
 export TEMP_SOURCE=$(mktemp -d -t FEX-XXXXXXXXXX)
 export FEX_VERSION=$(date +%y%m)
 export UBUNTU_SUBVERSION= # If exists then tilde plus a number
-export PACKAGE_VERSION=${FEX_VERSION}${UBUNTU_SUBVERSION}
+export PACKAGE_VERSION=${FEX_VERSION}-1${UBUNTU_SUBVERSION}
 export FEXPPA=$(readlink -f .)
 git clone --recurse-submodules --depth=1 --branch=FEX-${FEX_VERSION} https://github.com/FEX-Emu/FEX.git $TEMP_SOURCE
 rm -Rf $TEMP_SOURCE/External/{fex-gcc-target-tests-bins,fex-gvisor-tests-bins,fex-posixtest-bins}
@@ -12,9 +12,9 @@ rm -Rf $TEMP_SOURCE/.git
 rm -Rf $TEMP_SOURCE/unittests
 rm -Rf $TEMP_SOURCE/External/vixl/src/aarch32/
 rm -Rf $TEMP_SOURCE/External/vixl/test
-tar -cvpzf fex-emu_${PACKAGE_VERSION}.orig.tar.gz -C $TEMP_SOURCE/ .
+tar -cvpzf gen_ppa/fex-emu_${PACKAGE_VERSION}.orig.tar.gz -C $TEMP_SOURCE/ .
 wget https://github.com/bylaws/llvm-mingw/releases/download/20250920/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64.tar.xz -O $TEMP_SOURCE/llvm-mingw-ucrt-ubuntu-20.04-aarch64.tar.xz
-tar -cvpzf wine_fex-emu_${PACKAGE_VERSION}.orig.tar.gz -C $TEMP_SOURCE/ .
+tar -cvpzf gen_ppa/wine_fex-emu_${PACKAGE_VERSION}.orig.tar.gz -C $TEMP_SOURCE/ .
 ${FEXPPA}/create_packages.py 0 ${FEX_VERSION} ${PACKAGE_VERSION} TestChanges fex-emu_${PACKAGE_VERSION}.orig.tar.gz
 ${FEXPPA}/create_packages.py 1 ${FEX_VERSION} ${PACKAGE_VERSION} TestChanges fex-emu_${PACKAGE_VERSION}.orig.tar.gz
 ${FEXPPA}/create_packages.py 2 ${FEX_VERSION} ${PACKAGE_VERSION} TestChanges fex-emu_${PACKAGE_VERSION}.orig.tar.gz
@@ -22,8 +22,6 @@ ${FEXPPA}/create_packages.py 2 ${FEX_VERSION} ${PACKAGE_VERSION} TestChanges fex
 ${FEXPPA}/create_packages.py 3 ${FEX_VERSION} ${PACKAGE_VERSION} TestChanges fex-emu_${PACKAGE_VERSION}.orig.tar.gz
 rm -Rf $TEMP_SOURCE
 rm -Rf ${FEXPPA}/gen_ppa
-rm ${FEXPPA}/fex-emu_${PACKAGE_VERSION}.orig.tar.gz
-rm ${FEXPPA}/wine_fex-emu_${PACKAGE_VERSION}.orig.tar.gz
 ```
 
 # Stage documentation
