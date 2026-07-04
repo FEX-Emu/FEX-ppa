@@ -1,3 +1,204 @@
+fex-emu-@ARCH_SUFFIX@ (2607-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2607
+
+  - AVX
+    - Remove unnecessary moves from VPSHUF{D, HW, LW} (a4f89b7)
+    - Reduce codegen for 256-bit VMOVMSKPD/VMOVMSKPS (394a6f2)
+    - Handle two field insertions in VPERMQ (83a989c)
+    - Slightly trim codegen for VPSADW 256-bit case (9740f48)
+    - Handle trivial UZP/ZIP operations in VPERMQ (c85e426)
+    - Handle trivial cases better for VDPPS (3470dd1)
+    - Handle easily broadcastable permutations in VPERMQ (7ae55d7)
+    - Skip identity insertions in VPERMQ (d5be15c)
+    - Handle transpose cases in VPERMQ (ec1b24d)
+    - Remove unnecessary dup if sources are the same in SHUFOpImpl (d93997c)
+    - Shave some moves off 256-bit VPALIGNR (ab4e0f6)
+    - Reduce moves in 256-bit VPSHUFB (fda023e)
+    - Wire up helper to VPERMILPD (5881266)
+    - Wire up lane helper for VPERMILPS imm variant (b846cb6)
+    - Wire up lane helper for VSHUFPD/VSHUFPS  (62ecdd6)
+    - Wire up lane helper for VPSHUFD/VPSHUFLW/VPSHUFHW (9f195ff)
+    - Reduce inserts in VBLENDPS/VPBLENDD/VPBLENDW (4eb5694)
+    - Remove unnecessary moves from PINSRX ops  (5ad06b0)
+
+  - Allocator
+    - Fix and optimize VA range detection (af4da43)
+
+  - Arm64
+    - Fix byte-size handling in unaligned STLXR emulation (f66368b)
+
+  - Arm64Emitter
+    - Tidy up load/stores in Push/PopCalleeSavedRegisters (500d237)
+
+  - Build
+    - Enable ccache sloppiness for time macros (cae5da5)
+
+  - CodeCache
+    - Support targeting WOW64/ARM64EC in FEXOfflineCompiler (08ed4fb)
+    - Resolve comment #5441 (comment) (df73e84)
+    - Implement lazy code loading (bb0d142)
+
+  - Config
+    - Use more sensible default for portable config location (33f3b86)
+
+  - Core
+    - Start a new block for the next op in full SMC check (b23fa30)
+
+  - FEXBash
+    - Drop implicit -c and add colored PS1 (9be7d6d)
+
+  - FEXCore
+    - Pass host type that changes codegen to FEXCore (3e60aa5)
+    - Ensure LOCK prefix instructions are handled correctly (d848cbb)
+    - Allow InterruptFaultPage to be significantly further away (e4daea4)
+    - Add support for developer single stepping, read/write watching. (d4c80d9)
+
+  - FEXGetConfig
+    - Even more correctness changes for X2E (ab9a8c6)
+    - Showcase RMW versus loadstore atomic differences (50f4494)
+
+  - FEXOfflineCompiler
+    - Fixes HostFeature detection under Win32 (7fa4d78)
+    - Add "process-all" verb (cb01825)
+
+  - FEXServerClient
+    - Workaround sun_path 108 byte limit (1db45e2)
+
+  - Format
+    - Fix missed clang-format (5fd917e)
+
+  - Frontend
+    - Fix vsyscall page tracking.  (e02953d)
+
+  - HostFeatures
+    - Put SVE support querying into single function (b9aeccf)
+    - Don't capture CTR/MIDR under simulator (07f7aa3)
+    - Only enable `dc zva` optimization on Ampere CPUs (c98cef0)
+
+  - IR
+    - Add constant for swapping midsections of 256-bit vectors around  (110313e)
+
+  - ImageTracker
+    - Support using image IDs as an extended volatile metadata key (ed724a6)
+
+  - IntrusiveIRList
+    - Amend signature for PostRA() (b87ff1e)
+
+  - JIT
+    - Arm64: fix the loop in CacheLineClear/Clean (27a5f09)
+    - Amend op typos in implementations (55c90cf)
+
+  - LibraryForwarding
+    - Implement support for CUDA (e12bd27)
+    - Add annotation for snd_htimestamp_t (a5c3fc4)
+
+    - cuda
+      - Convert constexpr to const (9ac608c)
+
+  - LinuxSyscalls
+    - add missing thread header (a1071ec)
+
+  - OpcodeDispatcher
+    - Fix missing zeroing for vcvtps2ph (9f2e982)
+    - Fixes CRC32 with high 8-bit register (43bd243)
+    - Fix incorrect comment for BTOp. ZF must be preserved. (e19aa97)
+    - Fix typo in comment (7dc2dc8)
+    - Sanitize selectors for VBLENDPD/VPBLENDD (681c5e8)
+    - Eliminate redundant moves in VMOVHPOp (dd44bc8)
+    - Make use of Bind consistently (110c7cb)
+    - Move a few stray literal accesses to Literal() (09aa5ab)
+    - Fixes 64-bit LODs with address size override  (ed6a178)
+
+  - Passes
+    - Trim unnecessary forward declarations (280568d)
+
+  - Proton
+    - Fixes Mafia 3 (34344e5)
+
+  - Vector
+    - Only signify 128-bit vector loads in UCOMISxOp (e26a792)
+    - Fix typo in VPERMQOp (70fe9a4)
+    - Remove unused OpcodeArgs parameter from SHUFOpImpl (ad618be)
+
+  - VectorOps
+    - Eliminate unnecessary moves in VMov if applicable (6bcadde)
+    - Avoid temporary if able in 256-bit VFRecp (5f1c8ef)
+    - Reduce temporary usage in 64-bit AdvSIMD min max paths (16f90b3)
+    - Avoid move in 256-bit VAddP/VFAddP if possible (5d8d052)
+    - Avoid dup if able in VInsElement 128-bit element path (01b0b4e)
+
+  - WOW64
+    - Support disabling DEP (f5efdac)
+
+  - Windows
+    - Fixes SHM stats reallocation (b4e2f51)
+    - Load unixlib if possible  (78832cc)
+    - Adds empty Linux side unix library (fe4d2bc)
+    - Trace interrupt translation and prototype INT 0x29 fail-fast mapping (f5fafa5)
+
+    - UnixLib
+      - Fix loading with new MemoryWineLoadUnixLibByName mechanism (44e24c9)
+      - Adds remaining helpers (32b96c2)
+      - Adds support for Hardware TSO support (24da43f)
+
+  - Misc
+    - Re-optimize FYL2X for reduced precision x87 path (3d593ce)
+    - instcountci/VEX_map3: Add missing third param to VPBLENDD (d138c85)
+    - instcountci/VEX_map1: Remove obsolete comments (7e2d3b0)
+    - Do not exec FEX if it is a folder in FEXBash (848c4b2)
+    - Fix UAF of PS1 (4f995cb)
+    - [SVE256] Add fast paths for trivial VSHUFPD flags (0b0000, and 0b1111) (1619374)
+    - [SVE256] Remove unnecessary move in VCVTPS2PD (c13064e)
+    - [SVE256] Remove heavy handed moves from scalar compares (37e32fb)
+    - [SVE256] More comprehensively test SSE insertions for scalar comparisons (27acbba)
+    - [SVE256] Add more SSE scalar variant unit tests (6f33d2b)
+    - [SVE256] Handle SSE insertions for PCMPESTRM/PCMPISTRM ops (c5880e7)
+    - [SVE256] Handle SSE insertions for MOVQ2DQ (9d0c05d)
+    - [SVE256] Handle SSE insertions for EXTRQ/INSERTQ (f6a68cb)
+    - [SVE256] Handle SSE insertions for CVTPI2PD (462c785)
+    - Fix incorrect RSP update for 16bit leave (f547703)
+    - [SVE256] Handle SSE insertions for PMADDWD (ee4794c)
+    - [SVE256] Handle SSE insertions for CMPSD/CMPSS (3a23bb4)
+    - [SVE256] Handle SSE insertions for MOVSHDUP/MOVSLDUP (46ffb25)
+    - [SVE256] Handle SSE insertion for aligned/unaligned loads and non-temporal loads (069a402)
+    - [SVE256] Handle SSE insertions for MOVH(PD, PD, LPS) and MOVL(PD, PS, HPS) (3929d25)
+    - [SVE256] Handle SSE insertions for XOR special case (f98ac7f)
+    - [SVE256] Handle SSE insertions for INSERTPS, PSIGN, PINSR, and shuffles (2309910)
+    - [SVE256] Handle SSE insertions for shifts (adad3c2)
+    - (470aeab)
+    - [SVE256] Handle SSE insertions for more misc ops (99662b7)
+    - [SVE256] Handle SSE insertions for PHMINPOSUW, DPPD, and DPPS (1a606de)
+    - [SVE256] Handle SSE insertions for blends (223e0f4)
+    - (0b1f336)
+    - [SVE256] Handle more SSE insertions for some one-off instructions (d9ea665)
+    - [SVE256] Vector: Handle SSE insertion properly for various ALU operations (9d5494d)
+    - Drop unused CMakeSettings.json (97f1f47)
+    - set sysroot to X86_DEV_ROOTFS for guest toolchain (53c269e)
+    - New CPL0 instructions from #5510 but with unittests (1240a00)
+    - code-format-helper: More dependabot changes (0b871bf)
+    - Cherry-pick #5508 with instcountci changes (268081e)
+    - Windows additions for code caching (27324de)
+    - Library Forwarding: Various build system improvements (b4fe65f)
+    - JIT-inline FPREM/FPREM1 for reduced precision x87 path (0d72890)
+
+  - arm64ec
+    - Single instruction optimization in EC map lookup (65b05fa)
+    - Fixes some FEX allocations that were missing TOP_DOWN  (7ff2069)
+
+  - instcountci
+    - Add a few more cases for VPBLENDW/VPBLENDD and VSHUFPD/VSHUFPS (72e0127)
+    - Add 16-bit pcmpxstrx variants  (3d66be9)
+
+  - meta
+    - Add CONTRIBUTING.md (83f325d)
+
+  - unittests
+    - Add selector tests for VPSHUF{D, HW, LW} (a79c471)
+    - Add test for stress-testing VPBLENDD selectors  (417bd86)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Sat, 04 Jul 2026 18:00:36 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2605~1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   Fix resolute wine hopefully
