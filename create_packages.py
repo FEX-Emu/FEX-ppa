@@ -7,6 +7,9 @@ import time
 from dataclasses import dataclass, field
 from shutil import which
 
+SKIP_WINE = False
+SKIP_LINUX = False
+
 NeededApplications = [
     "debuild",
     "tree",
@@ -532,61 +535,65 @@ if Stage == 2:
         print("Couldn't setup gpg key with signing dummy file")
         sys.exit(-1)
 
-    print("Generating debuild files: Spinning up {} processes".format(len(supported_distro_list) * len(supported_cpus)))
-    print("Don't kill this early otherwise you'll get background lintian processes running!")
+    if not SKIP_LINUX:
+        print("Generating debuild files: Spinning up {} processes".format(len(supported_distro_list) * len(supported_cpus)))
+        print("Don't kill this early otherwise you'll get background lintian processes running!")
 
-    ActiveProcesses = {}
-    for distro in supported_distro_list:
-        for arch in supported_cpus:
-            print("Building package for {} on {}.".format(arch[1], distro[0][1]))
-            SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0]
-            SubFolderLogs = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0] + "_logs"
+        ActiveProcesses = {}
+        for distro in supported_distro_list:
+            for arch in supported_cpus:
+                print("Building package for {} on {}.".format(arch[1], distro[0][1]))
+                SubFolder = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0]
+                SubFolderLogs = RootGenPPA + "/" + RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0] + "_logs"
+                os.makedirs(SubFolderLogs, exist_ok=True)
+                SubFolderLogFiles = SubFolderLogs + "/log.txt"
+                SubFolderLogFile = open(SubFolderLogFiles, "w")
+
+                p = subprocess.Popen(["debuild", "-S"], cwd = SubFolder, stderr=subprocess.STDOUT, stdout=SubFolderLogFile)
+                Process = DebuildOutput(distro, arch, SubFolderLogFiles, SubFolderLogFile, p)
+                ActiveProcesses[Process.pid()] = Process
+
+                # If at max processes then wait
+                ActiveProcesses = WaitForProcesses(ActiveProcesses, 9)
+
+        # Wait for all processes to exit
+        ActiveProcesses = WaitForProcesses(ActiveProcesses, 0)
+
+    if not SKIP_WINE:
+        print("Generating debuild files for wine: Spinning up {} processes".format(len(supported_distro_list) * len(supported_cpus)))
+        print("Don't kill this early otherwise you'll get background lintian processes running!")
+
+        ActiveProcesses = {}
+        for distro in supported_distro_list:
+            print("Building package for {}.".format(distro[0][1]))
+            SubFolder = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0]
+            SubFolderLogs = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0] + "_logs"
             os.makedirs(SubFolderLogs, exist_ok=True)
             SubFolderLogFiles = SubFolderLogs + "/log.txt"
             SubFolderLogFile = open(SubFolderLogFiles, "w")
 
             p = subprocess.Popen(["debuild", "-S"], cwd = SubFolder, stderr=subprocess.STDOUT, stdout=SubFolderLogFile)
-            Process = DebuildOutput(distro, arch, SubFolderLogFiles, SubFolderLogFile, p)
+            Process = DebuildWineOutput(distro, SubFolderLogFiles, SubFolderLogFile, p)
             ActiveProcesses[Process.pid()] = Process
 
             # If at max processes then wait
             ActiveProcesses = WaitForProcesses(ActiveProcesses, 9)
 
-    # Wait for all processes to exit
-    ActiveProcesses = WaitForProcesses(ActiveProcesses, 0)
-
-    print("Generating debuild files for wine: Spinning up {} processes".format(len(supported_distro_list) * len(supported_cpus)))
-    print("Don't kill this early otherwise you'll get background lintian processes running!")
-
-    ActiveProcesses = {}
-    for distro in supported_distro_list:
-        print("Building package for {}.".format(distro[0][1]))
-        SubFolder = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0]
-        SubFolderLogs = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0] + "_logs"
-        os.makedirs(SubFolderLogs, exist_ok=True)
-        SubFolderLogFiles = SubFolderLogs + "/log.txt"
-        SubFolderLogFile = open(SubFolderLogFiles, "w")
-
-        p = subprocess.Popen(["debuild", "-S"], cwd = SubFolder, stderr=subprocess.STDOUT, stdout=SubFolderLogFile)
-        Process = DebuildWineOutput(distro, SubFolderLogFiles, SubFolderLogFile, p)
-        ActiveProcesses[Process.pid()] = Process
-
-        # If at max processes then wait
-        ActiveProcesses = WaitForProcesses(ActiveProcesses, 9)
-
-    # Wait for all processes to exit
-    ActiveProcesses = WaitForProcesses(ActiveProcesses, 0)
+        # Wait for all processes to exit
+        ActiveProcesses = WaitForProcesses(ActiveProcesses, 0)
 
 if Stage == 3:
-    print("Uploading results for Linux")
-    for distro in supported_distro_list:
-        for arch in supported_cpus:
-            PackageName = RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0] + "_source.changes"
+    if not SKIP_LINUX:
+        print("Uploading results for Linux")
+        for distro in supported_distro_list:
+            for arch in supported_cpus:
+                PackageName = RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0] + "_source.changes"
+                p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
+                p.wait()
+
+    if not SKIP_WINE:
+        print("Uploading results for Wine")
+        for distro in supported_distro_list:
+            PackageName = RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0] + "_source.changes"
             p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
             p.wait()
-
-    print("Uploading results for Wine")
-    for distro in supported_distro_list:
-        PackageName = RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0] + "_source.changes"
-        p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
-        p.wait()
