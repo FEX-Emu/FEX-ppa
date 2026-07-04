@@ -12,6 +12,7 @@ rm -Rf $TEMP_SOURCE/.git
 rm -Rf $TEMP_SOURCE/unittests
 rm -Rf $TEMP_SOURCE/External/vixl/src/aarch32/
 rm -Rf $TEMP_SOURCE/External/vixl/test
+mkdir ${FEXPPA}/gen_ppa
 tar -cvpzf gen_ppa/fex-emu_${PACKAGE_VERSION}.orig.tar.gz -C $TEMP_SOURCE/ .
 wget https://github.com/bylaws/llvm-mingw/releases/download/20250920/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64.tar.xz -O $TEMP_SOURCE/llvm-mingw-ucrt-ubuntu-20.04-aarch64.tar.xz
 tar -cvpzf gen_ppa/wine_fex-emu_${PACKAGE_VERSION}.orig.tar.gz -C $TEMP_SOURCE/ .

@@ -345,7 +345,6 @@ if Stage == 1:
             if os.path.islink(TargetSymlink):
                 os.remove(TargetSymlink)
 
-            print("Creating symlink: {}".format(TargetSymlink))
             os.symlink(os.path.abspath(SourceTar), TargetSymlink)
 
     print("Generating debian file structure trees - Wine")
@@ -423,14 +422,12 @@ if Stage == 1:
         if os.path.islink(TargetSymlink):
             os.remove(TargetSymlink)
 
-        print("Wine: Creating symlink: {}".format(TargetSymlink))
         os.symlink(SourceWineTar, TargetSymlink)
 
         TargetSymlink = RootGenPPA + "/" + RootPackageNameWine + "_" + RootPackageVersion.split("-")[0] + ".orig.tar.gz"
         if os.path.islink(TargetSymlink):
             os.remove(TargetSymlink)
 
-        print("Wine: Creating symlink: {}".format(TargetSymlink))
         os.symlink(SourceWineTar, TargetSymlink)
 
 @dataclass
