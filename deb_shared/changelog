@@ -1,3 +1,9 @@
+fex-emu-@ARCH_SUFFIX@ (2608~1-3~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  Fixes build
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 05 Aug 2026 02:13:09 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2608-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2608

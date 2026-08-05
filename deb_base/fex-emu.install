@@ -2,7 +2,6 @@ usr/bin/FEXBash
 usr/bin/FEXConfig
 usr/bin/FEXGetConfig
 usr/bin/FEX
-usr/bin/FEXInterpreter
 usr/bin/FEXServer
 usr/bin/FEXRootFSFetcher
 @THUNK_FILES@
