@@ -39,6 +39,7 @@ buildflags = \
 confflags += \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_BUILD_TYPE=Release \
+	-DRANGES_NATIVE=OFF \
 	-DENABLE_LTO=False \
 	-DBUILD_TESTING=False \
 	-DENABLE_JEMALLOC_GLIBC_ALLOC=False \
