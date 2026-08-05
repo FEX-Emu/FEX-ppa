@@ -12,6 +12,7 @@ Build-Depends:
   gzip,
   git,
   tree,
+  clang,
 Build-Depends-Arch:
   pkg-config,
 Homepage: https://fex-emu.com/

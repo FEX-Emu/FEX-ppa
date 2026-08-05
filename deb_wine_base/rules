@@ -32,11 +32,13 @@ export DEB_LDFLAGS_MAINT_STRIP = \
 
 DEB_HOST_ARCH      ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
-confflags =
+confflags_common =
+confflags_dll =
+confflags_unixlib =
 buildflags = \
 	CXXFLAGS="-Wno-deprecated-enum-enum-conversion"
 
-confflags += \
+confflags_common += \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DRANGES_NATIVE=OFF \
@@ -47,13 +49,23 @@ confflags += \
 	-DTUNE_CPU=generic \
 	-DTUNE_ARCH=generic \
 	-GNinja \
+	-DOVERRIDE_VERSION=@FEX_VERSION@
+
+confflags_dll += \
+	$(confflags_common) \
 	-DCMAKE_INSTALL_LIBDIR=/ \
 	-DCMAKE_TOOLCHAIN_FILE=../Data/CMake/toolchain_mingw.cmake \
+	-DOVERRIDE_VERSION=@FEX_VERSION@
+
+confflags_unixlib += \
+	$(confflags_common) \
+	-DCMAKE_INSTALL_LIBDIR=/ \
 	-DOVERRIDE_VERSION=@FEX_VERSION@
 
 override_dh_clean:
 	rm -rf build_arm64ec
 	rm -rf build_wow64
+	rm -rf build_unixlib
 	dh_clean
 
 override_dh_auto_configure:
@@ -62,17 +74,21 @@ override_dh_auto_configure:
 	ls -l
 	mkdir build_arm64ec
 	mkdir build_wow64
-	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=arm64ec-w64-mingw32 ..
-	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags) -DMINGW_TRIPLE=aarch64-w64-mingw32 ..
+	mkdir build_unixlib
+	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags_dll) -DMINGW_TRIPLE=arm64ec-w64-mingw32 ..
+	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags_dll) -DMINGW_TRIPLE=aarch64-w64-mingw32 ..
+	cd build_unixlib && $(buildflags) CC=clang CXX=clang++ cmake $(confflags_unixlib) ../Source/Windows/UnixLib
 
 override_dh_auto_build:
 	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) ninja
 	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) ninja
+	cd build_unixlib && ninja
+
 
 override_dh_auto_install:
-	export
 	cd build_arm64ec && DESTDIR=../install/ ninja install
 	cd build_wow64 && DESTDIR=../install/ ninja install
+	cd build_unixlib && DESTDIR=../install/ ninja install
 
 #override_dh_installdocs:
 #	dh_installdocs
