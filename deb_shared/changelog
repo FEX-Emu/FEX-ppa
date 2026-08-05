@@ -1,3 +1,306 @@
+fex-emu-@ARCH_SUFFIX@ (2608-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2608
+
+  - 64BitAllocator
+    - Removes unused additional size argument (192e363)
+    - Avoid madvising more than necessary in InitializeVMARegionsUsed() (4fa539f)
+    - Remove duplicate headers (3e6b3c8)
+    - Avoid overwriting Region[0] in Create64BitAllocatorWithRegions (76b35df)
+
+  - ALUOps
+    - Remove unused macros (facbc78)
+
+  - AVX128
+    - Optimize 256-bit vmovmaskpd as well  (aa26a78)
+
+  - Allocator
+    - fix the caching of host va size (5b91642)
+
+  - AllocatorHooks
+    - Amend VirtualProtect for Windows (12baceb)
+
+  - Arm64Emitter
+    - Fix incorrect condition for constant NOP padding (83f4c9d)
+    - Pull FillSpecialRegs bools into a struct (e24f232)
+    - Wire up conditional FPR spilling in SpillForPreserveAllABICall (650f5b7)
+
+  - AtomicOps
+    - Avoid constrained unpredictable case in TelemetrySetValue() (12e8cf0)
+
+  - BPFEmitter
+    - Amend instruction class checking in HandleStore() (480f45f)
+
+  - CI
+    - Disable ranges-v3 from trying to build native (68740b3)
+
+  - CPUBackend
+    - Remove unnecessary reinterpret_casts (58c247b)
+
+  - CodeCache
+    - Use maximal code buffer size when generating code caches, too (0467d52)
+    - Mark executable memory as EC code on ARM64EC (aff3fcf)
+
+    - WoA
+      - Support mixed WoW64/ARM64EC processing (4a091df)
+
+  - Common
+
+    - Async
+      - Handle fd closing a little better (b750d67)
+
+    - BitSet
+      - Amend byte size retrieval (356d461)
+
+    - Bitset
+      - Minor API changes (87301ca)
+
+  - Config
+    - Minor cleanup (61d033f)
+    - Fixes AppOverrides with FEX_APP_CONFIG (7a6f0de)
+
+  - Context
+    - Add support for single-step RIP ranges (1bd3945)
+
+  - ConversionOps
+    - Remove redundant code in Vector_FToS (c8dd9ee)
+
+  - Core
+    - Remove unnecessary bounds check in GenerateIR() (f374b47)
+    - Fix dereference of invalid iterator (444c37f)
+
+  - Crypto
+    - Clarify zero vector size in SHA1RNDS4Op() (46ec279)
+    - Make use of XAR in SHA1NEXTE when available (850ef70)
+
+  - Dispatcher
+    - Avoid loading unnecessary reg in vixl single step (fb4d8a6)
+
+  - Externals
+    - Update fmt to 12.2.0 (3bd4d24)
+
+  - FEX
+    - Remove FEXInterpreter binary (37265b1)
+
+  - FEXCore
+    - Ignore inactive JIT guard ranges (464ec9d)
+    - Isolate multiblock error state per block (7469fdb)
+    - Split out CodeBuffer management to its own file (a652a58)
+    - Resolve missing prototype warnings (2ac95f4)
+    - Fixes a crash with multiblock if `ProcessorID` IR op is encountered (6cd2a48)
+
+  - FEXGetConfig
+    - Add convenience option for dumping system/tso info (31c2449)
+
+  - FEXOfflineCompiler
+    - Fix improper syscall ABI on WoA (5a0bf1b)
+
+  - FEXServer
+    - Fix some missing declaration warnings (7bb380a)
+
+  - Filesystem
+    - Fix Absolute() on Windows (4518d58)
+
+  - FlexBitSet
+    - Simplify MemClear/MemSet (7ce172a)
+
+  - Frontend
+    - Prioritize instruction fetch faults (27315e3)
+
+  - Github
+    - More dependabot things (1d695f6)
+
+  - HostFeatures
+    - Pull MMFR3 identification register (ba762a9)
+    - Amend SSBS2 signifying (b193a0c)
+
+  - HostRunner
+    - Tidy up interface (a1cc5d0)
+
+  - IR
+    - Enclose straggler Desc comments in brackets (3cbcc7b)
+    - Use begin block type in operator-- (d5572e3)
+    - Remove unused VUShraI (77467ea)
+    - Remove need to specify element size for vector bitwise ops (e508b6d)
+
+  - IRDumper
+    - stringstream -> ostringstream (d6b38b6)
+
+  - IREmitter
+    - Mark some helpers as const (1cffa00)
+
+  - IRValidation
+    - Minor cleanups (d028c79)
+
+  - JIT
+    - Remove JIT detection string (2464633)
+    - Rename temporary CPU buffer allocator (15e76e8)
+
+    - ALUOps
+      - Fix operand overlapping bug for pdep (21a968b)
+
+  - LinuxAllocator
+    - Reduce MemAllocator32Bit size by 16 bytes (941f0fb)
+
+  - LinuxEmulation
+    - Resolve missing prototype warnings (b58be2c)
+
+  - MemoryOps
+    - Avoid double application of base offset in {Load,Store}ContextIndexed case (6c57b2f)
+    - Make use of current working reg for cache operations (5d846c3)
+
+  - MiscOps
+    - Fix round mode clearing for RP/RM modes in PushRoundingMode (821dfe5)
+
+  - OpcodeDispatcher
+    - Fix 32bit cmpxchg zero extension with eax as first operand (8a8827c)
+    - Remove asterisk from BMI source args (b90c983)
+
+  - PassManager
+    - Simplify initialization interface (eb7e02e)
+
+  - RedundantFlagCalculationElimination
+    - Minor tidying (34ef28d)
+
+  - RegisterAllocationPass
+    - Ensure pair reg invariant (0f2463d)
+    - Function cleanup (ce27754)
+    - Amend type cast in DecodeSRANode() (0662508)
+
+  - SharedCodeBufferManager
+    - Minor header tidying (f2e35f3)
+
+  - SignalDelegator
+    - Remove unused Required parameter in handler setting (d295d9f)
+    - Group members together (ec95330)
+    - Remove odd double negation in GuestSigProcMask (6e0c9d1)
+
+  - Signals
+    - Preprocessor disable intentional dead code (a135325)
+
+  - Socket
+    - Pass size by reference in getsockopt (8a844f9)
+
+  - StringUtils
+    - Handle strings entirely composed of whitespace in trims (76c4ebb)
+
+  - Thread
+    - Amend new thread handling in HandleNewClone() (341a519)
+    - Amend pidfd_open check (c6f823f)
+
+  - ThreadManager
+    - Fix error return values in FrontendAllocateSlots() (99b8df4)
+
+  - Utils
+
+    - File
+      - Handle dual read/write case (7ff0466)
+
+  - Vector
+    - Indicate 128-bit zero vector in DefaultX87State() (7efc3ec)
+    - Use unary handler for scalar unary insertions (3781411)
+    - LoadSourceGPR -> LoadSourceFPR for MASKMOVOp (1417888)
+    - Trim one instruction off insertq (d0f03cb)
+
+  - VectorOps
+    - Make use of unpredicated shifts (921ce59)
+    - Add trivial case handling in VSQXTN2 (a7627ba)
+    - Simplify 256-bit VAddV (5ec8526)
+    - Simplify SVE 256-bit VOrn with BSL2N (28cdae4)
+    - Make SVE shift==0 case symmetric with ASIMD (bd15023)
+    - Join identical branches in VFMLS/VFNMLS (92a171c)
+
+  - WinAPI
+
+    - IO
+      - Fix handling of end of file offset in SetFilePointerEx (bc16f90)
+
+  - Windows
+    - Fixes around using Unicode functions (cfa3dfa)
+
+    - ImageTracker
+      - Adapt code cache loading logic to FEXOfflineCompiler (db9414a)
+      - Wire up LoadCache and EnableLoadedSection  (57ca49d)
+
+    - UnixLib
+      - Fix enabling TSO through legacy Proton codepath (ebe7342)
+
+  - Wow64
+    - Spin loop on atomic with WFE (71d4e2c)
+
+  - Misc
+    - #5795 but with clang_format (4caad9b)
+    - Fix building for Windows with libc++ 23 (2fdbff3)
+    - Extend FIST tests to check for indefinite value (7a3fdef)
+    - AVX_128: Optimize VMOVMSKPS from 11 to 7 instructions (b0af054)
+    - VDSO_Emulation: Mark relevant members as internally linked (b478f54)
+    - (903e7db)
+    - (376e3af)
+    - (af63c0a)
+    - (fe6d639)
+    - (d2f0961)
+    - (bd1e61b)
+    - (b97165b)
+    - (5f2d19c)
+    - (95e7c86)
+    - (2effdb0)
+    - (ab31e3e)
+    - (8347566)
+    - Fix movd when prefixed with 0x66 (3370d9a)
+    - Fix cvttss2si when prefixed with 0x66 (9306de7)
+    - Fix element getting overwritten in 66_5B test (ff7a54a)
+    - Fix LZCNT tests reading out of bounds (c3d1157)
+    - [SVE256] Handle 256-bit blend operations much more efficiently (5f2455c)
+    - [SVE256] Handle 256-bit AES operations (17e5637)
+    - [SVE256] EncryptionOps: Handle 256-bit VPCLMULQDQ (f8967aa)
+    - [SVE256] Ensure SSE insertion behavior for AES/SHA/PCLMUL operations (4233fb6)
+
+  - gitlab
+    - Fixes CI (c00b2c9)
+
+  - unittests
+    - Add stress tests for VBLEND{PD, PS} (ec2aa40)
+    - Add stress tests for VSHUF{PD, PS} (dddad1c)
+    - Add stress tests for VPERMIL{PD, PS} (3f98202)
+    - Add stress test for vperm2f128/vperm2i128 (91017db)
+
+  - x32
+
+    - FD
+      - Combine offset halves directly (f2b679f)
+      - Make use of SanitizeIOCount for vector construction in vmsplice (b9d97df)
+      - Fix readahead upper offset type (48ce5bf)
+      - Correct total word calculation in select() variants (617a518)
+      - Ensure sendfile updates offset if set (94ccfef)
+
+    - Info
+      - Only modify output in getrlimit/ugetrlimit if successful (00826d3)
+
+    - Msg
+      - Fix result comparison in mq_getsetattr (5dd0477)
+
+    - Semaphore
+      - Fix storing of message type in msgrcv (9ff322e)
+
+    - Thread
+      - Move writability check around in waitpid (0bdf159)
+      - Fix off-by-one in get_thread_area (2af7c24)
+
+    - Time
+      - Correct sizeof expression in utimensat (8fbde84)
+
+  - x64
+
+    - Thread
+      - Amend faulting copy handling related to LDTs (0e8b01c)
+
+  - x87StackOptimizationPass
+    - Minor cleanup (0589d9b)
+    - Make use of std::array for FixedSizeStack (6846f10)
+    - Remove shadowing variable in PUSHSTACK case (30f2a7b)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 05 Aug 2026 00:15:24 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2607~1-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   Fixing Wine
