@@ -1,3 +1,202 @@
+fex-emu-@ARCH_SUFFIX@ (2609-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2609
+
+  - ARMEmitter
+    - Fill in bfloat API holes (52cc568)
+
+  - CMake
+    - Fix MINGW compilation under ArchLinux (fd141ed)
+
+  - CPUID
+    - Adds a few new bits (92e43c2)
+
+  - Common
+
+    - Config
+      - Fixes Cache directory when `STEAM_COMPAT_SHADER_PATH` on Win32 (e3c6b37)
+
+  - Config
+    - Fix assertion being hit in config generation (98964c5)
+    - Filter the `CPUFeatureRegisters` option on serialization (baca86b)
+
+  - Core
+    - Adds more validation around pool buffer ownership (e7836f2)
+
+  - Decoder
+    - fix illegal LEA encoding (a3d609e)
+
+  - DiskCache
+    - support multiple entries per lookup key (566a5e2)
+    - also patch branches for more anon hit rate (023d0cd)
+    - detect inline data, hash around it and patch it on Lookup (42c6632)
+    - key fixes (50e6eee)
+    - SMC regression fixes (a77d00a)
+    - optional validation-only mode (6ff7e82)
+    - initial anon caching (e010e8a)
+    - disable with thunk relocs for now (5a68359)
+    - hash guest code according to its real extents (ab6e675)
+    - Lookup optimizations (8cf2bf7)
+    - on Linux, block signals in Writer thread (ef5439e)
+    - get rid of more extra copies/allocs on Lookup (dea5c62)
+    - Apply relocations from disk blob (e1d8881)
+    - use memory-mapped IO for reads when possible (fd180a1)
+    - clean up bucket key building a bit (0814780)
+    - bucket/key bookkeeping (9d4b493)
+    - make Writer thread low-priority (c9b23eb)
+    - add some SHM stats (44f69f4)
+    - offload Store to a WorkQueueThread (b2b6b26)
+
+  - External
+    - Update fmt to upstream master to fix building with LLVM 23 (5a4f84c)
+
+  - Externals
+    - Update vixl (cf6da6a)
+
+  - FEX
+    - Only fsync on assert (b563703)
+
+  - FEXCore
+    - Support ThreadRemoveCodeEntry as relocatable (c4c82f2)
+    - Removes syscall optimization  (a6e74cd)
+    - Fixes ever shrinking JIT code buffer (fa9bbf0)
+    - prevent deadlock when branching to MAX_UINT64 (9377bac)
+    - Adds a lock-free atomic bitset that supports contiguous range allocations (adea3e4)
+    - Fixes SourceOutline description (a4e04dd)
+
+    - Allocator
+      - Support naming VMA regions from rpmalloc  (84fabf4)
+
+    - Config
+      - Annotate all config options that can affect codegen (8ccc8da)
+      - Support Serializing (22498dc)
+
+    - Context
+      - Removes InitialRIP/RSP from CreateThread (c3769a6)
+
+    - Frontend
+      - Ensure instruction sizes account for sha256 in thunk op (55c80e6)
+
+    - HostFeatures
+      - Adds HostFeatures hashing support (7614e48)
+
+    - SharedCodeBufferManager
+      - Pivot what tracks memory allocations (bc69693)
+
+    - Utils
+      - Implements a new atomic segmented bitmap allocator  (f386c62)
+
+  - FEXUnixlib
+    - Removes unused variable/warning. (ff4da8a)
+
+  - Frontend
+    - fix nondeterminism by rolling back DecodedMaxAddress on error (bf70dee)
+    - Stop asserting on too long of an instruction (abec314)
+
+  - HostFeatures
+    - Fixes crash in mingw build (4ed80fd)
+
+  - InstCountCI
+    - Enforce DiskCache version matching  (e17fdf9)
+
+  - JIT
+    - Fixes some alignment logic (bf30f6a)
+
+  - LookupCache
+    - Add L1 entry on shrink (adfff26)
+    - Clear L1 entries on dynamic cache growth (49c1cda)
+
+  - MOVVectorUnalignedOp
+    - Fix same-register MMX writes being treated as a Nop (7187bc0)
+
+  - Misc
+    - Adds some missing headers (7966bfb)
+
+  - OpcodeDispatcher
+    - Explicitly handle no-nop vector moves (b78bde7)
+    - Validate instruction encodings with crc (d833f3a)
+    - Fixes SHLD by 16 behaviour  (a409220)
+
+  - Scripts
+    - Fixes failure in doc_outline_generator (69fe852)
+
+  - SharedCodeBufferManager
+    - Leak less internal details about implementation (8d12f3d)
+    - Allocate JIT space atomically. (f3ab82a)
+
+  - Steam
+
+    - CompatTool
+      - Become more picky about configs (9618b5a)
+
+  - Thunks
+    - Adds some new PV paths (71afe47)
+
+  - UnixLib
+    - Removes old non-unixlib handling (51c241d)
+
+  - Utils
+
+    - File
+      - Properly handle move assignment/construction (00b1249)
+
+  - WOW64
+    - Update frame state ESP and EIP before unlocking context for syscall (063af71)
+
+  - Win32
+    - Actually set app config path and name (c772c0e)
+
+  - Windows
+    - Use NtRaiseException to raise guest exception (310c250)
+    - Fix syscall regression (7fe7c39)
+    - Split CMAKE_CXX_FLAGS before passing to execute_process (d04ad79)
+    - Handle interrupt 3 in HandleGuestException (c1e9d19)
+    - Handle 0x2c interrupt in HandleGuestException (f42dc71)
+
+    - CRT
+      - Add printf and puts stubs (73ab3bc)
+
+  - Wine
+    - Change behaviour around SMC and NtReadFile (ec63be4)
+
+  - Misc
+    - Mark tag word valid for FST ST(0) self-store (7052f91)
+    - Mark both operands valid in the tag word for FXCH (a454845)
+    - System_Tests: Enable WFET/WFIT tests (8243b93)
+    - Clear C1 for fdecstp and fincstp (cfef3d2)
+    - Faster translation for *PMULHRSW (8346920)
+    - Preserve previous value of IE exception flag  (511c45c)
+    - Resolve symlinks continuously until we find the actual binary name. (433091c)
+    - Scripts/fit_native: Classify Oryon-1/3 (73dc3b3)
+    - Fix pf2id overflow saturation (62c9c13)
+    - Fix PFACC producing wrong results due to missing MMX-sized path in VFAddP (fca23d8)
+    - Fix pf2iw to saturate on 32-to-16-bit truncation (3a179a3)
+    - FCOMI fails to clear OF, SF, AF (2a76d3b)
+    - code-format-helper: More dependabot upgrades (9617284)
+    - Avoid double offset relocations (f0b4501)
+    - Disk Cache initial implementation (f50279a)
+    - clang-format: Slight whitespace difference (7075377)
+    - Fix warnings in llvm-mingw builds (f6d20a1)
+    - Fix precision loss for F64 to i32 conversion (c171c06)
+
+  - thunkgen
+    - satisfy the clang 22 ComplierInstance VFS invariant. (9686454)
+
+  - unittests
+    - Disable siglongjmp_branch_invalid on 32-bit (c3b4d4b)
+
+    - ASM
+      - Test BLSR/BLSMSK CF flag (af9b438)
+      - Ensure ffreep always has an operand (430846d)
+
+    - FEXLinuxTests
+      - Fixes race condition in signal_sra_state (b4b38a9)
+
+  - x87StackOptimizationPass
+    - Generalize ST(0) tag invalidation on pop (ac6be77)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Tue, 08 Sep 2026 06:46:48 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2608~1-3~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   Fixes build
