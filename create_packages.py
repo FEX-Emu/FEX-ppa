@@ -55,25 +55,6 @@ supported_distro_list = [
     ],
     [
         # Distro information
-        ["q", "questing"],
-        # Distro series depends
-        ["  mlir-20-tools",
-         "  libmlir-20-dev",
-         "  clang-20",
-         "  clang-tools-20",
-         "  clang-format-20",
-         "  clang-tidy-20",
-         "  clangd-20",
-         "  libclang-20-dev",
-         "  llvm-20-dev",
-         "  libstdc++-15-dev-i386-cross",
-         "  libgcc-15-dev-i386-cross",
-         ""],
-        # C/CXX Compiler
-        [ "clang-20", "clang++-20", ],
-    ],
-    [
-        # Distro information
         ["r", "resolute"],
         # Distro series depends
         ["  mlir-21-tools",
@@ -90,6 +71,25 @@ supported_distro_list = [
          ""],
         # C/CXX Compiler
         [ "clang-21", "clang++-21", ],
+    ],
+    [
+        # Distro information
+        ["s", "stonking"],
+        # Distro series depends
+        ["  mlir-22-tools",
+         "  libmlir-22-dev",
+         "  clang-22",
+         "  clang-tools-22",
+         "  clang-format-22",
+         "  clang-tidy-22",
+         "  clangd-22",
+         "  libclang-22-dev",
+         "  llvm-22-dev",
+         "  libstdc++-16-dev-i386-cross",
+         "  libgcc-16-dev-i386-cross",
+         ""],
+        # C/CXX Compiler
+        [ "clang-22", "clang++-22", ],
     ],
 ]
 
