@@ -1,3 +1,124 @@
+fex-emu-@ARCH_SUFFIX@ (2610-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2610
+
+  - CMake
+    - Stop searching for a bunch of projects when building for Steam (902d433)
+
+  - CPUInfo
+    - Adds new AVX extensions (48d7175)
+
+  - Config
+    - Add check to see if a config option is default (177542e)
+
+  - DiskCache
+    - Support FileID hash with gnu build-id (d2b6e37)
+    - adjust key strategy (72b2ff8)
+    - configurable max file size (08f451d)
+    - optional memory buffer for faster lookups (06b7f3b)
+    - patch a bunch of disp32s in anon code (98516b5)
+    - allow relocations within the same ELF image (e431bfe)
+
+  - Externals
+    - Update vixl (9bbdb35)
+
+  - FEXCore
+    - Update readme with supported ISAs (7d3090f)
+    - Adds a utility function for deleting a directory (4e5c181)
+    - Have ThreadRemoveCodeEntry IR op jump to dispatcher  (37d83d9)
+    - Have the Syscall IR op jump to the dispatcher  (64a6da9)
+    - Migrate internal DiskCache header to internal (7723c47)
+    - Moves crc32 helper to a shared location (fd7b749)
+
+    - Allocator
+      - Don't hang when /proc/self/maps can't be opened (12326d7)
+
+    - DiskCache
+      - Prune old entries automatically (d3dcc74)
+
+    - OpcodeDispatcher
+      - Fixes syscall instruction on Linux (794a118)
+
+    - Utils
+      - Make crc32 match between architectures (4bc4d78)
+
+  - Frontend
+    - Remove DST_RAX subflag (2790f89)
+    - Remove SRC_RCX subflag (f2e8f58)
+    - Remove DST_RDX flag (3af19ac)
+
+  - HostFeatures
+    - Reenable 3DNow! now that it is fixed (184c952)
+
+  - InstcountCI
+    - Add big moffset instructions (5d6609a)
+
+  - JIT
+    - Let DiskCache patch ValidateCode guest CRC (and other small fixes 👼) (5a24152)
+
+  - LinuxSyscalls
+    - Preserve argv and path across portable reexec (79a7afe)
+
+  - Readme
+    - Update with minspec update (cfafd89)
+
+  - Scripts
+
+    - InstallFEX
+      - Add new ubuntu versions (992349f)
+
+  - Steam
+    - Enable DiskCache by default (0df84d3)
+
+  - Tests
+    - Enable a handful of tests, and fix small bug in python test runner script (d58a4e0)
+    - add 'ninja tests' which runs all tests, with large pages (f11c8c7)
+
+  - Threads
+    - Support setting thread names through creation (208e9c3)
+
+  - Thunks
+    - allow self-lookups in vkGetDeviceProcAddr and vkGetInstanceProcAddr (3397eb9)
+
+  - Vector
+    - Inline PCMPXSTRX SSE4.2 Instructions (e2f973f)
+
+  - WOW64
+    - Use correct thread's CPU area in BTCpuThreadTerm (e320e1d)
+    - Use CHPEv2 for suspend and exception support (f18599d)
+
+  - Windows
+    - Don't hardcode NT syscall numbers for ARM64EC (47be6ad)
+    - On unimplemented print a log (59f85d6)
+
+  - X86Tables
+    - Give REX2 a name (7813c7a)
+
+  - X87
+    - Implement full FXAM support (7325cb0)
+
+  - Misc
+    - Peephole optimization for VPCMPEQD + VGATHERDPS (e9373bf)
+    - Externals/code-format-helper: Update for dependabot (3648ee9)
+    - gitlab-ci: Wow, failed to notice the single quotes (c747be4)
+    - gitlab-ci: Only auto-promote on pushes to the main branch (3aa38d1)
+    - A couple JITSymbol fixes (555e8bd)
+    - Add software fallback for RDRAND/RDSEED (1405755)
+    - Add regression test for consecutive syscalls (ca1fb3f)
+    - Rebase and add test to #5887 (19df181)
+    - Update functional.h (fd208da)
+    - Removes subflag SRC_RAX (82510eb)
+    - Implement ISA extension AVX-VNNI (4b652eb)
+    - Bump Vulkan-Headers to 1.4.362 and update generated Vulkan thunks (86f363d)
+
+  - unittests
+    - Make sure to test another system instruction (eb41dac)
+
+    - ASM
+      - Manually encode some smsw tests (c3e9c3f)
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 07 Oct 2026 18:50:35 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2609.1-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2609
