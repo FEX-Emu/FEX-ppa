@@ -1,3 +1,16 @@
+fex-emu-@ARCH_SUFFIX@ (2611.1-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2611.1
+
+  5e18ae0dd FEXRootFSFetcher: Fixes Config setting
+  0ec72ac1a ImageTracker: Actually wire up config option for Volatile Metadata
+  16233b3b6 Windows: Fixes forced assert
+  01bcd23c8 CPUID: Fixes crash in CPUID
+  8f8c19f00 InstcountCI: Update
+  6c0dcff0c DiskCache: Moves SVE/AVX from HostFeatureHash to ProcessHash
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Wed, 11 Nov 2026 19:17:35 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2611-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2611
