@@ -523,18 +523,27 @@ def WaitForProcesses(ActiveProcesses, MaxProcesses):
 
 def UploadPackage(PackageName):
     # Return code 0 for success
+    # Return code 1 for internal server error.
     # Return code 3 for already uploaded.
     # ??? For http error 550: internal server error
     UploadedTagPath = Path("{}/{}.uploaded".format(RootGenPPA, PackageName))
-    if not UploadedTagPath.exists():
-        p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
-        p.wait()
-        print("Process return code: {}".format(p.returncode))
+    HTTPError = True
+    while HTTPError:
+        if not UploadedTagPath.exists():
+            p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
+            p.wait()
+            print("Process return code: {}".format(p.returncode))
+            if p.returncode != 1:
+                # Only try again if there was an http error
+                HTTPError = False
+            else:
+                print("Had http error. Trying again")
 
-        if p.returncode == 0:
-            UploadedTagPath.touch()
-    else:
-        print("Skipping '{}' as it was already uploaded".format(PackageName))
+            if p.returncode == 0:
+                UploadedTagPath.touch()
+        else:
+            print("Skipping '{}' as it was already uploaded".format(PackageName))
+            return
 
 if Stage == 2:
     print("Signing our license key quick to kick off a GPG wallet hit for the following processes.")
