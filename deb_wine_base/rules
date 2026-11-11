@@ -75,13 +75,13 @@ override_dh_auto_configure:
 	mkdir build_arm64ec
 	mkdir build_wow64
 	mkdir build_unixlib
-	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags_dll) -DMINGW_TRIPLE=arm64ec-w64-mingw32 ..
-	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags_dll) -DMINGW_TRIPLE=aarch64-w64-mingw32 ..
+	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20261104-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags_dll) -DMINGW_TRIPLE=arm64ec-w64-mingw32 ..
+	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20261104-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) $(buildflags) cmake $(confflags_dll) -DMINGW_TRIPLE=aarch64-w64-mingw32 ..
 	cd build_unixlib && $(buildflags) CC=clang CXX=clang++ cmake $(confflags_unixlib) ../Source/Windows/UnixLib
 
 override_dh_auto_build:
-	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) ninja
-	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20250920-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) ninja
+	cd build_arm64ec && PATH=$(shell readlink -f .)/llvm-mingw-20261104-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) ninja
+	cd build_wow64 && PATH=$(shell readlink -f .)/llvm-mingw-20261104-ucrt-ubuntu-22.04-aarch64/bin/:$(PATH) ninja
 	cd build_unixlib && ninja
 
 
