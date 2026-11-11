@@ -527,7 +527,7 @@ def UploadPackage(PackageName):
     # ??? For http error 550: internal server error
     UploadedTagPath = Path("{}/{}.uploaded".format(RootGenPPA, PackageName))
     if not UploadedTagPath.exists():
-        p = subprocess.Popen(["dput", "-f", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
+        p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
         p.wait()
         print("Process return code: {}".format(p.returncode))
 
