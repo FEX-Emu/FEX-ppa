@@ -6,6 +6,7 @@ import subprocess
 import time
 from dataclasses import dataclass, field
 from shutil import which
+from pathlib import Path
 
 SKIP_WINE = False
 SKIP_LINUX = False
@@ -520,6 +521,21 @@ def WaitForProcesses(ActiveProcesses, MaxProcesses):
 
     return ActiveProcesses
 
+def UploadPackage(PackageName):
+    # Return code 0 for success
+    # Return code 3 for already uploaded.
+    # ??? For http error 550: internal server error
+    UploadedTagPath = Path("{}/{}.uploaded".format(RootGenPPA, PackageName))
+    if not UploadedTagPath.exists():
+        p = subprocess.Popen(["dput", "-f", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
+        p.wait()
+        print("Process return code: {}".format(p.returncode))
+
+        if p.returncode == 0:
+            UploadedTagPath.touch()
+    else:
+        print("Skipping '{}' as it was already uploaded".format(PackageName))
+
 if Stage == 2:
     print("Signing our license key quick to kick off a GPG wallet hit for the following processes.")
     print("\tMake sure to save to wallet so it doesn't get asked again")
@@ -588,12 +604,10 @@ if Stage == 3:
         for distro in supported_distro_list:
             for arch in supported_cpus:
                 PackageName = RootPackageName + "-" + arch[0] + "_" + RootPackageVersion + "~" + distro[0][0] + "_source.changes"
-                p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
-                p.wait()
+                UploadPackage(PackageName)
 
     if not SKIP_WINE:
         print("Uploading results for Wine")
         for distro in supported_distro_list:
             PackageName = RootPackageNameWine + "_" + RootPackageVersion + "~" + distro[0][0] + "_source.changes"
-            p = subprocess.Popen(["dput", "ppa:fex-emu/fex", PackageName], cwd = RootGenPPA)
-            p.wait()
+            UploadPackage(PackageName)
