@@ -1,3 +1,124 @@
+fex-emu-@ARCH_SUFFIX@ (2611-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
+
+  FEX Release FEX-2611
+
+  - ALUOps
+    - Inline 128 bit division (24987bed7)
+
+  - ARM64EC
+    - Fix the NtDllRedirectionLUT bounds check in CheckCall (94ff2b0c6)
+
+  - Allocator
+    - Commit rpmalloc memory on demand due to RLIMIT_DATA (5285020de)
+
+  - CMake
+    - Disable async unwind tables on mingw+preserve_all (d6ec06759)
+    - too-long-line fixes, options reorg, and some cleanups (1e4dab51d)
+    - Don't install ThunksDB for mingw (2b4145a88)
+
+  - CPUID
+    - Add new Apple Silicon names (805f44b8d)
+
+  - Config
+    - Fixes typo in man page. NFC (24da3ae7c)
+
+  - Crypto
+    - SHA256 Peephole (524a37c7a)
+
+  - Decoder
+    - Fix alias issue with 0x82 opcode (89713ba3c)
+
+  - Dependabot
+    - More (3f3f7bc69)
+
+  - DiskCache
+    - Fixes a race condition on the data blob (eef303f69)
+
+  - Dispatcher
+    - Optimize syscall return with L1 lookup (9eb5d92c0)
+
+  - Externals
+    - Update vixl (fc770b368)
+
+  - FEXCore
+    - Support partial instruction fault decoding  (1e463b040)
+    - Fixes two-byte instruction decode of 0xBX operations  (8a3764ee1)
+    - Wire up support for SERIALIZE (d7b8e1497)
+
+  - FEXMingwTests
+    - Adds the ability to run the mingw tests  (75df0f815)
+
+  - FEXServerManager
+    - Stop leaving stale FEXServer sockets around (eff9f459d)
+
+  - HostFeatures
+    - Make a stronger distinction between CPU features and Process features (4e2b509a4)
+    - clang-format (eeb99027c)
+
+  - InstcountCI
+    - Disable tpidrro in rdpid/rdtsc files. (b1f27cfa9)
+
+  - JIT
+    - Rename `CompileCode` to `EmitJITCode` (abc9334ef)
+
+  - Linux
+    - Track main stack usage more accurately in VmData (dab12ae78)
+    - Return EFAULT for stat() of a null path (e3c1c1e42)
+
+    - SignalDelegator
+      - Support SA_RESETHAND (fb925d6fc)
+
+  - OpcodeDispatcher
+    - Make sure xsetbv works correctly (a8c901622)
+    - Fixes swapgs on 32-bit (5c81797cf)
+    - Add undefined flags acid test (fd8a60177)
+
+  - Tests
+    - Reduce wall clock time spent in "ninja tests" (e9c103412)
+
+  - Thunks
+    - Fixes LLVM 23 (cb508dfbf)
+
+  - Tools
+    - Fixes a couple throws that leaked (a81762cae)
+
+  - Misc
+    - Feature flag fixes and alignment between targets (effbda64c)
+    - Implement _wsetlocale and _wcsdup for libc++ 24 (fb68b0e9a)
+    - fix(CMakeLists): Fix build flags when LIBCXX is enabled (4a4669a07)
+    - Debug register instruction breakpoint support (2b1082060)
+    - Wire up support for using TPIDRRO as CPU core index on Linux (eae8d219a)
+    - Ir keep unused guest loads (fixes Necesse) (46acbde3c)
+    - Implement support for x87 FIP (1c4f04b71)
+    - Add the various new extensions that we may care about to the the various tool (2e537bd10)
+    - Another missed clang-format (3da673e69)
+    - Emulate SLDT (e3e83041e)
+    - code-format-helper: More dependabot things (80e28a1e2)
+    - Implement support for AVX_NE_Convert (3b7daa5e8)
+    - Add another function stub for libc++ 24 on Windows (a36ca807c)
+
+  - arm64ec
+    - Have synchronous faults skip fault overhead (741e146fd)
+
+  - unittests
+    - Adds new Mingw tests that are only build-tested  (781657310)
+    - Also fix LLVM 23 (7780a436b)
+
+    - ASM
+      - Fixes results in new tests (02e24ca5c)
+      - New RNG tests for all the new instructions (d321f49fb)
+      - Fixes AVX-NE-convert tests (fb48e2d19)
+      - Test SAR sign extension for 8 and 16 bit (d1d772c05)
+
+    - FEXMingwTests
+      - Adds breakpoint unittest (a6ba3e2fb)
+
+  - x87
+    - Initial FIP support (710195aed)
+
+
+ -- Ryan Houdek <houdek.ryan@fex-emu.com>  Thu, 05 Nov 2026 17:45:19 +0000
+
 fex-emu-@ARCH_SUFFIX@ (2610-1~@DISTRO_SERIES_LETTER@) @DISTRO_SERIES@; urgency=medium
 
   FEX Release FEX-2610
